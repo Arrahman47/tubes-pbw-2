@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <style>
-        /* CSS untuk memastikan footer di bagian bawah */
+        
         body, html {
             height: 100%;
             margin: 0;

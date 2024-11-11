@@ -9,7 +9,7 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
         </li>
-        <!-- Dashboard Button -->
+        
         <li class="nav-item">
           <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
         </li>
