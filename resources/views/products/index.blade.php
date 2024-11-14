@@ -53,7 +53,7 @@
                 @method('DELETE')
 
                 
-                <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Delete</button>
+                <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i>Hapus</button>
            
             </form>
         </td>
