@@ -31,28 +31,7 @@
         .navbar-custom {
             background-color: #c2def8;
             color: black;
-        }
-        .navbar-brand-custom {
-            font-weight: bold;
-            color: black !important;
-            display: flex;
-            align-items: center;
-        }
-        .navbar-brand-custom img {
-            width: 80px;
-            height: 80px;
-            margin-right: 10px;
-        }
-        .footer-navbar {
-            position: fixed; /* Menempel di bawah layar */
-    bottom: 0;
-    left: 0;
-    width: 100%; /* Agar footer mengisi seluruh lebar */
-    background-color: #c2def8; /* Sesuaikan warna sesuai kebutuhan */
-    color: white; /* Teks footer berwarna putih */
-    text-align: center;
-    padding: 10px 0; /* Padding agar footer terlihat lebih rapi */
-    z-index: 9999; /* Pastikan footer berada di atas konten lainnya */
+            text-align: right;
         }
     </style>
 </head>
@@ -74,37 +53,33 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="btn btn-custom btn-login" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="btn btn-custom btn-register" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('users.index') }}">Kelola User</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('products.index') }}">Kelola Pemesanan</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('roles.index') }}">Kelola Role</a>
-                            </li>
+                            <li><a class="nav-link" href="{{ route('users.index') }}">Kelola User</a></li>
+                            <li><a class="nav-link" href="{{ route('products.index') }}">Kelola Pemesanan</a></li>
+                            <li><a class="nav-link" href="{{ route('roles.index') }}">Kelola Role</a></li>
+                            <li><a class="nav-link" href="{{ route('promos.index') }}">Kelola Promo</a></li>
+
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+        {{ Auth::user()->name }}
+    </a>
+    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item btn-logout" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+    </div>
+</li>
                         @endguest
                     </ul>
                 </div>

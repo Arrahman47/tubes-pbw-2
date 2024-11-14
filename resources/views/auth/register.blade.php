@@ -109,3 +109,51 @@
         box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
     }
 </style>
+
+<style>
+    /* Keyframes for Fade-In Animation */
+    @keyframes fadeIn {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Apply Fade-In Animation to Form */
+    .fade-in {
+        animation: fadeIn 1s ease-out;
+    }
+
+    /* Card Styling */
+    .card {
+        transform: scale(0.95);
+        opacity: 0;
+        animation: scaleUp 1s ease-out forwards;
+    }
+
+    /* Scale-Up Animation for Card */
+    @keyframes scaleUp {
+        0% {
+            transform: scale(0.95);
+            opacity: 0;
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    /* Add Shadow Effect */
+    .card:hover {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        transition: box-shadow 0.3s ease-in-out;
+    }
+
+    /* Styling for Form Input */
+    .form-control {
+        transition: all 0.3s ease-in-out;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    }
+</style>

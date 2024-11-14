@@ -97,3 +97,71 @@
         transform: scale(1.05);
     }
 </style>
+
+<style>
+    /* Keyframes for Fade-In Animation */
+    @keyframes fadeIn {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Apply Animation to Container */
+    .fade-in {
+        animation: fadeIn 1s ease-out;
+    }
+
+    /* Apply Staggered Animation to Each Item */
+    .fade-in-item {
+        opacity: 0;
+        animation: fadeIn 0.8s ease-out forwards;
+        animation-delay: 0.5s;
+    }
+
+    /* Delay for Each List Item */
+    .fade-in-item:nth-child(2) {
+        animation-delay: 0.7s;
+    }
+
+    .fade-in-item:nth-child(3) {
+        animation-delay: 0.9s;
+    }
+
+    /* Border Kotak Hanya di Samping */
+    .service-box {
+        border-left: 4px solid #007bff;   /* Border di sisi kiri */
+        border-right: 4px solid #007bff;  /* Border di sisi kanan */
+        padding: 16px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    /* Hover Effect for Service Box */
+    .service-box:hover {
+        transform: scale(1.02);
+        background-color: #e3f2fd;
+    }
+
+    /* Styling untuk Judul dan Teks */
+    .service-box h5 {
+        color: #007bff;
+        margin-bottom: 8px;
+    }
+
+    /* Hero Section Styling */
+    .hero-section {
+        background: linear-gradient(135deg, white, white);
+        color: #333;
+        padding: 60px 20px;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Image Styling */
+    .img-fluid {
+        transition: transform 0.3s ease;
+    }
+    .img-fluid:hover {
+        transform: scale(1.05);
+    }
+</style>
