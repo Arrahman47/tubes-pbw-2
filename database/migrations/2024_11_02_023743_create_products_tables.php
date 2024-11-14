@@ -10,29 +10,21 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up()
-{
-    Schema::table('products', function (Blueprint $table) {
-        $table->date('tanggal_pemesanan')->nullable();
-        $table->string('pilihan_kategori')->nullable();
-        $table->string('gedung_asrama')->nullable();
-        $table->decimal('jumlah_kg', 8, 2)->nullable();
-        $table->string('no_kamar')->nullable();
-        $table->text('catatan')->nullable();
-    });
-}
+    {
+        Schema::create('promos', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama_promo');
+            $table->text('deskripsi')->nullable();
+            $table->decimal('diskon', 5, 2)->nullable(); // Misal, diskon dalam persentase
+            $table->timestamps();
+        });
+    }
 
-public function down()
-{
-    Schema::table('products', function (Blueprint $table) {
-        $table->dropColumn([
-            'tanggal_pemesanan',
-            'pilihan_kategori',
-            'gedung_asrama',
-            'jumlah_kg',
-            'no_kamar',
-            'catatan',
-        ]);
-    });
-}
-
+    /**
+     * Reverse the migrations.
+     */
+    public function down()
+    {
+        Schema::dropIfExists('promos');
+    }
 };

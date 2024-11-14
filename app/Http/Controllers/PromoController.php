@@ -44,8 +44,8 @@ class PromoController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:promos,name',
-            'description' => 'required',
-            'discount' => 'required|numeric',
+            'deskripsi' => 'required',
+            'diskon' => 'required|numeric',
         ]);
 
         Promo::create($request->all());
@@ -78,8 +78,8 @@ class PromoController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'description' => 'required',
-            'discount' => 'required|numeric',
+            'deskripsi' => 'required',
+            'diskon' => 'required|numeric',
         ]);
 
         $promo = Promo::find($id);
