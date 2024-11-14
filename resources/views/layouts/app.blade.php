@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <style>
-  
         body, html {
             height: 100%;
             margin: 0;
@@ -33,10 +32,10 @@
     <div id="app" class="content-wrapper">
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #c2def8;">
             <div class="container">
-            <a class="navbar-brand navbar-brand-custom text-black font-lemon" href="{{ url('/') }}" style="color: black;">
-    <img src="{{ asset('images/laundry.png') }}" alt="Logo" style="width: 80px; height: 80px; margin-right: 5px;">
-    Laundry Go
-</a>
+                <a class="navbar-brand navbar-brand-custom text-black font-lemon" href="{{ url('/') }}" style="color: black;">
+                    <img src="{{ asset('images/laundry.png') }}" alt="Logo" style="width: 80px; height: 80px; margin-right: 5px;">
+                    Laundry Go
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -56,9 +55,10 @@
                                 </li>
                             @endif
                         @else
-                            <li><a class="nav-link" href="{{ route('users.index') }}">Kelola user</a></li>
-                            <li><a class="nav-link" href="{{ route('products.index') }}">Kelola pemesanan</a></li>
-                            <li><a class="nav-link" href="{{ route('roles.index') }}">Kelola role</a></li>
+                            <li><a class="nav-link" href="{{ route('users.index') }}">Kelola User</a></li>
+                            <li><a class="nav-link" href="{{ route('products.index') }}">Kelola Pemesanan</a></li>
+                            <li><a class="nav-link" href="{{ route('roles.index') }}">Kelola Role</a></li>
+                            <li><a class="nav-link" href="{{ route('promos.index') }}">Kelola Promo</a></li> <!-- Menambahkan Akses Promo -->
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -93,13 +93,12 @@
         </main>
     </div>
 
-    
     <!-- Footer Navbar di bagian bawah -->
-<nav class="navbar footer-navbar">
-    <div class="container text-center">
-        <span class="mx-auto">&copy; 2023 Laundry Go. All rights reserved.</span>
-    </div>
-</nav>
+    <nav class="navbar footer-navbar">
+        <div class="container text-center">
+            <span class="mx-auto">&copy; 2024 Laundry Go. All rights reserved.</span>
+        </div>
+    </nav>
 
 </body>
 </html>

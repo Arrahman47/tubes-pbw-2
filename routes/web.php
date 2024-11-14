@@ -1,7 +1,7 @@
 <?php
   
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthenticatedSessionControllers;
+use App\Http\Controllers\PromoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
+    Route::resource('promos', PromoController::class);
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
 
 });
