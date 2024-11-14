@@ -11,7 +11,9 @@ class Promo extends Model
 
     protected $fillable = [
         'nama_promo',
-        'deskripsi',  // Tambahkan deskripsi
-        'diskon',     // Diskon tetap ada
+        'deskripsi', 
+        'diskon',
+        'tanggal_mulai',   
+        'tanggal_berakhir',            
     ];
 }

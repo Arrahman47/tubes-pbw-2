@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('nama_promo');
             $table->text('deskripsi')->nullable();
             $table->decimal('diskon', 5, 2)->nullable(); // Misal, diskon dalam persentase
+            $table->date('tanggal_mulai')->nullable();
+            $table->date('tanggal_berakhir')->nullable();
             $table->timestamps();
         });
     }

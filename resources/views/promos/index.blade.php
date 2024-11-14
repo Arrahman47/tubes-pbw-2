@@ -24,16 +24,20 @@
      <th>Nama Promo</th>
      <th>Deskripsi</th>
      <th>Diskon (%)</th>
+     <th>Tanggal mulai</th>
+     <th>Tanggal berakhir</th>
      <th width="280px">Aksi</th>
   </tr>
-    @foreach ($promos as $key => $promo)
+    @foreach ($promos as $promo)
     <tr>
-        <td>{{ ++$i }}</td>
-        <td>{{ $promo->name }}</td>
-        <td>{{ $promo->description }}</td>
-        <td>{{ $promo->discount }}</td>
+        <td>{{ $loop->iteration }}</td>  <!-- Use $loop->iteration for the row number -->
+        <td>{{ $promo->nama_promo}}</td>
+        <td>{{ $promo->deskripsi }}</td>
+        <td>{{ $promo->diskon }}</td>
+        <td>{{ $promo->tanggal_mulai }}</td>
+        <td>{{ $promo->tanggal_berakhir }}</td>
         <td>
-            <a class="btn btn-info btn-sm" href="{{ route('promos.show', $promo->id) }}"><i class="fa-solid fa-list"></i> Show</a>
+            
             <a class="btn btn-primary btn-sm" href="{{ route('promos.edit', $promo->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
             <form method="POST" action="{{ route('promos.destroy', $promo->id) }}" style="display:inline">
                 @csrf

@@ -9,7 +9,7 @@ class PromoController extends Controller
 {
     public function index()
 {
-    $promos = Promo::paginate(10); // Pagination added
+    $promos = Promo::paginate(10); 
     return view('promos.index', compact('promos'));
 }
 
@@ -24,9 +24,10 @@ class PromoController extends Controller
             'nama_promo' => 'required',
             'deskripsi' => 'required|string',
             'diskon' => 'nullable|numeric',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_berakhir' => 'required|date|after_or_equal:tanggal_mulai',
         ]);
 
-        // Menyimpan data promo tanpa kode_promo, tanggal_mulai, tanggal_berakhir
         Promo::create($request->all());
 
         return redirect()->route('promos.index')->with('success', 'Promo created successfully.');
@@ -48,6 +49,8 @@ class PromoController extends Controller
             'nama_promo' => 'required',
             'deskripsi' => 'required|string',
             'diskon' => 'nullable|numeric',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_berakhir' => 'required|date|after_or_equal:tanggal_mulai',
         ]);
 
         $promo->update($request->all());
