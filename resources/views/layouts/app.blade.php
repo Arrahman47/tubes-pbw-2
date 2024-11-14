@@ -25,6 +25,64 @@
             color: black;
             text-align: right;
         }
+        /* Styling Footer */
+.footer-navbar {
+    position: fixed; /* Menempel di bawah layar */
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Agar footer mengisi seluruh lebar */
+    background-color: #c2def8; /* Sesuaikan warna sesuai kebutuhan */
+    color: black; /* Teks footer berwarna putih */
+    text-align: center;
+    padding: 10px 0; /* Padding agar footer terlihat lebih rapi */
+    z-index: 9999; /* Pastikan footer berada di atas konten lainnya */
+}
+
+/* Tambahkan sedikit padding bawah pada konten agar tidak tertutup footer */
+body {
+    padding-bottom: 50px; /* Sesuaikan sesuai tinggi footer */
+}
+    .navbar-nav .nav-item {
+        margin-right: 20px; /* Memberikan ruang antara setiap tombol */
+    }
+
+    .navbar-nav .nav-item .btn-custom {
+        padding: 10px 20px;
+        margin: 5px;
+        border-radius: 25px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        color: white;
+    }
+
+    .navbar-nav .nav-item .btn-primary {
+        background-color: #007bff;
+    }
+
+    .navbar-nav .nav-item .btn-success {
+        background-color: #28a745;
+    }
+
+    .navbar-nav .nav-item .btn-warning {
+        background-color: #ffc107;
+    }
+
+    .navbar-nav .nav-item .btn-info {
+        background-color: #17a2b8;
+    }
+
+    /* Hover effect */
+    .navbar-nav .nav-item .btn-custom:hover {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+</style>
+
+</style>
+
+
     </style>
 </head>
 
@@ -55,10 +113,19 @@
                                 </li>
                             @endif
                         @else
-                            <li><a class="nav-link" href="{{ route('users.index') }}">Kelola User</a></li>
-                            <li><a class="nav-link" href="{{ route('products.index') }}">Manajemen Pemesanan</a></li>
-                            <li><a class="nav-link" href="{{ route('roles.index') }}">Kelola Role</a></li>
-                            <li><a class="nav-link" href="{{ route('promos.index') }}">Kelola Promo</a></li>
+                        <li class="nav-item">
+    <a class="btn btn-custom btn-primary" href="{{ route('users.index') }}">Kelola User</a>
+</li>
+<li class="nav-item">
+    <a class="btn btn-custom btn-primary" href="{{ route('products.index') }}">Manajemen Pemesanan</a>
+</li>
+<li class="nav-item">
+    <a class="btn btn-custom btn-primary" href="{{ route('roles.index') }}">Kelola Role</a>
+</li>
+<li class="nav-item">
+    <a class="btn btn-custom btn-primary" href="{{ route('promos.index') }}">Kelola Promo</a>
+</li>
+
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -96,7 +163,7 @@
 
     <!-- Footer Navbar di bagian bawah -->
     <nav class="navbar footer-navbar">
-        <div class="container text-center">
+        <div class="container text-bg">
             <span class="mx-auto">&copy; 2024 Laundry Go. All rights reserved.</span>
         </div>
     </nav>
