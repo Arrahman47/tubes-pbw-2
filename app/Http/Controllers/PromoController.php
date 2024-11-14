@@ -2,104 +2,63 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Promo;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Promo;  // Pastikan ada model Promo yang sesuai
-
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 
 class PromoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request): View
-    {
-        $promos = Promo::orderBy('id', 'DESC')->paginate(5);
+    public function index()
+{
+    $promos = Promo::paginate(10); // Pagination added
+    return view('promos.index', compact('promos'));
+}
 
-        return view('promos.index', compact('promos'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(): View
+    public function create()
     {
         return view('promos.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|unique:promos,name',
-            'deskripsi' => 'required',
-            'diskon' => 'required|numeric',
+        $request->validate([
+            'nama_promo' => 'required',
+            'deskripsi' => 'required|string',
+            'diskon' => 'nullable|numeric',
         ]);
 
+        // Menyimpan data promo tanpa kode_promo, tanggal_mulai, tanggal_berakhir
         Promo::create($request->all());
 
-        return redirect()->route('promos.index')
-                         ->with('success', 'Promo created successfully');
+        return redirect()->route('promos.index')->with('success', 'Promo created successfully.');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id): View
+    public function show(Promo $promo)
     {
-        $promo = Promo::find($id);
+        return view('promos.show', compact('promo'));
+    }
 
+    public function edit(Promo $promo)
+    {
         return view('promos.edit', compact('promo'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(Request $request, Promo $promo)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'deskripsi' => 'required',
-            'diskon' => 'required|numeric',
+        $request->validate([
+            'nama_promo' => 'required',
+            'deskripsi' => 'required|string',
+            'diskon' => 'nullable|numeric',
         ]);
 
-        $promo = Promo::find($id);
         $promo->update($request->all());
 
-        return redirect()->route('promos.index')
-                         ->with('success', 'Promo updated successfully');
+        return redirect()->route('promos.index')->with('success', 'Promo updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id): RedirectResponse
+    public function destroy(Promo $promo)
     {
-        Promo::destroy($id);
+        $promo->delete();
 
-        return redirect()->route('promos.index')
-                         ->with('success', 'Promo deleted successfully');
+        return redirect()->route('promos.index')->with('success', 'Promo deleted successfully.');
     }
 }

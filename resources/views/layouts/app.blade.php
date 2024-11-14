@@ -58,7 +58,8 @@
                             <li><a class="nav-link" href="{{ route('users.index') }}">Kelola User</a></li>
                             <li><a class="nav-link" href="{{ route('products.index') }}">Kelola Pemesanan</a></li>
                             <li><a class="nav-link" href="{{ route('roles.index') }}">Kelola Role</a></li>
-                            <li><a class="nav-link" href="{{ route('promos.index') }}">Kelola Promo</a></li> <!-- Menambahkan Akses Promo -->
+                            <li><a class="nav-link" href="{{ route('promos.index') }}">Kelola Promo</a></li>
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

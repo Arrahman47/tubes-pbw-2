@@ -11,19 +11,7 @@ class Promo extends Model
 
     protected $fillable = [
         'nama_promo',
-        'deskripsi',
-        'kode_promo',
-        'diskon', // Persentase atau nilai diskon yang diberikan
-        'tanggal_mulai',
-        'tanggal_berakhir',
-        'created_at',
-        'updated_at',
-    ];
-
-    protected $dates = [
-        'tanggal_mulai',
-        'tanggal_berakhir',
-        'created_at',
-        'updated_at',
+        'deskripsi',  // Tambahkan deskripsi
+        'diskon',     // Diskon tetap ada
     ];
 }
