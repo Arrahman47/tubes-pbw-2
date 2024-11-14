@@ -12,12 +12,14 @@ return new class extends Migration
     public function up()
 {
     Schema::table('products', function (Blueprint $table) {
+        
         $table->date('tanggal_pemesanan')->nullable();
         $table->string('pilihan_kategori')->nullable();
         $table->string('gedung_asrama')->nullable();
         $table->decimal('jumlah_kg', 8, 2)->nullable();
         $table->string('no_kamar')->nullable();
         $table->text('catatan')->nullable();
+        $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
     });
 }
 

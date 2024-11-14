@@ -14,17 +14,17 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(): View
-{
-    $products = Product::latest()->paginate(5);
-
-    if ($products->isEmpty()) {
-        return view('products.index')->with('message', 'No products found.');
+    public function index()
+    {
+        // Mengambil pemesanan dengan paginasi (10 per halaman)
+        $products = Product::paginate(10);
+    
+        // Menghitung jumlah pemesanan
+        $orderCount = $products->total(); // Total pemesanan yang ada
+    
+        return view('products.index', compact('products', 'orderCount'));
     }
-
-    return view('products.index', compact('products'))
-        ->with('i', (request()->input('page', 1) - 1) * 5);
-}
+    
 
     /**
      * Show the form for creating a new resource.
@@ -56,7 +56,7 @@ class ProductController extends Controller
         Product::create($request->all());
 
         return redirect()->route('products.index')
-                         ->with('success', 'Product created successfully.');
+                         ->with('success', 'Pemesanan berhasil dibuat.');
     }
 
     /**
