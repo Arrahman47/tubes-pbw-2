@@ -56,7 +56,7 @@
                             @endif
                         @else
                             <li><a class="nav-link" href="{{ route('users.index') }}">Kelola User</a></li>
-                            <li><a class="nav-link" href="{{ route('products.index') }}">Kelola Pemesanan</a></li>
+                            <li><a class="nav-link" href="{{ route('products.index') }}">Manajemen Pemesanan</a></li>
                             <li><a class="nav-link" href="{{ route('roles.index') }}">Kelola Role</a></li>
                             <li><a class="nav-link" href="{{ route('promos.index') }}">Kelola Promo</a></li>
 
