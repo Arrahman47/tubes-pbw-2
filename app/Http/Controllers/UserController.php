@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -21,6 +22,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        
         $data = User::latest()->paginate(5);
   
         return view('users.index',compact('data'))
@@ -70,12 +72,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id): View
-    {
-        $user = User::find($id);
-
-        return view('users.show',compact('user'));
-    }
+    
     
     /**
      * Show the form for editing the specified resource.

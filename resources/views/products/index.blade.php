@@ -4,15 +4,13 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>List Pemesanan</h2>
+            <h2>Manajemen Pemesanan</h2>
         </div>
         <div class="pull-right">
-            @can('product-create')
-            <a class="btn btn-outline-primary btn-sm mb-2" href="{{ route('products.create') }}">
-    <i class="fa fa-plus"></i> Tambah Pemesanan
-</a>
+            
+            <a class="btn btn-outline-primary btn-sm mb-2" href="{{ route('products.create') }}"><i class="fa fa-plus"></i> Tambah Pemesanan</a>
 
-            @endcan
+           
         </div>
     </div>
 </div>
@@ -29,28 +27,34 @@
         <th>Tanggal Pemesanan</th>
         <th>Pilihan</th>
         <th>Gedung Asrama</th>
+        <th>Jumlah (kg)</th>
         <th>No Kamar</th>
         <th>Catatan</th>
+        <th>Aksi</th>
         
     </tr>
     @foreach ($products as $product)
     <tr>
         <td>{{ ++$i }}</td>
-        <td>{{ $product->name }}</td>
-        <td>{{ $product->detail }}</td>
+        <td>{{ $product->tanggal_pemesanan  }}</td>
+        <td>{{ $product->pilihan_kategori }}</td>
+        <td>{{ $product->gedung_asrama }}</td>
+        <td>{{ $product->jumlah_kg }}</td>
+        <td>{{ $product->no_kamar}}</td>
+        <td>{{ $product->catatan }}</td>
         <td>
-            <form action="{{ route('products.destroy',$product->id) }}" method="POST">
-                <a class="btn btn-info btn-sm" href="{{ route('products.show',$product->id) }}"><i class="fa-solid fa-list"></i> Show</a>
-                @can('product-edit')
+           
+               
+                
                 <a class="btn btn-primary btn-sm" href="{{ route('products.edit',$product->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
-                @endcan
+                <form action="{{ route('products.destroy',$product->id) }}" method="POST">
 
                 @csrf
                 @method('DELETE')
 
-                @can('product-delete')
+                
                 <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Delete</button>
-                @endcan
+           
             </form>
         </td>
     </tr>

@@ -32,5 +32,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
+    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+
 });
 require __DIR__.'/auth.php';

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <style>
-        
+  
         body, html {
             height: 100%;
             margin: 0;
@@ -23,7 +23,7 @@
         }
         .footer-navbar {
             background-color: #c2def8;
-            color: white;
+            color: black;
             text-align: right;
         }
     </style>
@@ -33,10 +33,10 @@
     <div id="app" class="content-wrapper">
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #c2def8;">
             <div class="container">
-                <a class="navbar-brand navbar-brand-custom text-white font-lemon" href="{{ url('/') }}">
-                    <img src="{{ asset('images/laundry.png') }}" alt="Logo" style="width: 80px; height: 80px; margin-right: 5px;">
-                    Laundry Go
-                </a>
+            <a class="navbar-brand navbar-brand-custom text-black font-lemon" href="{{ url('/') }}" style="color: black;">
+    <img src="{{ asset('images/laundry.png') }}" alt="Logo" style="width: 80px; height: 80px; margin-right: 5px;">
+    Laundry Go
+</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

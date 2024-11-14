@@ -30,44 +30,54 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Tanggal Pemesanan</strong>
-                <input type="date" name="name" class="form-control" placeholder="">
+                <input type="date" name="tanggal_pemesanan" class="form-control" placeholder="Tanggal Pemesanan">
             </div>
         </div>
+        
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-            <label for="pilihan" class="form-label required">Pilihan Kategori</label>
-                <select id="pilihan" name="pilihan" class="form-select" required>
-                    <option selected>Pilihan Kategori</option>
+                <label for="pilihan_kategori" class="form-label required">Pilihan Kategori</label>
+                <select id="pilihan_kategori" name="pilihan_kategori" class="form-select">
+                    <option selected></option>
                     <option value="Kiloan">Kiloan</option>
                     <option value="Satuan">Satuan</option>
                     <option value="Cuci Kering">Cuci Kering</option>
                 </select>
-                <div class="mb-3">
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
                 <label for="gedung_asrama" class="form-label required">Gedung Asrama</label>
-                <input type="text" id="gedung_asrama" name="gedung_asrama" class="form-control" required>
+                <input type="text" id="gedung_asrama" name="gedung_asrama" class="form-control" placeholder="Gedung Asrama">
             </div>
-            <div class="mb-3">
-                <label for="jumlah" class="form-label required">Jumlah (kg)</label>
-                <input type="text" id="jumlah" name="jumlah" class="form-control" required>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <label for="jumlah_kg" class="form-label required">Jumlah (kg)</label>
+                <input type="number" id="jumlah_kg" name="jumlah_kg" class="form-control" placeholder="Jumlah (kg)">
             </div>
-            <div class="mb-3">
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
                 <label for="no_kamar" class="form-label required">No Kamar</label>
-                <input type="number" id="no_kamar" name="no_kamar" class="form-control" required>
+                <input type="number" id="no_kamar" name="no_kamar" class="form-control" placeholder="No Kamar">
             </div>
-</div>
-</div>
-    </select>
+        </div>
+
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Catatan</strong>
-                <textarea class="form-control" name="detail" placeholder="Catatan"></textarea>
+                <textarea class="form-control" name="catatan" placeholder="Catatan"></textarea>
             </div>
         </div>
+
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary btn-sm mb-3 mt-2"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
+            <button type="submit" class="btn btn-primary btn-sm mb-3 mt-2"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
         </div>
     </div>
 </form>
-
 
 @endsection
