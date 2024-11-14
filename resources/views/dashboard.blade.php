@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="text-center">
-        <h1>Selamat Datang di Laundry Go!</h1>
+        <h1>Selamat Datang, {{ Auth::user()->name }} di Laundry Go!</h1>
         <p>Yeay! Kamu berhasil login ke layanan Laundry kami.</p>
         <p>Kami siap membantu kamu mencuci pakaian dengan layanan terbaik. Nikmati pengalaman mencuci yang mudah dan cepat!</p>
         
