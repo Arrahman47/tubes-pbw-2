@@ -1,55 +1,60 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Manajemen Role</h2>
+<div class="container mt-4">
+    <div class="row mb-3 align-items-center">
+        <div class="col-md-8">
+            <h2 class="text-primary fw-bold"><i class="fa-solid fa-user-shield me-2"></i>Manajemen Role</h2>
+            <p class="text-muted">Kelola daftar role pengguna untuk sistem dengan mudah.</p>
         </div>
-        <div class="pull-right">
-       
-            <a class="btn btn-outline-primary btn-sm mb-2" href="{{ route('roles.create') }}"><i class="fa fa-plus"></i> Tambah Role</a>
-       
+        <div class="col-md-4 text-md-end">
+            <a href="{{ route('roles.create') }}" class="btn btn-success btn-lg shadow-sm">
+                <i class="fa fa-plus me-2"></i>Tambah Role
+            </a>
         </div>
+    </div>
+
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fa-solid fa-check-circle me-2"></i>{{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-primary text-center">
+                <tr>
+                    <th>No</th>
+                    <th>Nama Role</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($roles as $key => $role)
+                    <tr class="text-center">
+                        <td>{{ ++$i }}</td>
+                        <td>{{ $role->name }}</td>
+                        <td>
+                            <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-primary btn-sm me-1">
+                                <i class="fa-solid fa-pen-to-square"></i> Edit
+                            </a>
+                            <form action="{{ route('roles.destroy', $role->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="fa-solid fa-trash"></i> Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-center mt-3">
+        {!! $roles->links('pagination::bootstrap-5') !!}
     </div>
 </div>
-
-@session('success')
-    <div class="alert alert-success" role="alert"> 
-        {{ $value }}
-    </div>
-@endsession
-
-<table class="table table-bordered">
-  <tr>
-     <th width="100px">No</th>
-     <th>Nama Role</th>
-     <th width="280px">Aksi</th>
-  </tr>
-    @foreach ($roles as $key => $role)
-    <tr>
-        <td>{{ ++$i }}</td>
-        <td>{{ $role->name }}</td>
-        <td>
-         
-     
-             <a class="btn btn-primary btn-sm" href="{{ route('roles.edit',$role->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
-        
-
-          
-            <form method="POST" action="{{ route('roles.destroy', $role->id) }}" style="display:inline">
-                @csrf
-                @method('DELETE')
-
-                <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Delete</button>
-            </form>
-      
-        </td>
-    </tr>
-    @endforeach
-</table>
-
-{!! $roles->links('pagination::bootstrap-5') !!}
-
-
 @endsection
