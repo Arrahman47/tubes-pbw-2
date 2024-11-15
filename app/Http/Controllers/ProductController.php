@@ -108,6 +108,15 @@ class ProductController extends Controller
     return redirect()->route('products.index')->with('success', 'Pemesanan berhasil.');
 }
 
+public function updatePaymentStatus(Request $request, $id)
+{
+    $product = Product::findOrFail($id);
+    $product->status_pembayaran = 'sudah_bayar';
+    $product->save();
+
+    return redirect()->route('orders.index')->with('success', 'Status pembayaran berhasil diperbarui.');
+}
+
     /**
      * Remove the specified resource from storage.
      *

@@ -44,6 +44,22 @@
         <th>Catatan</th>
         <th>Aksi</th>
     </tr>
+    @foreach($products as $product)
+<tr>
+    <!-- Kolom lainnya -->
+    <td>
+        @if($product->status_pembayaran === 'belum_bayar')
+            <form action="{{ route('orders.pay', $product->id) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-success">Bayar</button>
+            </form>
+        @else
+            <span class="badge bg-success">Sudah Dibayar</span>
+        @endif
+    </td>
+</tr>
+@endforeach
+
     @foreach ($products as $product)
     <tr>
         <td>{{ $loop->iteration }}</td>

@@ -16,6 +16,8 @@ class Product extends Model
         'updated_at',
         'created_at',
         'tanggal_pemesanan', // Tambahkan kolom ini jika belum ada
+        'total_harga', 
+        'status_pembayaran',
     ];
 
     protected $dates = [
