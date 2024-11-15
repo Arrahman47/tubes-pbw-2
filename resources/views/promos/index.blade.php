@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Promo</h2>
+            <h2>Manajemen Promo</h2>
         </div>
         <div class="pull-right">
             <a class="btn btn-outline-primary btn-sm mb-2" href="{{ route('promos.create') }}"><i class="fa fa-plus"></i> Tambah Promo</a>

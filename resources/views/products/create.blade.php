@@ -74,6 +74,13 @@
             </div>
         </div>
 
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Status pembayaran</strong>
+                <textarea class="form-control" name="status_pembayaran" placeholder="Status Pembayaran"></textarea>
+            </div>
+        </div>
+
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btn-primary btn-sm mb-3 mt-2"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
         </div>

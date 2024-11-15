@@ -37,6 +37,14 @@
         <label for="diskon">Diskon (%):</label>
         <input type="number" name="diskon" id="diskon" class="form-control" min="0" max="100">
     </div>
+    <div class="form-group">
+        <label for="tanggal_mulai">Tanggal mulai:</label>
+        <input type="date" name="tanggal_mulai" id="tanggal_mulai" class="form-control" min="0" max="100">
+    </div>
+    <div class="form-group">
+        <label for="tanggal_berakhir">Tanggal berakhir:</label>
+        <input type="date" name="tanggal_berakhir" id="tanggal_berakhir" class="form-control" min="0" max="100">
+    </div>
     <button type="submit" class="btn btn-primary">Simpan</button>
 </form>
 

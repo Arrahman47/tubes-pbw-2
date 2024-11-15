@@ -17,8 +17,8 @@
         {{ session('success') }}
     </div>
 @endif
+
 <style>
-    
     .order-count {
         background-color: #c2def8;
         padding: 20px;
@@ -32,7 +32,6 @@
     <h4><strong>{{ $orderCount }} Orders</strong></h4>
 </div>
 
-
 <table class="table table-bordered">
     <tr>
         <th>No</th>
@@ -42,24 +41,9 @@
         <th>Jumlah (kg)</th>
         <th>No Kamar</th>
         <th>Catatan</th>
+        <th>Status Pembayaran</th>
         <th>Aksi</th>
     </tr>
-    @foreach($products as $product)
-<tr>
-    <!-- Kolom lainnya -->
-    <td>
-        @if($product->status_pembayaran === 'belum_bayar')
-            <form action="{{ route('orders.pay', $product->id) }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-success">Bayar</button>
-            </form>
-        @else
-            <span class="badge bg-success">Sudah Dibayar</span>
-        @endif
-    </td>
-</tr>
-@endforeach
-
     @foreach ($products as $product)
     <tr>
         <td>{{ $loop->iteration }}</td>
@@ -70,11 +54,22 @@
         <td>{{ $product->no_kamar }}</td>
         <td>{{ $product->catatan }}</td>
         <td>
+           <!-- @if($product->status_pembayaran === 'belum_bayar')
+                <form action="{{ route('orders.pay', $product->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    <button type="submit" class="btn btn-success btn-sm"></button>
+                </form>
+            @else
+                <span class="badge bg-success"></span>
+            @endif 
+            -->
+        </td>
+        <td>
             <a class="btn btn-primary btn-sm" href="{{ route('products.edit', $product->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
             <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Hapus</button>
+                <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Delete</button>
             </form>
         </td>
     </tr>

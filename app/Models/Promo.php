@@ -16,4 +16,11 @@ class Promo extends Model
         'tanggal_mulai',   
         'tanggal_berakhir',            
     ];
+
+    protected $dates = [
+        'updated_at',
+        'created_at',
+        'tanggal_mulai',
+        'tanggal_berakhir', 
+    ];
 }
