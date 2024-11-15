@@ -24,7 +24,7 @@ class ProductController extends Controller
     
         return view('products.index', compact('products', 'orderCount'));
     }
-    
+
     
 
     /**
@@ -105,7 +105,7 @@ class ProductController extends Controller
         'catatan' => $request->catatan,
     ]);
 
-    return redirect()->route('products.index')->with('success', 'Product updated successfully.');
+    return redirect()->route('products.index')->with('success', 'Pemesanan berhasil.');
 }
 
     /**
@@ -119,6 +119,6 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('products.index')
-                         ->with('success', 'Product deleted successfully.');
+                         ->with('success', 'Pemesanan berhasil dihapus.');
     }
 }

@@ -8,12 +8,12 @@
                 <div class="card-header text-center text-white fs-4" style="background-color: #c2def8;">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('login') }}" enctype="multipart/form-data">
                         @csrf
 
                         <!-- Email Address Field -->
                         <div class="mb-4">
-                            <label for="email" class="form-label">{{ __('Email Address') }}</label>
+                            <label for="email" class="form-label">{{ __('Email') }}</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                             @error('email')
@@ -29,6 +29,18 @@
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                             @error('password')
+                                <div class="invalid-feedback">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+
+                        <!-- Profile Picture Upload Field -->
+                        <div class="mb-4">
+                            <label for="profile_picture" class="form-label">{{ __('Profile Picture') }}</label>
+                            <input id="profile_picture" type="file" class="form-control @error('profile_picture') is-invalid @enderror" name="profile_picture" accept="image/*">
+
+                            @error('profile_picture')
                                 <div class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
                                 </div>
