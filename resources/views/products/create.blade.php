@@ -41,8 +41,8 @@
                                 <label for="pilihan_kategori"><strong>Pilihan Kategori</strong></label>
                                 <select id="pilihan_kategori" name="pilihan_kategori" class="form-select @error('pilihan_kategori') is-invalid @enderror">
                                     <option value="" disabled selected>Pilih kategori</option>
-                                    <option value="Kiloan" {{ old('pilihan_kategori') == 'Kiloan' ? 'selected' : '' }}>Kiloan</option>
-                                    <option value="Satuan" {{ old('pilihan_kategori') == 'Satuan' ? 'selected' : '' }}>Satuan</option>
+                                    <option value="Kiloan" {{ old('pilihan_kategori') == 'Komplit' ? 'selected' : '' }}>Komplit</option>
+                                    <option value="Satuan" {{ old('pilihan_kategori') == 'Setrika' ? 'selected' : '' }}>Setrika</option>
                                     <option value="Cuci Kering" {{ old('pilihan_kategori') == 'Cuci Kering' ? 'selected' : '' }}>Cuci Kering</option>
                                 </select>
                                 @error('pilihan_kategori')
@@ -83,19 +83,8 @@
                             </div>
                         </div>
 
-                        <!-- Harga Total -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="harga_total"><strong>Harga Total</strong></label>
-                                <input 
-                                    type="text" 
-                                    id="harga_total" 
-                                    name="harga_total" 
-                                    class="form-control" 
-                                    placeholder="Harga Total" 
-                                    readonly> <!-- Input untuk menampilkan harga total -->
-                            </div>
-                        </div>
+             
+                        
 
                         <!-- No Kamar -->
                         <div class="col-md-6">
@@ -107,6 +96,8 @@
                                 @enderror
                             </div>
                         </div>
+
+                        
 
                         <!-- Status Pembayaran -->
                         <!-- <div class="col-md-6">

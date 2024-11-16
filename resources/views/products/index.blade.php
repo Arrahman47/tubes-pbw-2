@@ -37,48 +37,41 @@
                     <th>Jumlah (kg)</th>
                     <th>No Kamar</th>
                     <th>Catatan</th>
+                    <th>Harga Total</th>
+                    <th>Status Pembayaran</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($products as $product)
-                    <tr class="text-center">
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $product->tanggal_pemesanan }}</td>
-                        <td>{{ $product->pilihan_kategori }}</td>
-                        <td>{{ $product->gedung_asrama }}</td>
-                        <td>{{ $product->jumlah_kg }}</td>
-                        <td>{{ $product->no_kamar }}</td>
-                        <td>{{ $product->catatan }}</td>
-                        <!-- <td>
-                            @if($product->status_pembayaran === 'belum_bayar')
-                                <form action="{{ route('orders.pay', $product->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-warning btn-sm shadow-sm">
-                                        <i class="fa-solid fa-credit-card"></i> Bayar
-                                    </button>
-                                </form>
-                            @else
-                                <span class="badge bg-success">
-                                    <i class="fa-solid fa-check"></i> Lunas
-                                </span>
-                            @endif
-                        </td> -->
-                        <td>
-                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm">
-                                <i class="fa-solid fa-pen-to-square"></i> Edit
-                            </a>
-                            <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">
-                                    <i class="fa-solid fa-trash"></i> Hapus
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
+    @foreach ($products as $product)
+        <tr class="text-center">
+            <td>{{ $loop->iteration }}</td>
+            <td>{{ $product->tanggal_pemesanan }}</td>
+            <td>{{ $product->pilihan_kategori }}</td>
+            <td>{{ $product->gedung_asrama }}</td>
+            <td>{{ $product->jumlah_kg }}</td>
+            <td>{{ $product->no_kamar }}</td>
+            <td>{{ $product->catatan }}</td>
+            <td>{{ $product->harga_total }}</td>
+            <td>{{ $product->status_pembayaran }}</td>
+            <td>
+                <div class="d-flex justify-content-center">
+                    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm me-1">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                    </a>
+                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            <i class="fa-solid fa-trash"></i> Hapus
+                        </button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+    @endforeach
+</tbody>
+
         </table>
     </div>
 

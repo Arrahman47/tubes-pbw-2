@@ -39,8 +39,8 @@
             <div class="form-group">
                 <label for="pilihan_kategori">Pilihan Kategori</label>
                 <select id="pilihan_kategori" name="pilihan_kategori" class="form-select">
-                    <option value="Kiloan" {{ $product->pilihan_kategori == 'Kiloan' ? 'selected' : '' }}>Kiloan</option>
-                    <option value="Satuan" {{ $product->pilihan_kategori == 'Satuan' ? 'selected' : '' }}>Satuan</option>
+                    <option value="Komplit" {{ $product->pilihan_kategori == 'Komplit' ? 'selected' : '' }}>Komplit</option>
+                    <option value="Setrika" {{ $product->pilihan_kategori == 'Setrika' ? 'selected' : '' }}>Setrika</option>
                     <option value="Cuci Kering" {{ $product->pilihan_kategori == 'Cuci Kering' ? 'selected' : '' }}>Cuci Kering</option>
                 </select>
             </div>
