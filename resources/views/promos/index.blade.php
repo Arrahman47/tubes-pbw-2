@@ -44,7 +44,7 @@
                         <td>{{ \Carbon\Carbon::parse($promo->tanggal_mulai)->format('d M Y') }}</td>
                         <td>{{ \Carbon\Carbon::parse($promo->tanggal_berakhir)->format('d M Y') }}</td>
                         <td>
-                            <a href="{{ route('promos.edit', $promo->id) }}" class="btn btn-warning btn-sm">
+                            <a href="{{ route('promos.edit', $promo->id) }}" class="btn btn-primary btn-sm">
                                 <i class="fa-solid fa-pen-to-square"></i> Edit
                             </a>
                             <form method="POST" action="{{ route('promos.destroy', $promo->id) }}" style="display:inline">
