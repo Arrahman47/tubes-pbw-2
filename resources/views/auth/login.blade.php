@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
+<div class="container mt-1">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card shadow-lg rounded-lg fade-in">
@@ -37,9 +37,6 @@
 
                         <!-- Profile Picture Upload Field -->
                         <div class="mb-4">
-                            <label for="profile_picture" class="form-label">{{ __('Profile Picture') }}</label>
-                            <input id="profile_picture" type="file" class="form-control @error('profile_picture') is-invalid @enderror" name="profile_picture" accept="image/*">
-
                             @error('profile_picture')
                                 <div class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
@@ -52,7 +49,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                 <label class="form-check-label" for="remember">
-                                    {{ __('Remember Me') }}
+                                    {{ __('Ingatkan Saya') }}
                                 </label>
                             </div>
                         </div>

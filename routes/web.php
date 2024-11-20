@@ -19,6 +19,7 @@ Route::get('/dashboard', function () {
 Route::get('/', function () {
     return view('home');
 });
+Route::get('/logout', [UserController::class, 'logout']);
 
 
 Route::middleware('auth')->group(function () {

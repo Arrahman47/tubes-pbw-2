@@ -9,8 +9,28 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset ('images/laundry.png') }}">
 
     <style>
+        /* Ubah background sidebar menu */
+#sidebarMenu .offcanvas-body {
+    background-color: #353c3d; /* Mengubah background menu */
+}
+
+#sidebarMenu .list-group-item {
+    background-color: #353c3d; /* Ubah warna latar belakang setiap item */
+    border: none; /* Menghilangkan border item */
+}
+
+#sidebarMenu .list-group-item a {
+    color: white; /* Warna teks item */
+}
+
+#sidebarMenu .list-group-item a:hover {
+    background-color: #2c3333; /* Warna latar belakang saat hover */
+    color: white; /* Warna teks saat hover */
+}
+
         body, html {
             height: 100%;
             margin: 0;
@@ -35,69 +55,87 @@
             padding-bottom: 50px;
         }
         .btn-custom {
-    background-color: #c2def8;
-    color: black; /* Agar teks terlihat */
-    border: none; /* Hilangkan border */
+            background-color: #c2def8;
+            color: black; /* Agar teks terlihat */
+            border: none; /* Hilangkan border */
+        }
+
+        .btn-custom:hover {
+            background-color: #a6cde4; /* Warna saat hover */
+            color: black;
+        }
+        @keyframes attention-blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
 }
 
-.btn-custom:hover {
-    background-color: #a6cde4; /* Warna saat hover */
-    color: black;
+.attention-btn {
+    animation: attention-blink 1s infinite; /* Berkedip setiap 1 detik */
+    transition: background-color 0.3s ease;
 }
+
+.attention-btn:hover {
+    background-color: #e60000; /* Warna merah terang saat hover */
+    color: white;
+}
+
+
 
     </style>
 </head>
 
 <body style="background-color: #e0f7fa;">
     <div id="app" class="content-wrapper">
-    <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #c2def8;">
-    <div class="container d-flex align-items-center">
-        <!-- Tombol Sidebar -->
-        @auth
-    <button class="btn btn-custom me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
-        <i class="fas fa-bars"></i> Menu
-    </button>
-@endauth
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #c2def8;">
+            <div class="container d-flex align-items-center">
+                <!-- Tombol Sidebar -->
+                @auth
+                <button class="btn btn-custom me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
+                    <i class="fas fa-bars"></i> Menu
+                </button>
+                @endauth
 
-        <!-- Logo dan Teks Laundry Go -->
-        <a class="navbar-brand text-black font-lemon d-flex align-items-center" href="{{ url('/') }}">
-            <img src="{{ asset('images/laundry.png') }}" alt="Logo" style="width: 80px; height: 80px; margin-left: 5px;">
-            <span class="ms-2 fw-bold">Laundry Go</span>
-        </a>
+                <!-- Logo dan Teks Laundry Go -->
+                <a class="navbar-brand text-black font-lemon d-flex align-items-center" href="{{ url('/') }}">
+                    <img src="{{ asset('images/laundry.png') }}" alt="Logo" style="width: 80px; height: 80px; margin-left: 5px;">
+                    <span class="ms-2 fw-bold">Laundry Go</span>
+                </a>
 
-        <!-- Tombol Profil atau Login/Register -->
-        <ul class="navbar-nav ms-auto">
-            @guest
-                <li class="nav-item">
-                    <a class="btn btn-outline-primary me-2" href="{{ route('login') }}">Login</a>
-                </li>
-                @if (Route::has('register'))
-                    <li class="nav-item">
-                        <a class="btn btn-primary" href="{{ route('register') }}">Register</a>
-                    </li>
-                @endif
-            @else
-                <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ Auth::user()->name }}
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </div>
-                </li>
-            @endguest
-        </ul>
-    </div>
-</nav>
-
-
-
-               
+                <!-- Tombol Profil atau Login/Register -->
+                <ul class="navbar-nav ms-auto">
+                    @guest
+                        <li class="nav-item">
+                            <a class="btn btn-outline-primary me-2" href="{{ route('login') }}">Login</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="btn btn-primary" href="{{ route('register') }}">Register</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); confirmLogout();">
+                                    {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                            <div id="logout-confirmation" class="d-none">
+    <p>Apakah Anda yakin ingin logout?</p>
+    <button class="attention-btn btn btn-success" onclick="logoutConfirm()">Iya</button>
+    <button class="btn btn-secondary" onclick="cancelLogout()">Tidak</button>
+</div>
+                        </li>
+                    @endguest
+                </ul>
+            </div>
+        </nav>
 
         <!-- Sidebar Off-Canvas -->
         <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
@@ -108,16 +146,27 @@
             <div class="offcanvas-body">
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <a class="btn btn-custom btn-primary w-100" href="{{ route('users.index') }}">Kelola User</a>
+                        <a href="{{ route('dashboard') }}" class="btn btn-custom btn-primary w-100">Dashboard</a>
                     </li>
                     <li class="list-group-item">
-                        <a class="btn btn-custom btn-primary w-100" href="{{ route('products.index') }}">Manajemen Pemesanan</a>
+                        <a href="{{ route('users.index') }}" class="btn btn-custom btn-primary w-100">
+                            <i class="fa-solid fa-users me-2"></i> Kelola User
+                        </a>
                     </li>
                     <li class="list-group-item">
-                        <a class="btn btn-custom btn-primary w-100" href="{{ route('roles.index') }}">Kelola Role</a>
+                        <a href="{{ route('products.index') }}" class="btn btn-custom btn-primary w-100">
+                            <i class="fa-solid fa-box me-2"></i> Manajemen Pemesanan
+                        </a>
                     </li>
                     <li class="list-group-item">
-                        <a class="btn btn-custom btn-primary w-100" href="{{ route('promos.index') }}">Kelola Promo</a>
+                        <a href="{{ route('roles.index') }}" class="btn btn-custom btn-primary w-100">
+                            <i class="fa-solid fa-user-shield me-2"></i> Kelola Role
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="{{ route('promos.index') }}" class="btn btn-custom btn-primary w-100">
+                            <i class="fa-solid fa-tags me-2"></i> Kelola Promo
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -144,5 +193,23 @@
             <span class="mx-auto">&copy; 2024 Laundry Go. All rights reserved.</span>
         </div>
     </nav>
+    
+    <script>
+    function confirmLogout() {
+    document.querySelector('.dropdown-menu').classList.add('d-none'); // Sembunyikan menu logout
+    document.getElementById('logout-confirmation').classList.remove('d-none'); // Tampilkan konfirmasi
+}
+
+function logoutConfirm() {
+    // Kirimkan form logout
+    document.getElementById('logout-form').submit();
+}
+
+function cancelLogout() {
+    // Sembunyikan konfirmasi dan kembalikan menu logout
+    document.getElementById('logout-confirmation').classList.add('d-none');
+    document.querySelector('.dropdown-menu').classList.remove('d-none');
+}
+</script>
 </body>
 </html>

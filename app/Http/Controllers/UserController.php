@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
     
 class UserController extends Controller
 {
@@ -20,6 +22,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+   
     public function index(Request $request)
     {
         
