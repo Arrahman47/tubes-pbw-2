@@ -29,12 +29,48 @@
         <p class="text-primary fw-bold simple-border">Harga: Rp. 4.000/kg</p>
     </li>
 </ul>
-
-
             </div>
-
             <img src="{{ asset('images/laundry.png') }}" alt="Laundry Go Image" class="img-fluid mt-5 rounded shadow-lg" style="max-width: 400px;">
         </div>
+        <div class="team-section mt-5">
+                <h3 class="fw-bold text-primary text-center position-relative feature-title">
+                    <span>All About Teams</span>
+                </h3>
+                <p class="text-center"><b>Kami adalah tim yang berdedikasi untuk memberikan layanan laundry terbaik di asrama. Setiap anggota tim kami memiliki keahlian di bidangnya dan berkomitmen untuk menjaga kualitas dan kenyamanan pelanggan.</b></p>
+
+        <div class="row mt-4">
+                    <!-- Tim Member 1 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="team-member text-center">
+                            <img src="{{ asset('images/.jpg') }}" alt="Tim Member 1" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
+                            <h5 class="fw-bold">Daffa Akhadi Yoga Perdana</h5>
+                            <p class="text-muted">lorem ipsum</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tim Member 2 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="team-member text-center">
+                            <img src="{{ asset('images/team-member2.jpg') }}" alt="Tim Member 2" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
+                            <h5 class="fw-bold">Muhammad Arrahman</h5>
+                            <p class="text-muted">lorem ipsum</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tim Member 3 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="team-member text-center">
+                            <img src="{{ asset('images/team-member3.jpg') }}" alt="Tim Member 3" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
+                            <h5 class="fw-bold">Yusuf Surya Mulyawan</h5>
+                            <p class="text-muted">lorem ipsum</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
     </div>
 @endsection
 
@@ -137,5 +173,23 @@
 
     .img-fluid:hover {
         transform: scale(1.05);
+    }
+    .team-member img {
+        border: 3px solid #007bff;
+        transition: transform 0.3s ease;
+    }
+
+    .team-member img:hover {
+        transform: scale(1.1);
+    }
+
+    .team-member h5 {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    .team-member p {
+        font-size: 0.875rem;
+        color: #6c757d;
     }
 </style>
