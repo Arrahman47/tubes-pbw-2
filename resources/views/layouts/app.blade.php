@@ -53,9 +53,11 @@
     <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #c2def8;">
     <div class="container d-flex align-items-center">
         <!-- Tombol Sidebar -->
-        <button class="btn btn-custom me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
-            <i class="fas fa-bars"></i> Menu
-        </button>
+        @auth
+    <button class="btn btn-custom me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
+        <i class="fas fa-bars"></i> Menu
+    </button>
+@endauth
 
         <!-- Logo dan Teks Laundry Go -->
         <a class="navbar-brand text-black font-lemon d-flex align-items-center" href="{{ url('/') }}">
