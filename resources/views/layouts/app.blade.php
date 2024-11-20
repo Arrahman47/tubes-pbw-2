@@ -97,7 +97,7 @@
                 @endauth
 
                 <!-- Logo dan Teks Laundry Go -->
-                <a class="navbar-brand text-black font-lemon d-flex align-items-center" href="{{ url('/') }}">
+                <a class="navbar-brand text-black font-lemon d-flex align-items-center">
                     <img src="{{ asset('images/laundry.png') }}" alt="Logo" style="width: 80px; height: 80px; margin-left: 5px;">
                     <span class="ms-2 fw-bold">Laundry Go</span>
                 </a>
@@ -146,7 +146,7 @@
             <div class="offcanvas-body">
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <a href="{{ route('dashboard') }}" class="btn btn-custom btn-primary w-100">Dashboard</a>
+                        <a href="{{ route('dashboard') }}" class="btn btn-custom btn-primary w-100"><i class=" fas fa-home me-2"></i>Dashboard</a>
                     </li>
                     <li class="list-group-item">
                         <a href="{{ route('users.index') }}" class="btn btn-custom btn-primary w-100">

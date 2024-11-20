@@ -42,7 +42,7 @@
                     <!-- Tim Member 1 -->
                     <div class="col-md-4 mb-4">
                         <div class="team-member text-center">
-                            <img src="{{ asset('images/.jpg') }}" alt="Tim Member 1" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
+                            <img src="{{ asset('images/.jpg') }}" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
                             <h5 class="fw-bold">Daffa Akhadi Yoga Perdana</h5>
                             <p class="text-muted">lorem ipsum</p>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus.</p>
@@ -52,7 +52,7 @@
                     <!-- Tim Member 2 -->
                     <div class="col-md-4 mb-4">
                         <div class="team-member text-center">
-                            <img src="{{ asset('images/team-member2.jpg') }}" alt="Tim Member 2" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
+                            <img src="{{ asset('images/team-member2.jpg') }}"  class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
                             <h5 class="fw-bold">Muhammad Arrahman</h5>
                             <p class="text-muted">lorem ipsum</p>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus.</p>
@@ -62,7 +62,7 @@
                     <!-- Tim Member 3 -->
                     <div class="col-md-4 mb-4">
                         <div class="team-member text-center">
-                            <img src="{{ asset('images/team-member3.jpg') }}" alt="Tim Member 3" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
+                            <img src="{{ asset('images/team-member3.jpg') }}" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
                             <h5 class="fw-bold">Yusuf Surya Mulyawan</h5>
                             <p class="text-muted">lorem ipsum</p>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus.</p>
@@ -166,30 +166,29 @@
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     }
 
-    /* Image Styling */
-    .img-fluid {
-        transition: transform 0.3s ease;
-    }
+   /* Border for each team member container */
+.team-member {
+    border: 2px solid #ddd; /* Border tipis dengan warna abu-abu */
+    padding: 20px;
+    border-radius: 15px; /* Membulatkan sudut border */
+    transition: box-shadow 0.3s ease-in-out; /* Efek transisi saat hover */
+}
 
-    .img-fluid:hover {
-        transform: scale(1.05);
-    }
-    .team-member img {
-        border: 3px solid #007bff;
-        transition: transform 0.3s ease;
-    }
+.team-member:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Menambahkan efek shadow saat hover */
+}
 
-    .team-member img:hover {
-        transform: scale(1.1);
-    }
+/* Border for team member images */
+.team-member img {
+    border: 4px solid black; /* Border berwarna biru untuk gambar anggota tim */
+}
 
-    .team-member h5 {
-        font-size: 1.25rem;
-        font-weight: bold;
-    }
+/* Border and background for team member name and description */
+.team-member h5 {
+    border-bottom: 2px solid black; /* Menambahkan garis bawah di nama anggota tim */
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    color: #333; /* Warna teks nama */
+}
 
-    .team-member p {
-        font-size: 0.875rem;
-        color: #6c757d;
-    }
 </style>
