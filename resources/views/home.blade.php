@@ -11,24 +11,26 @@
                 <h3 class="fw-bold text-primary text-center position-relative feature-title">
                     <span>Kami memiliki layanan:</span>
                 </h3>
-                <ul class="list-unstyled mt-3 fade-in">
-                    <li class="mb-4 p-4 service-box fade-in-item">
-                        <h5><strong>Komplit</strong></h5>
-                        <p>Layanan ini memungkinkan pelanggan untuk mencuci pakaian berdasarkan berat (kiloan). Ini adalah pilihan yang lebih ekonomis untuk mencuci banyak pakaian dalam satu waktu.</p>
-                        <p class="text-primary fw-bold simple-border">Harga: Rp. 6.000/kg</p>
+               <ul class="list-unstyled mt-3 fade-in">
+               <ul class="list-unstyled mt-3 fade-in">
+    <li class="mb-4 p-4 service-box fade-in-item">
+        <h5><img src="{{ asset('images/komplit.png') }}" alt="Komplit" class="me-2" style="width: 30px; height: 30px;"><strong>Komplit</strong></h5>
+        <p>Layanan ini memungkinkan pelanggan untuk mencuci pakaian berdasarkan berat (kiloan). Ini adalah pilihan yang lebih ekonomis untuk mencuci banyak pakaian dalam satu waktu.</p>
+        <p class="text-primary fw-bold simple-border">Harga: Rp. 6.000/kg</p>
+    </li>
+    <li class="mb-4 p-4 service-box fade-in-item">
+        <h5><img src="{{ asset('images/setrika.png') }}" alt="Setrika" class="me-2" style="width: 30px; height: 30px;"><strong>Setrika</strong></h5>
+        <p>Layanan ini menawarkan pencucian untuk item tertentu seperti selimut, jaket, atau pakaian dengan bahan khusus yang membutuhkan perlakuan tertentu.</p>
+        <p class="text-primary fw-bold simple-border">Harga: Rp. 4.000/kg</p>
+    </li>
+    <li class="mb-4 p-4 service-box fade-in-item">
+        <h5><img src="{{ asset('images/drying.png') }}" alt="Cuci Kering" class="me-2" style="width: 30px; height: 30px;"><strong>Cuci Kering</strong></h5>
+        <p>Layanan cuci kering digunakan untuk pakaian atau tekstil yang tidak bisa dicuci dengan air, seperti jas, gaun, atau pakaian berbahan sutra dan wol.</p>
+        <p class="text-primary fw-bold simple-border">Harga: Rp. 4.000/kg</p>
+    </li>
+</ul>
 
-                    </li>
-                    <li class="mb-4 p-4 service-box fade-in-item">
-                        <h5><strong>Setrika</strong></h5>
-                        <p>Layanan ini menawarkan pencucian untuk item tertentu seperti selimut, jaket, atau pakaian dengan bahan khusus yang membutuhkan perlakuan tertentu.</p>
-                        <p class="text-primary fw-bold simple-border">Harga: Rp. 4.000/kg</p>
-                    </li>
-                    <li class="mb-4 p-4 service-box fade-in-item">
-                        <h5><strong>Cuci Kering</strong></h5>
-                        <p>Layanan cuci kering digunakan untuk pakaian atau tekstil yang tidak bisa dicuci dengan air, seperti jas, gaun, atau pakaian berbahan sutra dan wol.</p>
-                        <p class="text-primary fw-bold simple-border">Harga: Rp. 4.000/kg</p>
-                    </li>
-                </ul>
+
             </div>
 
             <img src="{{ asset('images/laundry.png') }}" alt="Laundry Go Image" class="img-fluid mt-5 rounded shadow-lg" style="max-width: 400px;">
