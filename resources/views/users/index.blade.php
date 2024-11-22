@@ -41,7 +41,17 @@
                         <td>
                             @if(!empty($user->getRoleNames()))
                                 @foreach($user->getRoleNames() as $v)
-                                    <span class="badge bg-success">{{ $v }}</span>
+                                    <span class="badge 
+                                        @if($v == 'Admin') 
+                                            bg-danger 
+                                        @elseif($v == 'Customer') 
+                                            bg-primary 
+                                        @else 
+                                            bg-secondary 
+                                        @endif
+                                    ">
+                                        {{ $v }}
+                                    </span>
                                 @endforeach
                             @endif
                         </td>

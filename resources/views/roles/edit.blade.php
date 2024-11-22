@@ -30,21 +30,30 @@
                     @csrf
                     @method('PUT')
 
+                    <!-- Role Name Input -->
                     <div class="mb-3">
                         <label for="name" class="form-label">Role Name</label>
-                        <input type="text" name="name" id="name" placeholder="Enter role name" class="form-control" value="{{ $role->name }}">
+                        <input type="text" name="name" id="name" placeholder="Enter role name" class="form-control" value="{{ $role->name }}" required>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Permission:</strong>
-                <br/>
-                @foreach($permission as $value)
-                    <label><input type="checkbox" name="permission[{{$value->id}}]" value="{{$value->id}}" class="name">
-                    {{ $value->name }}</label>
-                <br/>
-                @endforeach
-            </div>
-        </div>
+
+                    <!-- Permission Section -->
+                    <div class="mb-3">
+                        <label for="permissions" class="form-label">Permissions</label>
+                        <div class="row">
+                            @foreach($permission as $value)
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="permission[{{$value->id}}]" value="{{$value->id}}" class="form-check-input" id="permission{{$value->id}}" @if(in_array($value->id, $rolePermissions)) checked @endif>
+                                        <label class="form-check-label" for="permission{{$value->id}}">
+                                            {{ $value->name }}
+                                        </label>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <!-- Save Button -->
                     <div class="text-center">
                         <button type="submit" class="btn btn-success btn-lg">
                             <i class="fa-solid fa-floppy-disk"></i> Save Changes
@@ -56,3 +65,4 @@
     </div>
 </div>
 @endsection
+
