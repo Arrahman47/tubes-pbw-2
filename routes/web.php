@@ -20,6 +20,7 @@ Route::get('/', function () {
     return view('home');
 });
 Route::get('/logout', [UserController::class, 'logout']);
+Route::post('/orders/{id}/accept', [ProductController::class, 'accept'])->name('orders.accept');
 
 
 Route::middleware('auth')->group(function () {

@@ -14,6 +14,13 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+         $this->middleware('permission:product-list|laundry-create|laundry-edit|laundry-delete', ['only' => ['index','show']]);
+         $this->middleware('permission:laundry-create', ['only' => ['create','store']]);
+         $this->middleware('permission:laundry-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:laundry-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         // Mengambil pemesanan dengan paginasi (10 per halaman)
@@ -59,6 +66,15 @@ class ProductController extends Controller
         return redirect()->route('products.index')
                          ->with('success', 'Pemesanan berhasil dibuat.');
     }
+    public function accept($id)
+{
+    $order = Product::findOrFail($id);
+    $order->status = 'accepted';
+    $order->save();
+
+    return redirect()->back()->with('success', 'Order accepted successfully!');
+}
+
 
     /**
      * Display the specified resource.

@@ -1,13 +1,11 @@
 <?php
-  
 namespace Database\Seeders;
-  
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-  
+
 class CreateAdminUserSeeder extends Seeder
 {
     /**
@@ -15,21 +13,29 @@ class CreateAdminUserSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::find(1); // Replace 1 with the user ID you want to assign permissions to
-$user->givePermissionTo(['role-list', 'role-create', 'role-edit', 'role-delete']);
-        // $user = User::create([
-        //     'name' => 'Daffa Akhadi Yoga Perdana', 
-        //     'email' => 'akhadidaffa332@gmail.com',
-        //     'password' => bcrypt('123456')
-        // ]);
+        // Cek apakah pengguna dengan ID 1 ada, jika tidak, buat pengguna baru
+        $user = User::find(1);
+
+        if (!$user) {
+            // Membuat pengguna baru jika tidak ada
+            $user = User::create([
+                'name' => 'Fafa',
+                'email' => 'fafagaming@gmail.com',
+                'password' => bcrypt('123456'),
+            ]);
+        }
+
+        // Memberikan izin kepada pengguna
+        $user->givePermissionTo(['role-list', 'role-create', 'role-edit', 'role-delete']);
         
-        $user= User::where("email",'admin@gmail.com')->first();
-        // $role = Role::create(['name' => 'Admin']);
-        $role = Role::where("name","Admin")->first();
-        $permissions = Permission::pluck('id','id')->all();
-       
+        // Membuat role Admin jika belum ada
+        $role = Role::firstOrCreate(['name' => 'Admin']);
+
+        // Menyinkronkan semua izin ke peran Admin
+        $permissions = Permission::pluck('id', 'id')->all();
         $role->syncPermissions($permissions);
-         
+
+        // Menetapkan peran Admin ke pengguna
         $user->assignRole([$role->id]);
     }
 }

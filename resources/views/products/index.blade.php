@@ -8,9 +8,11 @@
             <p class="text-muted">Kelola semua pemesanan yang telah dibuat dengan mudah.</p>
         </div>
         <div class="col-md-4 text-md-end">
+            @can('laundry-create')
             <a href="{{ route('products.create') }}" class="btn btn-success btn-lg shadow-sm">
                 <i class="fa fa-plus me-2"></i>Tambah Pemesanan
             </a>
+            @endcan
         </div>
     </div>
 
@@ -22,9 +24,17 @@
     @endif
 
     <!-- Menampilkan jumlah pemesanan -->
-    <div class="mb-4 text-center py-3 bg-light rounded shadow-sm">
-        <h4 class="fw-bold text-primary"><i class="fa-solid fa-list me-2"></i>{{ $orderCount }} Orders</h4>
-    </div>
+    <div class="mb-4 text-center py-3 bg-warning rounded shadow-sm border border-primary d-inline-block">
+    <h4 class="fw-bold text-dark">
+        <i class="fa-solid fa-list me-2"></i>{{ $orderCount }} Orders Pending
+    </h4>
+</div>
+
+<div class="mb-4 text-center py-3 bg-success rounded shadow-sm border border-primary d-inline-block">
+    <h4 class="fw-bold text-white">
+        <i class="fa-solid fa-check me-2"></i>{{ $orderCount}} Orders Accepted
+    </h4>
+</div>
 
     <div class="table-responsive">
         <table class="table table-hover align-middle">
@@ -55,17 +65,30 @@
             <td>{{ $product->harga_total }}</td>
             <td>{{ $product->status_pembayaran }}</td>
             <td>
-                <div class="d-flex justify-content-center">
-                    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm me-1">
-                        <i class="fa-solid fa-pen-to-square"></i> Edit
-                    </a>
-                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">
-                            <i class="fa-solid fa-trash"></i> Hapus
-                        </button>
-                    </form>
+            <div class="d-flex justify-content-center">
+    <!-- Tombol Edit -->
+    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm me-1">
+        <i class="fa-solid fa-pen-to-square"></i> Edit
+    </a>
+    
+    <!-- Tombol Hapus -->
+    <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger btn-sm me-1">
+            <i class="fa-solid fa-trash"></i> Hapus
+        </button>
+    </form>
+    
+    <!-- Tombol Accepted -->
+    <form action="{{ route('orders.accept', $product->id) }}" method="POST" style="display:inline;">
+        @csrf
+        <button type="submit" class="btn btn-success btn-sm">
+            <i class="fa-solid fa-check"></i> Accepted
+        </button>
+    </form>
+</div>
+
                 </div>
             </td>
         </tr>
