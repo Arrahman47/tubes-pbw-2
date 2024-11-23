@@ -4,7 +4,7 @@
 <div class="container mt-4">
     <div class="row mb-3 align-items-center">
         <div class="col-md-8">
-            <h2 class="text-primary fw-bold"><i class="fa-solid fa-box me-2"></i>Manajemen Pemesanan</h2>
+            <h2 class="text-primary fw-bold"><i class="fa-solid fa-box me-2"></i>Pemesanan</h2>
             <p class="text-muted">Kelola semua pemesanan yang telah dibuat dengan mudah.</p>
         </div>
         <div class="col-md-4 text-md-end">
