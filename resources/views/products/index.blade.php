@@ -46,8 +46,8 @@
                     <th>Gedung Asrama</th>
                     <th>Jumlah (kg)</th>
                     <th>No Kamar</th>
+                    <th>Total Harga</th>
                     <th>Catatan</th>
-                    <th>Harga Total</th>
                     <th>Status Pembayaran</th>
                     <th>Aksi</th>
                 </tr>
@@ -61,8 +61,8 @@
             <td>{{ $product->gedung_asrama }}</td>
             <td>{{ $product->jumlah_kg }}</td>
             <td>{{ $product->no_kamar }}</td>
+            <td>{{ $product->total_harga}}</td>
             <td>{{ $product->catatan }}</td>
-            <td>{{ $product->harga_total }}</td>
             <td>{{ $product->status_pembayaran }}</td>
             <td>
             <div class="d-flex justify-content-center">

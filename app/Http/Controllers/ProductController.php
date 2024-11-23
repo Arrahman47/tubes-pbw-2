@@ -10,18 +10,20 @@ use Illuminate\Http\RedirectResponse;
 class ProductController extends Controller
 { 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Set up middleware for permissions.
      */
-    function __construct()
+    public function __construct()
     {
-         $this->middleware('permission:product-list|laundry-create|laundry-edit|laundry-delete', ['only' => ['index','show']]);
-         $this->middleware('permission:laundry-create', ['only' => ['create','store']]);
-         $this->middleware('permission:laundry-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:laundry-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:product-list|laundry-create|laundry-edit|laundry-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:laundry-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:laundry-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:laundry-delete', ['only' => ['destroy']]);
     }
-    public function index()
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(): View
     {
         // Mengambil pemesanan dengan paginasi (10 per halaman)
         $products = Product::paginate(10);
@@ -32,12 +34,8 @@ class ProductController extends Controller
         return view('products.index', compact('products', 'orderCount'));
     }
 
-    
-
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create(): View
     {
@@ -46,48 +44,55 @@ class ProductController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'tanggal_pemesanan' => 'required|date',
-            'pilihan_kategori' => 'required|string',
-            'gedung_asrama' => 'required|string',
-            'jumlah_kg' => 'required|numeric',
-            'no_kamar' => 'required|string',
-            'catatan' => 'required|string',
-        ]);
-
-        Product::create($request->all());
-
-        return redirect()->route('products.index')
-                         ->with('success', 'Pemesanan berhasil dibuat.');
-    }
-    public function accept($id)
 {
-    $order = Product::findOrFail($id);
-    $order->status = 'accepted';
-    $order->save();
+    $request->validate([
+        'tanggal_pemesanan' => 'required|date',
+        'pilihan_kategori' => 'required|string',
+        'gedung_asrama' => 'required|string',
+        'jumlah_kg' => 'required|numeric|min:0',
+        'no_kamar' => 'required|string|max:10',
+        'catatan' => 'nullable|string',
+    ]);
 
-    return redirect()->back()->with('success', 'Order accepted successfully!');
+    // Definisikan harga berdasarkan kategori
+    $hargaPerKg = [
+        'Komplit' => 6000,
+        'Setrika' => 4000,
+        'Cuci Kering' => 4000,
+    ];
+
+    // Dapatkan harga per kg berdasarkan kategori yang dipilih
+    $harga = $hargaPerKg[$request->pilihan_kategori] ?? 0;
+    
+    // Hitung total harga
+    $totalHarga = $harga * $request->jumlah_kg;
+
+    // Tambahkan total harga ke dalam data untuk disimpan
+    $request->merge(['total_harga' => $totalHarga]);
+
+    // Simpan pemesanan
+    Product::create($request->all());
+
+    return redirect()->route('products.index')
+                     ->with('success', 'Pemesanan berhasil dibuat.');
 }
 
 
     /**
-     * Display the specified resource.
-     *
-     * @param  Product  $product
-     * @return \Illuminate\Http\Response
+     * Accept an order by updating its status.
      */
-    
+    public function accept(int $id): RedirectResponse
+    {
+        $order = Product::findOrFail($id);
+        $order->update(['status' => 'accepted']);
+
+        return redirect()->back()->with('success', 'Pemesanan berhasil diterima!');
+    }
+
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  Product  $product
-     * @return \Illuminate\Http\Response
      */
     public function edit(Product $product): View
     {
@@ -96,49 +101,65 @@ class ProductController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Product  $product
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product): RedirectResponse
-{
-    $request->validate([
-        'tanggal_pemesanan' => 'required|date',
-        'pilihan_kategori' => 'required|string',
-        'gedung_asrama' => 'required|string',
-        'jumlah_kg' => 'required|numeric',
-        'no_kamar' => 'required|string',
-        'catatan' => 'required|string',
-    ]);
-
-    $product->update([
-        'tanggal_pemesanan' => $request->tanggal_pemesanan,
-        'pilihan_kategori' => $request->pilihan_kategori,
-        'gedung_asrama' => $request->gedung_asrama,
-        'jumlah_kg' => $request->jumlah_kg,
-        'no_kamar' => $request->no_kamar,
-        'catatan' => $request->catatan,
-    ]);
-
-    return redirect()->route('products.index')->with('success', 'Pemesanan berhasil.');
-}
-
-/*public function updatePaymentStatus(Request $request, $id)
-{
-    $product = Product::findOrFail($id);
-    $product->status_pembayaran = 'sudah_bayar';
-    $product->save();
-
-    return redirect()->route('orders.index')->with('success', 'Status pembayaran berhasil diperbarui.');
-}
-*/
+    {
+        $request->validate([
+            'tanggal_pemesanan' => 'required|date',
+            'pilihan_kategori' => 'required|string',
+            'gedung_asrama' => 'required|string',
+            'jumlah_kg' => 'required|numeric|min:0',
+            'no_kamar' => 'required|string|max:10',
+            'catatan' => 'nullable|string',
+        ]);
     
+        // Definisikan harga berdasarkan kategori
+        $hargaPerKg = [
+            'Cuci Basah' => 5000,
+            'Cuci Kering' => 7000,
+            'Setrika' => 3000,
+        ];
+    
+        // Dapatkan harga per kg berdasarkan kategori yang dipilih
+        $harga = $hargaPerKg[$request->pilihan_kategori] ?? 0;
+        
+        // Hitung total harga
+        $totalHarga = $harga * $request->jumlah_kg;
+    
+        // Perbarui data pemesanan
+        $product->update([
+            'tanggal_pemesanan' => $request->tanggal_pemesanan,
+            'pilihan_kategori' => $request->pilihan_kategori,
+            'gedung_asrama' => $request->gedung_asrama,
+            'jumlah_kg' => $request->jumlah_kg,
+            'no_kamar' => $request->no_kamar,
+            'catatan' => $request->catatan,
+            'total_harga' => $totalHarga, // Perbarui total harga
+        ]);
+    
+        return redirect()->route('products.index')->with('success', 'Pemesanan berhasil diperbarui.');
+    }
+    
+
+    /**
+     * Delete the specified resource from storage.
+     */
     public function destroy(Product $product): RedirectResponse
     {
         $product->delete();
 
         return redirect()->route('products.index')
                          ->with('success', 'Pemesanan berhasil dihapus.');
+    }
+
+    /**
+     * Update payment status for a product (if needed).
+     */
+    public function updatePaymentStatus(Request $request, int $id): RedirectResponse
+    {
+        $product = Product::findOrFail($id);
+        $product->update(['status_pembayaran' => 'sudah_bayar']);
+
+        return redirect()->route('products.index')->with('success', 'Status pembayaran berhasil diperbarui.');
     }
 }

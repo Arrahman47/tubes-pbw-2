@@ -11,6 +11,7 @@ class Product extends Model
         'pilihan_kategori',
         'gedung_asrama',
         'jumlah_kg',
+        'total_harga',
         'no_kamar',
         'catatan',
         'updated_at',

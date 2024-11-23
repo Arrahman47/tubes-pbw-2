@@ -39,12 +39,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="pilihan_kategori"><strong>Pilihan Kategori</strong></label>
-                                <select id="pilihan_kategori" name="pilihan_kategori" class="form-select @error('pilihan_kategori') is-invalid @enderror">
-                                    <option value="" disabled selected>Pilih kategori</option>
-                                    <option value="Kiloan" {{ old('pilihan_kategori') == 'Komplit' ? 'selected' : '' }}>Komplit</option>
-                                    <option value="Satuan" {{ old('pilihan_kategori') == 'Setrika' ? 'selected' : '' }}>Setrika</option>
-                                    <option value="Cuci Kering" {{ old('pilihan_kategori') == 'Cuci Kering' ? 'selected' : '' }}>Cuci Kering</option>
-                                </select>
+                                <select id="pilihan_kategori" name="pilihan_kategori" class="form-control">
+    <option value="" disabled selected>Pilih kategori</option>
+    <option value="Cuci Basah" data-harga="6000">Komplit (Rp 6000/kg)</option>
+    <option value="Cuci Kering" data-harga="4000">Setrika (Rp 7000/kg)</option>
+    <option value="Setrika" data-harga="4000">Cuci Kering (Rp 3000/kg)</option>
+</select>
+
                                 @error('pilihan_kategori')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -77,6 +78,11 @@
                                     oninput="hitungHarga()" 
                                     required
                                 >
+                                <div class="mb-3">
+        <label for="harga_total" class="form-label">Total Harga</label>
+        <div id="harga_total" class="form-control bg-light text-dark" readonly>Rp 0</div>
+    </div>
+</div>
                                 @error('jumlah_kg')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -139,23 +145,32 @@
 
 @section('scripts')
     <script>
-        function hitungHarga() {
-            const hargaPerKg = 5000; // Harga per kg
-            const jumlahKgInput = document.getElementById('jumlah_kg');
-            const hargaTotalInput = document.getElementById('harga_total');
+       function hitungHarga() {
+    const kategoriSelect = document.getElementById('pilihan_kategori');
+    const jumlahKgInput = document.getElementById('jumlah_kg');
+    const hargaTotalDiv = document.getElementById('harga_total');
 
-            if (!jumlahKgInput || !hargaTotalInput) {
-                console.error('Input jumlah_kg atau harga_total tidak ditemukan.');
-                return;
-            }
+    // Ambil data harga dari kategori yang dipilih
+    const selectedOption = kategoriSelect.options[kategoriSelect.selectedIndex];
+    const hargaPerKg = selectedOption ? parseInt(selectedOption.getAttribute('data-harga')) : 0;
 
-            let jumlahKg = parseInt(jumlahKgInput.value);
-            if (isNaN(jumlahKg) || jumlahKg < 0) {
-                jumlahKg = 0;
-            }
+    // Ambil jumlah (kg)
+    const jumlahKg = parseInt(jumlahKgInput.value) || 0;
 
-            const totalHarga = jumlahKg * hargaPerKg;
-            hargaTotalInput.value = totalHarga.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
-        }
+    // Hitung total harga
+    const totalHarga = hargaPerKg * jumlahKg;
+
+    // Tampilkan hasil ke elemen harga total
+    hargaTotalDiv.textContent = totalHarga.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+}
+    document.addEventListener('DOMContentLoaded', () => {
+        const kategoriSelect = document.getElementById('pilihan_kategori');
+        const jumlahKgInput = document.getElementById('jumlah_kg');
+
+        kategoriSelect.addEventListener('change', hitungHarga);
+        jumlahKgInput.addEventListener('input', hitungHarga);
+    });
+
+
     </script>
 @endsection

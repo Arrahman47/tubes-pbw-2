@@ -44,7 +44,7 @@
                                     <span class="badge 
                                         @if($v == 'Admin') 
                                             bg-danger 
-                                        @elseif($v == 'Customer') 
+                                        @elseif($v == 'C    ustomer') 
                                             bg-primary 
                                         @else 
                                             bg-secondary 
