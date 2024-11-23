@@ -22,7 +22,16 @@ class PermissionTableSeeder extends Seeder
            'laundry-list',
            'laundry-create',
            'laundry-edit',
-           'laundry-delete'
+           'laundry-delete',
+           'promo-list',
+           'promo-create',
+           'promo-edit',
+           'promo-delete',
+           'user-list',
+           'user-create',
+           'user-edit',
+           'user-delete',
+
         ];
         
         foreach ($permissions as $permission) {

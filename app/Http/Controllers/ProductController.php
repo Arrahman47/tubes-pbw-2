@@ -53,10 +53,11 @@ class ProductController extends Controller
         'gedung_asrama' => 'required|string',
         'jumlah_kg' => 'required|numeric|min:0',
         'no_kamar' => 'required|string|max:10',
+        'total_harga' => '',
         'catatan' => 'nullable|string',
     ]);
 
-    // Definisikan harga berdasarkan kategori
+    
     $hargaPerKg = [
         'Komplit' => 6000,
         'Setrika' => 4000,
@@ -67,10 +68,10 @@ class ProductController extends Controller
     $harga = $hargaPerKg[$request->pilihan_kategori] ?? 0;
     
     // Hitung total harga
-    $totalHarga = $harga * $request->jumlah_kg;
+    $total_harga = $harga * $request->jumlah_kg;
 
     // Tambahkan total harga ke dalam data untuk disimpan
-    $request->merge(['total_harga' => $totalHarga]);
+    $request->merge(['total_harga' => $total_harga]);
 
     // Simpan pemesanan
     Product::create($request->all());
@@ -83,14 +84,19 @@ class ProductController extends Controller
     /**
      * Accept an order by updating its status.
      */
-    public function accept(int $id): RedirectResponse
-    {
-        $order = Product::findOrFail($id);
-        $order->update(['status' => 'accepted']);
+    /**public function accept($id)
+{
+    // Cari data order berdasarkan ID
+    $order = Product::findOrFail($id);
 
-        return redirect()->back()->with('success', 'Pemesanan berhasil diterima!');
-    }
+    // Ubah status pembayaran menjadi "Accepted"
+    $order->status_pembayaran = 'Accepted';
+    $order->save();
 
+    // Redirect kembali ke halaman orders dengan pesan sukses
+    return redirect()->route('products.index')->with('success', 'Pesanan telah diterima.');
+}
+/** */
     /**
      * Show the form for editing the specified resource.
      */
@@ -110,21 +116,22 @@ class ProductController extends Controller
             'gedung_asrama' => 'required|string',
             'jumlah_kg' => 'required|numeric|min:0',
             'no_kamar' => 'required|string|max:10',
+            'total_harga' => '',
             'catatan' => 'nullable|string',
         ]);
     
         // Definisikan harga berdasarkan kategori
         $hargaPerKg = [
-            'Cuci Basah' => 5000,
-            'Cuci Kering' => 7000,
-            'Setrika' => 3000,
+            'Komplit' => 6000,
+            'Setrika' => 4000,
+            'Cuci Kering' => 4000,
         ];
     
         // Dapatkan harga per kg berdasarkan kategori yang dipilih
         $harga = $hargaPerKg[$request->pilihan_kategori] ?? 0;
         
         // Hitung total harga
-        $totalHarga = $harga * $request->jumlah_kg;
+        $total_harga = $harga * $request->jumlah_kg;
     
         // Perbarui data pemesanan
         $product->update([
@@ -133,8 +140,9 @@ class ProductController extends Controller
             'gedung_asrama' => $request->gedung_asrama,
             'jumlah_kg' => $request->jumlah_kg,
             'no_kamar' => $request->no_kamar,
+            'total_harga' => $total_harga, 
             'catatan' => $request->catatan,
-            'total_harga' => $totalHarga, // Perbarui total harga
+            
         ]);
     
         return redirect()->route('products.index')->with('success', 'Pemesanan berhasil diperbarui.');

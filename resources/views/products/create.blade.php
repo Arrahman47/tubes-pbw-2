@@ -41,9 +41,9 @@
                                 <label for="pilihan_kategori"><strong>Pilihan Kategori</strong></label>
                                 <select id="pilihan_kategori" name="pilihan_kategori" class="form-control">
     <option value="" disabled selected>Pilih kategori</option>
-    <option value="Cuci Basah" data-harga="6000">Komplit (Rp 6000/kg)</option>
-    <option value="Cuci Kering" data-harga="4000">Setrika (Rp 7000/kg)</option>
-    <option value="Setrika" data-harga="4000">Cuci Kering (Rp 3000/kg)</option>
+    <option value="Komplit" data-harga="6000">Komplit (Rp 6000/kg)</option>
+    <option value="Cuci Kering" data-harga="4000">Cuci Kering (Rp 4000/kg)</option>
+    <option value="Setrika" data-harga="4000">Setrika (Rp 4000/kg)</option>
 </select>
 
                                 @error('pilihan_kategori')

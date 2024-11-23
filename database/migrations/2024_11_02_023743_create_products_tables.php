@@ -17,6 +17,7 @@ return new class extends Migration
         $table->string('gedung_asrama')->nullable();
         $table->decimal('jumlah_kg', 8, 2)->nullable();
         $table->decimal('total_harga', 10, 2)->nullable();
+       
         //$table->string('status_pembayaran')->default('Belum Dibayar');
         $table->string('no_kamar')->nullable();
         $table->text('catatan')->nullable();
@@ -32,7 +33,7 @@ public function down()
             'gedung_asrama',
             'jumlah_kg',
             'total_harga',
-            //'status_pembayaran',
+             //'status_pembayaran',
             'no_kamar',
             'catatan',
         ]);

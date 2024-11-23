@@ -15,6 +15,7 @@
             @endcan
         </div>
     </div>
+  
 
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -29,13 +30,13 @@
         <i class="fa-solid fa-list me-2"></i>{{ $orderCount }} Orders Pending
     </h4>
 </div>
-
+<!--
 <div class="mb-4 text-center py-3 bg-success rounded shadow-sm border border-primary d-inline-block">
     <h4 class="fw-bold text-white">
         <i class="fa-solid fa-check me-2"></i>{{ $orderCount}} Orders Accepted
     </h4>
 </div>
-
+-->
     <div class="table-responsive">
         <table class="table table-hover align-middle">
             <thead class="table-primary text-center">
@@ -80,15 +81,9 @@
         </button>
     </form>
     
-    <!-- Tombol Accepted -->
-    <form action="{{ route('orders.accept', $product->id) }}" method="POST" style="display:inline;">
-        @csrf
-        <button type="submit" class="btn btn-success btn-sm">
-            <i class="fa-solid fa-check"></i> Accepted
-        </button>
-    </form>
-</div>
-
+     
+    
+ 
                 </div>
             </td>
         </tr>

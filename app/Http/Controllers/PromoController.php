@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class PromoController extends Controller
 {
+   /**  public function __construct()
+    {
+        $this->middleware('permission:promo-list|promo-create|promo-edit|promo-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:promo-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:promo-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:promo-delete', ['only' => ['destroy']]);
+    }*/
+        
     public function index()
 {
     $promos = Promo::paginate(10); 
