@@ -42,6 +42,7 @@
             <thead class="table-primary text-center">
                 <tr>
                     <th>No</th>
+                    <th>Nama</th>
                     <th>Tanggal Pemesanan</th>
                     <th>Pilihan</th>
                     <th>Gedung Asrama</th>
@@ -57,6 +58,7 @@
     @foreach ($products as $product)
         <tr class="text-center">
             <td>{{ $loop->iteration }}</td>
+            <td>{{ $product->nama }}</td>
             <td>{{ $product->tanggal_pemesanan }}</td>
             <td>{{ $product->pilihan_kategori }}</td>
             <td>{{ $product->gedung_asrama }}</td>

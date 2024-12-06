@@ -54,9 +54,9 @@
                     </div>
 
                     <!-- Save Button -->
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-success btn-lg">
-                            <i class="fa-solid fa-floppy-disk"></i> Save Changes
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+            <button type="submit" class="btn btn-primary btn-sm mb-2 mt-2"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
+      
                         </button>
                     </div>
                 </form>

@@ -22,6 +22,16 @@
 
                 <form action="{{ route('products.store') }}" method="POST">
                     @csrf
+                    <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nama"><strong>Nama</strong></label>
+                                <input type="text" id="nama" name="nama" class="form-control @error('nama') is-invalid @enderror" placeholder="Nama" value="{{ old('nama') }}">
+                                @error('nama')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
 
                     <div class="row g-3">
                         <!-- Tanggal Pemesanan -->

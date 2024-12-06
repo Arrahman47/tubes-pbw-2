@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('permission:product-list|laundry-create|laundry-edit|laundry-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:laundry-list|laundry-create|laundry-edit|laundry-delete', ['only' => ['index', 'show']]);
         $this->middleware('permission:laundry-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:laundry-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:laundry-delete', ['only' => ['destroy']]);
@@ -48,6 +48,7 @@ class ProductController extends Controller
     public function store(Request $request): RedirectResponse
 {
     $request->validate([
+        'nama' => 'required|string',
         'tanggal_pemesanan' => 'required|date',
         'pilihan_kategori' => 'required|string',
         'gedung_asrama' => 'required|string',
@@ -111,6 +112,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $product): RedirectResponse
     {
         $request->validate([
+            'nama' => 'required|string',
             'tanggal_pemesanan' => 'required|date',
             'pilihan_kategori' => 'required|string',
             'gedung_asrama' => 'required|string',
@@ -135,6 +137,7 @@ class ProductController extends Controller
     
         // Perbarui data pemesanan
         $product->update([
+            'nama' => $request->nama,
             'tanggal_pemesanan' => $request->tanggal_pemesanan,
             'pilihan_kategori' => $request->pilihan_kategori,
             'gedung_asrama' => $request->gedung_asrama,

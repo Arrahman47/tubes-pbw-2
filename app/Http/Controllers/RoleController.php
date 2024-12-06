@@ -101,22 +101,29 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id): RedirectResponse
-    {
-        $this->validate($request, [
-            'name' => 'required',
-            
-        ]);
-    
-        $role = Role::find($id);
-        $role->name = $request->input('name');
-        $role->save();
+    public function update(Request $request, $id)
+{
+    // Temukan role berdasarkan ID
+    $role = Role::findOrFail($id);
 
-       
-        
-        return redirect()->route('roles.index')
-                        ->with('success','Role updated successfully');
-    }
+    // Validasi input
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'permission' => 'array|nullable', // Pastikan permission berupa array
+    ]);
+
+    // Update nama role
+    $role->name = $request->name;
+    $role->save();
+
+    // Simpan permissions
+    $permissions = $request->input('permission', []); // Ambil permission atau kosongkan array
+    $role->permissions()->sync($permissions); // sync untuk update di pivot table
+
+    // Redirect ke halaman index dengan pesan sukses
+    return redirect()->route('roles.index')->with('success', 'Role updated successfully!');
+}
+    
     /**
      * Remove the specified resource from storage.
      *

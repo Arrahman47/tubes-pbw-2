@@ -12,6 +12,7 @@ return new class extends Migration
     public function up()
 {
     Schema::table('products', function (Blueprint $table) {
+        $table->string('nama')->nullable();
         $table->date('tanggal_pemesanan')->nullable();
         $table->string('pilihan_kategori')->nullable();
         $table->string('gedung_asrama')->nullable();
@@ -28,6 +29,7 @@ public function down()
 {
     Schema::table('products', function (Blueprint $table) {
         $table->dropColumn([
+            'nama',
             'tanggal_pemesanan',
             'pilihan_kategori',
             'gedung_asrama',

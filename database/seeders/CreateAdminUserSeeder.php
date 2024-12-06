@@ -15,18 +15,23 @@ class CreateAdminUserSeeder extends Seeder
     {
         // Cek apakah pengguna dengan ID 1 ada, jika tidak, buat pengguna baru
         $user = User::find(1);
+        
+
 
         if (!$user) {
             // Membuat pengguna baru jika tidak ada
             $user = User::create([
-                'name' => 'Fafa',
-                'email' => 'fafagaming@gmail.com',
-                'password' => bcrypt('123456'),
+                'name' => 'Ben',
+                'email' => 'bernard47@gmail.com',
+                'password' => bcrypt('Horsee47'),
             ]);
         }
 
         // Memberikan izin kepada pengguna
         $user->givePermissionTo(['role-list', 'role-create', 'role-edit', 'role-delete']);
+        $user->givePermissionTo(['laundry-list', 'laundry-create', 'laundry-edit', 'laundry-delete']);
+        $user->givePermissionTo(['promo-list', 'promo-create', 'promo-edit', 'promo-delete']);
+        $user->givePermissionTo(['user-list', 'user-create', 'user-edit', 'user-delete']);
         
         // Membuat role Admin jika belum ada
         $role = Role::firstOrCreate(['name' => 'Admin']);

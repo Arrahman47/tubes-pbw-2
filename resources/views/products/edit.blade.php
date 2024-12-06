@@ -27,6 +27,13 @@
     @csrf
     @method('PUT')
 
+    <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <label for="gedung_asrama">Nama</label>
+                <input type="text" name="nama" class="form-control" value="{{ old('nama', $product->nama) }}">
+            </div>
+        </div>
+
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
