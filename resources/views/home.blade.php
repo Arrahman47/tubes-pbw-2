@@ -53,7 +53,7 @@
                 <!-- Tim Member 2 -->
                 <div class="col-md-4 mb-4">
                     <div class="team-member text-center fade-in-item">
-                        <img src="{{ asset('images/team-member2.jpg') }}" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
+                        <img src="{{ asset('images/rahman.jpg') }}" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
                         <h5 class="fw-bold">Muhammad Arrahman</h5>
                         <p class="text-muted">Back End Developer</p>
                         <p>Saya bertanggung jawab mengelola server, database, dan sistem yang mendukung operasional aplikasi laundry, memastikan bahwa data pelanggan dan transaksi diproses dengan aman dan efisien untuk memberikan layanan yang cepat dan andal.</p>

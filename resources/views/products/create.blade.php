@@ -98,10 +98,6 @@
                                 @enderror
                             </div>
                         </div>
-
-             
-                        
-
                         <!-- No Kamar -->
                         <div class="col-md-6">
                             <div class="form-group">
@@ -112,8 +108,12 @@
                                 @enderror
                             </div>
                         </div>
-
-                        
+                    <div class="col-md-6">
+                    <div class="form-group">
+    <label for="bukti_pembayaran"><strong>Foto Bukti Pembayaran</strong></label>
+    <input type="file" id="bukti_pembayaran" name="bukti_pembayaran" class="form-control" accept="image/*" onchange="previewBuktiPembayaran(event)">
+    <img id="bukti_preview" src="#" alt="Preview Bukti Pembayaran" class="img-fluid" style="display:none;">
+</div>
 
                         <!-- Status Pembayaran -->
                         <!-- <div class="col-md-6">
@@ -143,8 +143,38 @@
                     </div>
 
                     <div class="text-center mt-4">
+                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#reviewModal">
+        <i class="fa-solid fa-eye"></i> Review Pemesanan
+    </button>
                         <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
                         <button type="reset" class="btn btn-secondary btn-sm"><i class="fa-solid fa-eraser"></i> Reset</button>
+                   <!-- Modal Review -->
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reviewModalLabel">Review Pemesanan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Nama:</strong> <span id="review_nama"></span></p>
+                <p><strong>Tanggal Pemesanan:</strong> <span id="review_tanggal_pemesanan"></span></p>
+                <p><strong>Kategori:</strong> <span id="review_kategori"></span></p>
+                <p><strong>Gedung Asrama:</strong> <span id="review_gedung_asrama"></span></p>
+                <p><strong>Jumlah (kg):</strong> <span id="review_jumlah_kg"></span></p>
+                <p><strong>Total Harga:</strong> <span id="review_total_harga"></span></p>
+                <p><strong>No Kamar:</strong> <span id="review_no_kamar"></span></p>
+                <p><strong>Catatan:</strong> <span id="review_catatan"></span></p>
+                <p><strong>Foto Bukti Pembayaran:</strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="document.querySelector('form').submit();">Kirim Pemesanan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
                     </div>
                 </form>
             </div>
@@ -155,6 +185,63 @@
 
 @section('scripts')
     <script>
+       function previewBuktiPembayaran(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    const preview = document.getElementById('bukti_preview');
+
+    reader.onload = function(e) {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+        updateReview();
+    };
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+}
+
+function updateReview() {
+    document.getElementById('review_nama').textContent = document.getElementById('nama').value;
+    document.getElementById('review_tanggal_pemesanan').textContent = document.getElementById('tanggal_pemesanan').value;
+    document.getElementById('review_kategori').textContent = document.getElementById('pilihan_kategori').value;
+    document.getElementById('review_gedung_asrama').textContent = document.getElementById('gedung_asrama').value;
+    document.getElementById('review_jumlah_kg').textContent = document.getElementById('jumlah_kg').value;
+    document.getElementById('review_total_harga').textContent = document.getElementById('harga_total').textContent;
+    document.getElementById('review_no_kamar').textContent = document.getElementById('no_kamar').value;
+    document.getElementById('review_catatan').textContent = document.getElementById('catatan').value;
+
+    // Update preview of the uploaded payment receipt
+    const previewImage = document.getElementById('bukti_preview');
+    document.getElementById('review_bukti').src = previewImage.src;
+}
+
+// Event listener untuk memonitor setiap perubahan di form
+document.addEventListener('DOMContentLoaded', () => {
+    const formElements = document.querySelectorAll('input, select, textarea');
+    formElements.forEach(element => {
+        element.addEventListener('input', updateReview);
+    });
+});
+function updateReview() {
+    document.getElementById('review_nama').textContent = document.getElementById('nama').value;
+    document.getElementById('review_tanggal_pemesanan').textContent = document.getElementById('tanggal_pemesanan').value;
+    document.getElementById('review_kategori').textContent = document.getElementById('pilihan_kategori').value;
+    document.getElementById('review_gedung_asrama').textContent = document.getElementById('gedung_asrama').value;
+    document.getElementById('review_jumlah_kg').textContent = document.getElementById('jumlah_kg').value;
+    document.getElementById('review_total_harga').textContent = document.getElementById('harga_total').textContent;
+    document.getElementById('review_no_kamar').textContent = document.getElementById('no_kamar').value;
+    document.getElementById('review_catatan').textContent = document.getElementById('catatan').value;
+
+    // Update preview of the uploaded payment receipt
+    const previewImage = document.getElementById('bukti_preview');
+    document.getElementById('review_bukti').src = previewImage.src;
+
+    // Show the modal
+    const modal = new bootstrap.Modal(document.getElementById('reviewModal'));
+    modal.show();
+}
+
        function hitungHarga() {
     const kategoriSelect = document.getElementById('pilihan_kategori');
     const jumlahKgInput = document.getElementById('jumlah_kg');
