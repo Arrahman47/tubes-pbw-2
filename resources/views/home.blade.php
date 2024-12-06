@@ -36,16 +36,17 @@
             <h3 class="fw-bold text-primary text-center position-relative feature-title">
                 <span>All About Teams</span>
             </h3>
-            <p class="text-center"><b>Kami adalah tim yang berdedikasi untuk memberikan layanan laundry terbaik di asrama. Setiap anggota tim kami memiliki keahlian di bidangnya dan berkomitmen untuk menjaga kualitas dan kenyamanan pelanggan.</b></p>
+            <p class="text-center"><b>Kami dari STARWOVI tim yang berdedikasi untuk memberikan layanan laundry terbaik di asrama. Setiap anggota tim kami memiliki keahlian di bidangnya dan berkomitmen untuk menjaga kualitas dan kenyamanan pelanggan.</b></p>
 
             <div class="row mt-4">
                 <!-- Tim Member 1 -->
                 <div class="col-md-4 mb-4">
                     <div class="team-member text-center fade-in-item">
-                        <img src="{{ asset('images/team-member1.jpg') }}" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
+                        <img src="{{ asset('images/daffa.jpg') }}" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
                         <h5 class="fw-bold">Daffa Akhadi Yoga Perdana</h5>
-                        <p class="text-muted">lorem ipsum</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus.</p>
+                        <p class="text-muted">Front End Developer</p>
+                        <p>Saya bertanggung jawab merancang tampilan dan antarmuka pengguna aplikasi laundry, memastikan pengalaman yang mudah digunakan bagi pelanggan dan admin, serta menampilkan informasi secara jelas dan menarik.</p>
+
                     </div>
                 </div>
 
@@ -54,18 +55,20 @@
                     <div class="team-member text-center fade-in-item">
                         <img src="{{ asset('images/team-member2.jpg') }}" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
                         <h5 class="fw-bold">Muhammad Arrahman</h5>
-                        <p class="text-muted">lorem ipsum</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus.</p>
+                        <p class="text-muted">Back End Developer</p>
+                        <p>Saya bertanggung jawab mengelola server, database, dan sistem yang mendukung operasional aplikasi laundry, memastikan bahwa data pelanggan dan transaksi diproses dengan aman dan efisien untuk memberikan layanan yang cepat dan andal.</p>
+
                     </div>
                 </div>
 
                 <!-- Tim Member 3 -->
                 <div class="col-md-4 mb-4">
                     <div class="team-member text-center fade-in-item">
-                        <img src="{{ asset('images/team-member3.jpg') }}" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
+                        <img src="{{ asset('images/yusuf.jpg') }}" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
                         <h5 class="fw-bold">Yusuf Surya Mulyawan</h5>
-                        <p class="text-muted">lorem ipsum</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus.</p>
+                        <p class="text-muted">Front End & Back End Developer</p>
+                        <p>Saya bertanggung jawab dalam mengembangkan dan memelihara seluruh sistem aplikasi laundry, baik dari sisi tampilan yang user-friendly untuk pelanggan dan admin, serta memastikan fungsi backend yang berjalan dengan lancar untuk mendukung operasional yang efisien.</p>
+
                     </div>
                 </div>
             </div>
@@ -174,8 +177,12 @@
     }
 
     .team-member img {
-        border: 4px solid black;
-    }
+    width: 150px;
+    height: 150px;
+    object-fit: cover;  /* Ensures the image fits within the container */
+    border-radius: 50%; /* Makes the image circular */
+}
+
 
     .team-member h5 {
         border-bottom: 2px solid black;
