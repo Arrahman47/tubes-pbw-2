@@ -114,18 +114,31 @@
                             </li>
                         @endif
                     @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ Auth::user()->name }}
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); confirmLogout();">
-                                    {{ __('Logout') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
+<li class="nav-item dropdown">
+    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ Auth::user()->name }}
+    </a>
+    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="{{ route('profile.edit') }}">
+            {{ __('Edit Profil') }}
+        </a>
+        <!-- Logout option triggers confirmation -->
+        <a class="dropdown-item" href="#" onclick="confirmLogout()">
+            {{ __('Logout') }}
+        </a>
+    </div>
+
+    <!-- Logout confirmation -->
+    <div id="logout-confirmation" class="d-none">
+        <p>Apakah Anda yakin ingin logout?</p>
+        <button class="btn btn-success" onclick="logoutConfirm()">Iya</button>
+        <button class="btn btn-secondary" onclick="cancelLogout()">Tidak</button>
+    </div>
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        @csrf
+    </form>
+</li>
                             <div id="logout-confirmation" class="d-none">
     <p>Apakah Anda yakin ingin logout?</p>
     <button class="attention-btn btn btn-success" onclick="logoutConfirm()">Iya</button>
