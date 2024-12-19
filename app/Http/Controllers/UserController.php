@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Product;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -24,6 +26,18 @@ class UserController extends Controller
         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
     }
 
+    use HasFactory;
+
+    public function testRelationship()
+{
+    $user = User::find(1); // Or whatever user ID you want to test
+    $products = $user->products; // Access the related products
+    dd($products);
+}
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
     public function index(Request $request)
     {
         $data = User::latest()->paginate(5);

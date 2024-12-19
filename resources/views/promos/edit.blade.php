@@ -1,4 +1,4 @@
-@extends('layouts.app')
+ <!-- @extends('layouts.app')
 
 @section('content')
 <div class="row justify-content-center">
@@ -35,6 +35,14 @@
                         <input type="text" id="nama_promo" name="nama_promo" class="form-control" 
                             value="{{ old('nama_promo', $promo->nama_promo) }}" placeholder="Masukkan nama promo">
                     </div>
+
+                    <div class="mb-3">
+                        <label for="kode_promo" class="form-label">Kode promo</label>
+                        <textarea id="kode_promo" name="kode_promo" class="form-control" rows="4" 
+                            placeholder="Kode promo">{{ old('kode_promo', $promo->kode_promo) }}</textarea>
+                    </div>
+
+
                     <div class="row">
                         <div class="col-md-4">
                             <div class="mb-3">
@@ -58,11 +66,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="deskripsi" class="form-label">Deskripsi</label>
-                        <textarea id="deskripsi" name="deskripsi" class="form-control" rows="4" 
-                            placeholder="Deskripsi promo">{{ old('deskripsi', $promo->deskripsi) }}</textarea>
-                    </div>
+                    
                     <div class="text-center">
                         <button type="submit" class="btn btn-success btn-lg">
                             <i class="fa-solid fa-floppy-disk"></i> Save Changes

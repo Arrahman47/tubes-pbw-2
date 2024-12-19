@@ -1,7 +1,6 @@
 <?php
-  
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PromoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -36,9 +35,15 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
-    Route::resource('promos', PromoController::class);
+
+
+    Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
+    Route::get('/payments/create', [PaymentController::class, 'create'])->name('payments.create');
+    Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store');
+    Route::delete('/payments/{id}', [PaymentController::class, 'destroy'])->name('payments.destroy');
    /* Route::post('/orders/{id}/pay', [ProductController::class, 'updatePaymentStatus'])->name('orders.pay'); */
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+  
 
 });
 require __DIR__.'/auth.php';

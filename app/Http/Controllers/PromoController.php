@@ -1,8 +1,9 @@
-<?php
 
-namespace App\Http\Controllers;
+
+/**namespace App\Http\Controllers;
 
 use App\Models\Promo;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class PromoController extends Controller
@@ -14,7 +15,27 @@ class PromoController extends Controller
         $this->middleware('permission:promo-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:promo-delete', ['only' => ['destroy']]);
     }
-        
+
+    public function applyPromo(Request $request)
+    {
+        $promo = Promo::where('kode promo', $request->kode_promo)->first();
+
+        if ($promo && $promo->tanggal_mulai <= now() && $promo->tanggal_berakhir >= now()) {
+            // Hitung total harga setelah diskon
+            $total_harga = $request->total_harga * (1 - ($promo->diskon / 100));
+
+            return response()->json([
+                'diskon' => $promo->diskon,
+                'total_harga' => $total_harga
+            ]);
+        }
+
+        return response()->json(['error' => 'Kode promo tidak valid atau sudah expired'], 422);
+    }
+    public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
     public function index()
 {
     $promos = Promo::paginate(10); 
@@ -30,7 +51,7 @@ class PromoController extends Controller
     {
         $request->validate([
             'nama_promo' => 'required',
-            'deskripsi' => 'required|string',
+            'kode_promo' => 'required|string',
             'diskon' => 'nullable|numeric',
             'tanggal_mulai' => 'required|date',
             'tanggal_berakhir' => 'required|date|after_or_equal:tanggal_mulai',
@@ -55,7 +76,7 @@ class PromoController extends Controller
     {
         $request->validate([
             'nama_promo' => 'required',
-            'deskripsi' => 'required|string',
+            'kode_promo' => 'required|string',
             'diskon' => 'nullable|numeric',
             'tanggal_mulai' => 'required|date',
             'tanggal_berakhir' => 'required|date|after_or_equal:tanggal_mulai',

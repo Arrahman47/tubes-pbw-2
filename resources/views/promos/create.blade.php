@@ -1,4 +1,4 @@
-@extends('layouts.app')
+ <!-- @extends('layouts.app')
 
 @section('content')
 <div class="container mt-4">
@@ -35,8 +35,8 @@
                     <input type="text" name="nama_promo" id="nama_promo" class="form-control" placeholder="Masukkan nama promo" required>
                 </div>
                 <div class="mb-3">
-                    <label for="deskripsi" class="form-label">Deskripsi</label>
-                    <textarea name="deskripsi" id="deskripsi" class="form-control" rows="3" placeholder="Deskripsi promo" required></textarea>
+                    <label for="kode_promo" class="form-label">Kode Promo</label>
+                    <textarea name="kode_promo" id="kode_promo" class="form-control" rows="3" placeholder="Kode promo" required></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="diskon" class="form-label">Diskon (%)</label>

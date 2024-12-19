@@ -20,6 +20,8 @@
                     </div>
                 @endif
 
+                
+
                 <form action="{{ route('products.store') }}" method="POST">
                     @csrf
                     <div class="col-md-6">
@@ -90,7 +92,7 @@
                                 >
                                 <div class="mb-3">
         <label for="harga_total" class="form-label">Total Harga</label>
-        <div id="harga_total" class="form-control bg-light text-dark" readonly>Rp 0</div>
+        <div id="harga_total" class="form-control bg-light text-dark" readonly>Rp</div>
     </div>
 </div>
                                 @error('jumlah_kg')
@@ -141,6 +143,7 @@
                             </div>
                         </div>
                     </div>
+
 
                     <div class="text-center mt-4">
                     <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#reviewModal">

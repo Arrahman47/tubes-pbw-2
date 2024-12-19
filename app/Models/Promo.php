@@ -1,4 +1,4 @@
-<?php
+
 
 namespace App\Models;
 
@@ -11,7 +11,7 @@ class Promo extends Model
 
     protected $fillable = [
         'nama_promo',
-        'deskripsi', 
+        'kode_promo', 
         'diskon',
         'tanggal_mulai',   
         'tanggal_berakhir',            

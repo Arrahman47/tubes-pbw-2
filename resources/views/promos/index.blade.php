@@ -1,4 +1,4 @@
-@extends('layouts.app')
+ <!-- @extends('layouts.app')
 
 @section('content')
 <div class="container mt-4">
@@ -22,12 +22,17 @@
     @endif
 
     <div class="table-responsive shadow rounded">
+        <style>
+            .text-start {
+  text-align: center;
+}
+        </style>
         <table class="table table-hover align-middle">
             <thead class="table-primary text-center">
                 <tr>
                     <th width="80px">No</th>
                     <th>Nama Promo</th>
-                    <th>Deskripsi</th>
+                    <th>Kode Promo</th>
                     <th>Diskon (%)</th>
                     <th>Tanggal Mulai</th>
                     <th>Tanggal Berakhir</th>
@@ -39,7 +44,7 @@
                     <tr class="text-center">
                         <td>{{ $loop->iteration }}</td>
                         <td class="text-start fw-semibold">{{ $promo->nama_promo }}</td>
-                        <td class="text-start text-muted">{{ $promo->deskripsi }}</td>
+                        <td class="text-start text-muted">{{ $promo->kode_promo}}</td>
                         <td><span class="badge bg-success">{{ $promo->diskon }}%</span></td>
                         <td>{{ \Carbon\Carbon::parse($promo->tanggal_mulai)->format('d M Y') }}</td>
                         <td>{{ \Carbon\Carbon::parse($promo->tanggal_berakhir)->format('d M Y') }}</td>

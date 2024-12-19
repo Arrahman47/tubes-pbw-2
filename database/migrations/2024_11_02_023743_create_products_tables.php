@@ -54,6 +54,12 @@ return new class extends Migration
             if (!Schema::hasColumn('products', 'catatan')) {
                 $table->text('catatan')->nullable();
             }
+            if (!Schema::hasColumn('products', 'kode_promo')) {
+                $table->text('kode_promo')->nullable();
+            }
+            if (!Schema::hasColumn('products', 'user_id')) {
+                $table->text('user_id')->nullable();
+            }
         });
     }
 
