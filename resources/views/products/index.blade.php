@@ -37,6 +37,22 @@
     </h4>
 </div>
 -->
+    
+    <!-- Search Form -->
+    <form action="{{ route('products.index') }}" method="GET" class="mb-4">
+        <div class="input-group" style="max-width: 400px;">
+            <input type="text" name="search" class="form-control" placeholder="Cari berdasarkan nama atau status pembayaran..." value="{{ request('search') }}">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa-solid fa-search"></i> Cari
+            </button>
+        </div>
+    </form>
+
+    @if($products->isEmpty())
+        <div class="alert alert-warning text-center">
+            <i class="fa-solid fa-exclamation-circle me-2"></i>Data not found
+        </div>
+    @else
     <div class="table-responsive">
         <table class="table table-hover align-middle">
             <thead class="table-primary text-center">
@@ -98,5 +114,6 @@
     <div class="d-flex justify-content-center mt-3">
         {!! $products->links('pagination::bootstrap-5') !!}
     </div>
+    @endif
 </div>
 @endsection
