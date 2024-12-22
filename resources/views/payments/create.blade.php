@@ -169,7 +169,7 @@ function copyToClipboard(elementId, button) {
         </div>
 
         <button type="submit" class="btn btn-primary">Kirim Pembayaran</button>
-        <a href="{{ route('payments.index') }}" class="btn btn-secondary">Kembali ke Pembayaran</a>
+    
     </form>
 </div>
 </body>
