@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
 <div class="row justify-content-center">
     <div class="col-lg-8">
         <div class="card shadow-sm mt-4">
@@ -190,6 +191,9 @@
 @endsection
 
 @section('scripts')
+
+
+
     <script>
        function previewBuktiPembayaran(event) {
     const file = event.target.files[0];

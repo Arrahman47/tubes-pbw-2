@@ -29,14 +29,31 @@
                     <td>{{ ucfirst($payment->status) }}</td>
                     <td>{{ $payment->created_at->format('Y-m-d H:i:s') }}</td>
                     <td>
-                        <form action="{{ route('payments.destroy', $payment->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">
-                                <i class="fa-solid fa-trash"></i> Hapus
-                            </button>
-                        </form>
-                    </td>
+    <div class="d-flex justify-content-center">
+        
+
+        <!-- Tombol Hapus -->
+        <form action="{{ route('payments.destroy', $payment->id) }}" method="POST" style="display:inline;">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger btn-sm me-1">
+                <i class="fa-solid fa-trash"></i> Hapus
+            </button>
+        </form>
+
+        <!-- Tombol Accepted -->
+        @if($payment->status_pembayaran !== 'Accepted')
+        <form action="{{ route('payments.accept', $payment->id) }}" method="POST" style="display:inline;">
+            @csrf
+            @method('PUT')
+            <button type="submit" class="btn btn-success btn-sm">
+                <i class="fa-solid fa-check"></i> Accepted
+            </button>
+        </form>
+        @endif
+    </div>
+</td>
+
                 </tr>
                 @endforeach
             </tbody>

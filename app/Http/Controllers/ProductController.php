@@ -18,21 +18,35 @@ class ProductController extends Controller
         $this->middleware('permission:laundry-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:laundry-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:laundry-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:laundry-accept', ['only' => ['accept']]);
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
-    {
-        // Mengambil pemesanan dengan paginasi (10 per halaman)
-        $products = Product::paginate(10);
+    public function index()
+{
+    $products = Product::paginate(10);
+
+    // Hitung jumlah Orders Pending
+    $orderCountPending = Product::where('status_pembayaran', 'Pending')->count();
+
+    // Hitung jumlah Orders Accepted
+    $orderCountAccepted = Product::where('status_pembayaran', 'Accepted')->count();
+
+    return view('products.index', compact('products', 'orderCountPending', 'orderCountAccepted'));
+}
+
     
-        // Menghitung jumlah pemesanan
-        $orderCount = $products->total(); // Total pemesanan yang ada
-    
-        return view('products.index', compact('products', 'orderCount'));
-    }
+
+public function accept($id)
+{
+    $product = Product::findOrFail($id);
+    $product->status_pembayaran = 'Accepted';
+    $product->save();
+
+    return redirect()->route('products.index')->with('success', 'Pembayaran berhasil disetujui.');
+}
 
     /**
      * Show the form for creating a new resource.
@@ -58,7 +72,6 @@ class ProductController extends Controller
         'catatan' => 'nullable|string',
     ]);
 
-    
     $hargaPerKg = [
         'Komplit' => 6000,
         'Setrika' => 4000,
@@ -67,19 +80,26 @@ class ProductController extends Controller
 
     // Dapatkan harga per kg berdasarkan kategori yang dipilih
     $harga = $hargaPerKg[$request->pilihan_kategori] ?? 0;
-    
+
     // Hitung total harga
     $total_harga = $harga * $request->jumlah_kg;
 
-    // Tambahkan total harga ke dalam data untuk disimpan
-    $request->merge(['total_harga' => $total_harga]);
+    // Tambahkan data yang akan disimpan
+    Product::create([
+        'nama' => $request->nama,
+        'tanggal_pemesanan' => $request->tanggal_pemesanan,
+        'pilihan_kategori' => $request->pilihan_kategori,
+        'gedung_asrama' => $request->gedung_asrama,
+        'jumlah_kg' => $request->jumlah_kg,
+        'no_kamar' => $request->no_kamar,
+        'total_harga' => $total_harga,
+        'catatan' => $request->catatan,
+        'status_pembayaran' => 'Pending', // Default status pembayaran
+    ]);
 
-    // Simpan pemesanan
-    Product::create($request->all());
-
-    return redirect()->route('products.index')
-                     ->with('success', 'Pemesanan berhasil dibuat.');
+    return redirect()->route('products.index')->with('success', 'Pemesanan berhasil dibuat.');
 }
+
 
 
     /**
@@ -145,7 +165,7 @@ class ProductController extends Controller
             'no_kamar' => $request->no_kamar,
             'total_harga' => $total_harga, 
             'catatan' => $request->catatan,
-            
+            'status_pembayaran' => 'Pending',
         ]);
     
         return redirect()->route('products.index')->with('success', 'Pemesanan berhasil diperbarui.');

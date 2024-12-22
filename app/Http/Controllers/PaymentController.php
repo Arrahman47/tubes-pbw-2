@@ -13,12 +13,22 @@ class PaymentController extends Controller
         $this->middleware('permission:payment-list|payment-create|payment-delete', ['only' => ['index', 'show']]);
         $this->middleware('permission:payment-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:payment-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:payment-accept', ['only' => ['accept']]);
     }
    
 
     public function create()
 {
     return view('payments.create');
+}
+
+public function accept($id)
+{
+    $payment = Payment::findOrFail($id);
+    $payment->status = 'Accepted';
+    $payment->save();
+
+    return redirect()->route('payments.index')->with('success', 'Pembayaran berhasil disetujui.');
 }
 
 

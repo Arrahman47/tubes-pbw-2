@@ -88,10 +88,10 @@
 <body>
 
 <script>
-   document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form');
     form.addEventListener('submit', (event) => {
-        event.preventDefault(); // Mencegah form submit default
+        event.preventDefault(); // Prevent default form submission
 
         const formData = new FormData(form);
         const url = form.action;
@@ -106,7 +106,7 @@
             .then(response => response.json())
             .then(data => {
                 if (data.message) {
-                    // Gunakan SweetAlert2 untuk notifikasi sukses
+                    // Use SweetAlert2 for success notification
                     Swal.fire({
                         icon: 'success',
                         title: 'Success!',
@@ -115,10 +115,15 @@
                         showConfirmButton: false,
                     });
 
-                    // Reset form atau lakukan tindakan lainnya
+                    // Redirect to the product create page after success
+                    setTimeout(() => {
+                        window.location.href = '{{ route("products.create") }}';  // Replace with the actual URL
+                    }, 2000);  // Delay redirection by 2 seconds to show success message
+
+                    // Reset the form or perform other actions
                     form.reset();
                 } else {
-                    // Tampilkan notifikasi error
+                    // Show error notification
                     Swal.fire({
                         icon: 'error',
                         title: 'Error!',
@@ -130,7 +135,7 @@
             })
             .catch(error => {
                 console.error('Error:', error);
-                // Tampilkan notifikasi error
+                // Show error notification
                 Swal.fire({
                     icon: 'error',
                     title: 'Error!',
@@ -141,6 +146,7 @@
             });
     });
 });
+
 </script>
 
 <script>
@@ -214,7 +220,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Kirim Pembayaran</button>
-        <a href="{{ route('payments.index') }}" class="btn btn-secondary">Kembali ke Pembayaran</a>
+        
     </form>
 </div>
 

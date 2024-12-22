@@ -30,7 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-  
+Route::put('/products/{id}/accept', [ProductController::class, 'accept'])->name('products.accept');
+Route::put('/payments/{id}/accept', [PaymentController::class, 'accept'])->name('payments.accept');
+
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
