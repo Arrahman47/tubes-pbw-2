@@ -6,44 +6,45 @@
 </head>
 <body>
 <div class="container mt-5">
-    <h2>Pembayaran</h2>
+    <h2 class="mb-4">Pembayaran</h2>
    
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                
-                <th>User Name</th>
-                <th>Payment Method</th>
-                <th>Amount</th>
-                <th>Status</th>
-                <th>Created At</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($payments as $payment)
-            <tr>
-                
-                <td>{{ $payment->user_name }}</td>
-                <td>{{ ucfirst($payment->payment_method) }}</td>
-                <td>Rp{{ number_format($payment->amount, 2) }}</td>
-                <td>{{ ucfirst($payment->status) }}</td>
-                <td>{{ $payment->created_at->format('Y-m-d H:i:s') }}</td>
-                <td>
-                <form action="{{ route('payments.destroy', $payment->id) }}" method="POST" style="display:inline;">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-danger btn-sm me-1">
-            <i class="fa-solid fa-trash"></i> Hapus
-        </button>
-    </form>
-
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Payment Method</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($payments as $payment)
+                <tr>
+                    <td>{{ $payment->user_name }}</td>
+                    <td>{{ ucfirst($payment->payment_method) }}</td>
+                    <td>Rp{{ number_format($payment->amount, 2) }}</td>
+                    <td>{{ ucfirst($payment->status) }}</td>
+                    <td>{{ $payment->created_at->format('Y-m-d H:i:s') }}</td>
+                    <td>
+                        <form action="{{ route('payments.destroy', $payment->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fa-solid fa-trash"></i> Hapus
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/js/all.min.js"></script>
 </body>
 </html>
 @endsection
