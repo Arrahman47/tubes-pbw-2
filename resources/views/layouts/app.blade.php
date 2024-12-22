@@ -178,7 +178,7 @@
                     </li>
                     <li class="list-group-item">
                         <a href="{{ route('payments.index') }}" class="btn btn-custom btn-primary w-100">
-                            <i class="fa-solid fa-box me-2"></i> Pembayaran
+                            <i class="fa-solid fa-box me-2"></i> Kelola Pembayaran
                         </a>
                     </li>
                 </ul>

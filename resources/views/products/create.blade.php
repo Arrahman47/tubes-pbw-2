@@ -110,12 +110,15 @@
                                 @enderror
                             </div>
                         </div>
+                        
                     <div class="col-md-6">
                     <div class="form-group">
     <label for="bukti_pembayaran"><strong>Foto Bukti Pembayaran</strong></label>
     <input type="file" id="bukti_pembayaran" name="bukti_pembayaran" class="form-control" accept="image/*" onchange="previewBuktiPembayaran(event)">
     <img id="bukti_preview" src="#" alt="Preview Bukti Pembayaran" class="img-fluid" style="display:none;">
+
 </div>
+<a href="{{ route('payments.create') }}" class="btn btn-success mb-3" id="pay-button">Bayar</a>
 
                         <!-- Status Pembayaran -->
                         <!-- <div class="col-md-6">
@@ -143,15 +146,16 @@
                             </div>
                         </div>
                     </div>
+                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
+                    <button type="reset" class="btn btn-secondary btn-sm"><i class="fa-solid fa-eraser"></i> Reset</button>
 
 
-                    <div class="text-center mt-4">
+                 <!-- <div class="text-center mt-4">
                     <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#reviewModal">
         <i class="fa-solid fa-eye"></i> Review Pemesanan
     </button>
-                        <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
-                        <button type="reset" class="btn btn-secondary btn-sm"><i class="fa-solid fa-eraser"></i> Reset</button>
-                   <!-- Modal Review -->
+                       
+
 <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -176,7 +180,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
                     </div>
                 </form>

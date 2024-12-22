@@ -30,7 +30,7 @@ class CreateAdminUserSeeder extends Seeder
         // Memberikan izin kepada pengguna
         $user->givePermissionTo(['role-list', 'role-create', 'role-edit', 'role-delete']);
         $user->givePermissionTo(['laundry-list', 'laundry-create', 'laundry-edit', 'laundry-delete']);
-        $user->givePermissionTo(['promo-list', 'promo-create', 'promo-edit', 'promo-delete']);
+        $user->givePermissionTo(['payment-list', 'payment-create', 'payment-delete']);
         $user->givePermissionTo(['user-list', 'user-create', 'user-edit', 'user-delete']);
         
         // Membuat role Admin jika belum ada

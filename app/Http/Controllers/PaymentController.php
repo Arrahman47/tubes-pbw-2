@@ -5,38 +5,62 @@ namespace App\Http\Controllers;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-
+use Illuminate\Support\Facades\DB;
 class PaymentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:payment-list|payment-create|payment-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:payment-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:payment-delete', ['only' => ['destroy']]);
+    }
    
 
     public function create()
 {
     return view('payments.create');
 }
-    public function store(Request $request): JsonResponse
-    {
+
+
+public function store(Request $request): JsonResponse
+{
+    try {
         // Validasi request
         $validated = $request->validate([
             'user_name'      => 'required|string|max:255',
-            'payment_method' => 'required|string',
+            'payment_method' => 'required|string|in:qris,bank_transfer',
             'amount'         => 'required|numeric|min:1',
         ]);
 
-        // Simpan data pembayaran
-        $payment = Payment::create([
-            'user_name'      => $validated['user_name'],
-            'payment_method' => $validated['payment_method'],
-            'amount'         => $validated['amount'],
-            'status'         => 'pending',
+        // Gunakan transaksi untuk memastikan atomisitas
+        $payment = DB::transaction(function () use ($validated) {
+            return Payment::create([
+                'user_name'      => $validated['user_name'],
+                'payment_method' => $validated['payment_method'],
+                'amount'         => $validated['amount'],
+                'status'         => 'pending',
+            ]);
+        });
+
+        // Berikan respons JSON sukses
+        return response()->json([
+            'message' => 'Payment created successfully.',
+            'payment' => $payment, // Opsional, jika ingin mengirim data pembayaran
+        ], 201);
+    } catch (\Exception $e) {
+        // Log error untuk debugging
+        \Log::error('Failed to create payment:', [
+            'error' => $e->getMessage(),
+            'data'  => $request->all(),
         ]);
 
-        // Respon sukses
+        // Berikan respons JSON error
         return response()->json([
-            'message' => 'Payment created successfully',
-            'data'    => $payment,
-        ], 201);
+            'message' => 'Failed to create payment. Please try again later.',
+        ], 500);
     }
+}
+
     public function destroy($id)
 {
     $payment = Payment::find($id);
