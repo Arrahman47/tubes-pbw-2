@@ -1,51 +1,92 @@
-@extends('layouts.app')
-
-@section('content')
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         body {
-            background-color: #c2def8;
+            background-color: #e0f7fa;
             font-family: 'Arial', sans-serif;
         }
-        h2 {
-            color: #4a6fa5;
-            font-weight: bold;
+        .container {
+            max-width: 600px;
+            background-color: #c2def8;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
         }
-        label {
-            color: #3b587a;
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .form-label {
+            font-weight: 600;
+            color: #555;
         }
         .btn-primary {
-            background-color: #4a6fa5;
-            border: none;
+            background-color: #007bff;
+            border-color: #007bff;
+            font-weight: 600;
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
         }
         .btn-primary:hover {
-            background-color: #365b88;
+            background-color: #0056b3;
+            border-color: #0056b3;
         }
-        .btn-secondary {
-            background-color: #3b587a;
-            border: none;
+        .btn-outline-primary {
+            border-color: #007bff;
+            color: #007bff;
+            font-weight: 600;
         }
-        .btn-secondary:hover {
-            background-color: #2d4762;
-        }
-        input[type="radio"]:checked + div {
-            font-weight: bold;
-            color: #4a6fa5;
+        .btn-outline-primary:hover {
+            background-color: #007bff;
+            color: #ffffff;
         }
         .copy-btn {
-            color: #4a6fa5;
-            border-color: #4a6fa5;
+            font-weight: 600;
         }
-        .copy-btn:hover {
-            background-color: #4a6fa5;
-            color: #fff;
+        .form-check-label {
+            font-size: 1.1rem;
+        }
+        .copy-btn {
+            padding: 5px 12px;
+            border-radius: 5px;
+        }
+        .payment-option img {
+            max-width: 150px;
+            margin-right: 15px;
+        }
+        .payment-option {
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .payment-option div {
+            flex: 1;
+        }
+        .payment-option button {
+            flex-shrink: 0;
         }
     </style>
 </head>
 <body>
+
 <script>
    document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form');
@@ -100,25 +141,27 @@
             });
     });
 });
+</script>
 
-function copyToClipboard(elementId, button) {
-    const accountNumber = document.getElementById(elementId).innerText;
-    navigator.clipboard.writeText(accountNumber).then(() => {
-        // Ubah teks tombol menjadi "Copied ✔️"
-        button.innerHTML = 'Copied ✔️';
-        button.classList.remove('btn-outline-primary');
-        button.classList.add('btn-success');
+<script>
+    function copyToClipboard(elementId, button) {
+        const accountNumber = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(accountNumber).then(() => {
+            // Ubah teks tombol menjadi "Copied ✔️"
+            button.innerHTML = 'Copied ✔️';
+            button.classList.remove('btn-outline-primary');
+            button.classList.add('btn-success');
 
-        // Kembalikan ke "Copy" setelah 2 detik
-        setTimeout(() => {
-            button.innerHTML = 'Copy';
-            button.classList.remove('btn-success');
-            button.classList.add('btn-outline-primary');
-        }, 2000);
-    }).catch(err => {
-        console.error('Gagal menyalin', err);
-    });
-}
+            // Kembalikan ke "Copy" setelah 2 detik
+            setTimeout(() => {
+                button.innerHTML = 'Copy';
+                button.classList.remove('btn-success');
+                button.classList.add('btn-outline-primary');
+            }, 2000);
+        }).catch(err => {
+            console.error('Gagal menyalin', err);
+        });
+    }
 </script>
 
 <div class="container mt-5">
@@ -127,32 +170,34 @@ function copyToClipboard(elementId, button) {
         @csrf
         <div class="mb-3">
             <label for="user_name" class="form-label">Nama</label>
-            <input type="text" name="user_name" id="user_name" class="form-control" placeholder="Masukkan nama Anda" required>
+            <input type="text" name="user_name" id="user_name" class="form-control" placeholder="Enter your name" required>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Metode Pembayaran</label>
             <div class="d-flex flex-column gap-3">
-                <label class="d-flex align-items-center gap-2">
+                <!-- Qris Option -->
+                <label class="d-flex align-items-center gap-2 payment-option">
                     <input type="radio" name="payment_method" value="qris" required>
-                    <img src="/images/qris.png" alt="Qris" style="width: 200px;">
-                    <div>QRIS</div>
+                    <img src="/images/qris.png" alt="Qris">
+                    <div>Qris</div>
                 </label>
 
-                <label class="d-flex flex-column gap-2">
+                <!-- Bank Transfer Option -->
+                <label class="d-flex flex-column gap-1">
                     <div class="d-flex align-items-center gap-2">
                         <input type="radio" name="payment_method" value="bank_transfer" required id="bank_transfer_option">
                         <div>Transfer Bank</div>
                     </div>
 
                     <div class="d-flex flex-column gap-3">
-                        <div class="d-flex align-items-center justify-content-between">
+                        <div class="payment-option">
                             <div>MANDIRI: <span id="mandiri_account">290111922</span></div>
                             <button type="button" class="btn btn-sm btn-outline-primary copy-btn" onclick="copyToClipboard('mandiri_account', this)">
                                 Copy
                             </button>
                         </div>
-                        <div class="d-flex align-items-center justify-content-between">
+                        <div class="payment-option">
                             <div>BCA: <span id="bca_account">942222344</span></div>
                             <button type="button" class="btn btn-sm btn-outline-primary copy-btn" onclick="copyToClipboard('bca_account', this)">
                                 Copy
@@ -165,13 +210,13 @@ function copyToClipboard(elementId, button) {
 
         <div class="mb-3">
             <label for="amount" class="form-label">Jumlah</label>
-            <input type="number" name="amount" id="amount" class="form-control" placeholder="Masukkan jumlah" step="0.01" required>
+            <input type="number" name="amount" id="amount" class="form-control" placeholder="Enter amount" step="0.01" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Kirim Pembayaran</button>
-        <a href="{{ route('payments.index') }}" class="btn btn-secondary">Kembali ke Pembayaran</a>
+        <button type="submit" class="btn btn-primary">Submit Payment</button>
+        <a href="{{ route('payments.index') }}" class="btn btn-secondary mt-3">Back to Payments</a>
     </form>
 </div>
+
 </body>
 </html>
-@endsection
