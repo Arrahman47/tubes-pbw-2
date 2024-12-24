@@ -29,33 +29,26 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
 
+    public function store(Request $request): RedirectResponse
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|confirmed', // Ganti 'same:confirm-password' dengan 'confirmed'
+        ]);
 
-    // Di method handle untuk registrasi
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
+        $user = User::create($input);
 
+        if (auth()->user() && auth()->user()->hasRole('Customer')) {
+            // Logika khusus untuk Customer
+        }
 
-public function store(Request $request): RedirectResponse
-{
-    $this->validate($request, [
-        'name' => 'required',
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|same:confirm-password',
-    ]);
+        // Assign role Customer
+        $user->assignRole('Customer');
 
-    $input = $request->all();
-    $input['password'] = Hash::make($input['password']);
-    $user = User::create($input);
-
-    if (auth()->user()->hasRole('Customer')) {
-        // Logika khusus untuk Customer
+        return redirect()->route('dashboard')
+            ->with('success', 'User registered successfully');
     }
-    
-    // Assign role Customer
-    $user->assignRole('Customer');
-
-    return redirect()->route('dashboard')
-        ->with('success', 'User registered successfully');
-}
-
-    
-
 }

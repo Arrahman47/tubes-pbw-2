@@ -19,6 +19,7 @@ class ProductController extends Controller
         $this->middleware('permission:laundry-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:laundry-delete', ['only' => ['destroy']]);
         $this->middleware('permission:laundry-accept', ['only' => ['accept']]);
+        
     }
 
     /**
@@ -56,6 +57,9 @@ public function accept($id)
         return view('products.create');
     }
 
+    
+
+
     /**
      * Store a newly created resource in storage.
      */
@@ -72,6 +76,7 @@ public function accept($id)
         'catatan' => 'nullable|string',
         
     ]);
+    
 
     $hargaPerKg = [
         'Komplit' => 6000,
@@ -85,6 +90,7 @@ public function accept($id)
     // Hitung total harga
     $total_harga = $harga * $request->jumlah_kg;
 
+    
     // Tambahkan data yang akan disimpan
     Product::create([
         'nama' => $request->nama,
@@ -96,6 +102,7 @@ public function accept($id)
         'total_harga' => $total_harga,
         'catatan' => $request->catatan,
         'status_pembayaran' => 'Pending', // Default status pembayaran
+       
     ]);
 
     return redirect()->route('products.index')->with('success', 'Pemesanan berhasil dibuat.');

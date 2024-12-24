@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="container mt-5">
-    <h2 class="mb-4">Pembayaran</h2>
+    <h2 class="mb-4">Manajemen Pembayaran</h2>
    
     <div class="table-responsive">
         <table class="table table-bordered table-striped">

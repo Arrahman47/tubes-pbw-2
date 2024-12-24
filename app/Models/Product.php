@@ -19,7 +19,6 @@ class Product extends Model
         'created_at',
         'tanggal_pemesanan', // Tambahkan kolom ini jika belum ada
         'status_pembayaran',
-        'kode_promo',
          'user_id',
     ];
 

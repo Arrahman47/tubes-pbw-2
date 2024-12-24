@@ -98,16 +98,44 @@
         <!-- Tombol Accepted -->
         @if($product->status_pembayaran !== 'Accepted')
         <form action="{{ route('products.accept', $product->id) }}" method="POST" style="display:inline;">
-    @csrf
-    @method('PUT')
-    <button type="submit" class="btn btn-success btn-sm">
-        <i class="fa-solid fa-check"></i> Accepted
-    </button>
-</form>
-
+            @csrf
+            @method('PUT')
+            <button type="submit" class="btn btn-success btn-sm">
+                <i class="fa-solid fa-check"></i> Accepted
+            </button>
+        </form>
         @endif
+
+        <!-- Tombol Lihat Bukti Pembayaran -->
+        <button class="btn btn-info btn-sm ms-1" data-bs-toggle="modal" data-bs-target="#paymentProofModal-{{ $product->id }}">
+            <i class="fa-solid fa-image"></i> Lihat Bukti Pembayaran
+        </button>
     </div>
 </td>
+
+<!-- Modal Lihat Bukti Pembayaran -->
+<div class="modal fade" id="paymentProofModal-{{ $product->id }}" tabindex="-1" aria-labelledby="paymentProofModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentProofModalLabel">Bukti Pembayaran - {{ $product->nama }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <!-- Check if the product has a payment proof image -->
+                @if($product->bukti_pembayaran)
+                    <img src="{{ asset('storage/' . $product->bukti_pembayaran) }}" alt="Bukti Pembayaran" class="img-fluid" style="max-width: 100%; height: auto;">
+                @else
+                    <p>No Payment Proof Available</p>
+                @endif
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
         </tr>
     @endforeach
