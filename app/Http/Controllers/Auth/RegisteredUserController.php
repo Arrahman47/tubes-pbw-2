@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
@@ -27,24 +28,34 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
 
-        event(new Registered($user));
+    // Di method handle untuk registrasi
 
-        Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+public function store(Request $request): RedirectResponse
+{
+    $this->validate($request, [
+        'name' => 'required',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|same:confirm-password',
+    ]);
+
+    $input = $request->all();
+    $input['password'] = Hash::make($input['password']);
+    $user = User::create($input);
+
+    if (auth()->user()->hasRole('Customer')) {
+        // Logika khusus untuk Customer
     }
+    
+    // Assign role Customer
+    $user->assignRole('Customer');
+
+    return redirect()->route('dashboard')
+        ->with('success', 'User registered successfully');
+}
+
+    
+
 }

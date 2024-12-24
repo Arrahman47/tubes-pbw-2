@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+use Spatie\Permission\Models\Role;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,5 +19,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        Role::firstOrCreate(['name' => 'Customer']);
     }
 }

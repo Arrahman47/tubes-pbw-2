@@ -70,6 +70,7 @@ public function accept($id)
         'no_kamar' => 'required|string|max:10',
         'total_harga' => '',
         'catatan' => 'nullable|string',
+        
     ]);
 
     $hargaPerKg = [
@@ -140,6 +141,7 @@ public function accept($id)
             'no_kamar' => 'required|string|max:10',
             'total_harga' => '',
             'catatan' => 'nullable|string',
+            
         ]);
     
         // Definisikan harga berdasarkan kategori

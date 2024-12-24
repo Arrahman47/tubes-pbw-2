@@ -8,9 +8,11 @@
                 <div class="card-header text-center text-white fs-4" style="background-color: #c2def8;">{{ __('Register') }}</div>
 
                 <div class="card-body">
+                    
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
+                        
                         <div class="mb-3">
                             <label for="name" class="form-label">{{ __('Name') }}</label>
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>

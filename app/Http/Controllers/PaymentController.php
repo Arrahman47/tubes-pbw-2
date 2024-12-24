@@ -10,7 +10,7 @@ class PaymentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:payment-list|payment-create|payment-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:payment-list|payment-create|payment-delete|payment-accept', ['only' => ['index', 'show']]);
         $this->middleware('permission:payment-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:payment-delete', ['only' => ['destroy']]);
         $this->middleware('permission:payment-accept', ['only' => ['accept']]);
@@ -87,10 +87,21 @@ public function store(Request $request): JsonResponse
 
     // Get all payments
     public function index()
-    {
-        $payments = Payment::all();
-        return view('payments.index', compact('payments'));
+{
+    // Pastikan hanya pengguna dengan izin payment-list yang bisa mengakses
+    if (!auth()->user()->can('payment-list')) {
+        abort(403, 'User does not have the right permissions.');
     }
+
+    // Dapatkan semua pembayaran, bisa ditambah dengan filter
+    $payments = Payment::all();
+
+    // Jika ingin memfilter berdasarkan pengguna yang login
+    // $payments = Payment::where('user_id', auth()->id())->get();
+
+    return view('payments.index', compact('payments'));
+}
+
     // Get single payment
     public function show($id): JsonResponse
     {

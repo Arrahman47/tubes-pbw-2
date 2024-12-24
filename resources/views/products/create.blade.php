@@ -1,6 +1,28 @@
 @extends('layouts.app')
 @section('content')
 
+
+<script>
+    function previewImage(event) {
+        const file = event.target.files[0]; // Ambil file pertama
+        const preview = document.getElementById('preview'); // Ambil elemen img
+
+        if (file) {
+            const reader = new FileReader(); // Gunakan FileReader API
+
+            reader.onload = function (e) {
+                preview.src = e.target.result; // Set src ke hasil baca file
+                preview.style.display = 'block'; // Tampilkan elemen img
+            };
+
+            reader.readAsDataURL(file); // Baca file sebagai Data URL
+        } else {
+            preview.src = ''; // Kosongkan src jika tidak ada file
+            preview.style.display = 'none'; // Sembunyikan elemen img
+        }
+    }
+</script>
+
 <div class="row justify-content-center">
     <div class="col-lg-8">
         <div class="card shadow-sm mt-4">
@@ -113,11 +135,11 @@
                         
                     <div class="col-md-6">
                     <div class="form-group">
-    <label for="bukti_pembayaran"><strong>Foto Bukti Pembayaran</strong></label>
-    <input type="file" id="bukti_pembayaran" name="bukti_pembayaran" class="form-control" accept="image/*" onchange="previewBuktiPembayaran(event)">
-    <img id="bukti_preview" src="#" alt="Preview Bukti Pembayaran" class="img-fluid" style="display:none;">
-
+    <label for="bukti_pembayaran">Foto Bukti Pembayaran</label>
+    <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran" accept="image/*" onchange="previewImage(event)">
+    <img id="preview" src="" alt="Preview Bukti Pembayaran" style="display: none; margin-top: 10px; max-width: 100%; height: auto; border: 1px solid #ddd; padding: 5px;">
 </div>
+
 <a href="{{ route('payments.create') }}" class="btn btn-success mb-3" id="pay-button">Bayar</a>
 
                         <!-- Status Pembayaran -->
