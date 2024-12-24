@@ -12,11 +12,17 @@
                     <span>Kami memiliki layanan:</span>
                 </h3>
                 <ul class="list-unstyled mt-3 fade-in">
-                    <li class="mb-4 p-4 service-box fade-in-item">
-                        <h5><img src="{{ asset('images/komplit.png') }}" alt="Komplit" class="me-2" style="width: 30px; height: 30px;"><strong>Komplit</strong></h5>
-                        <p>Layanan ini memungkinkan pelanggan untuk mencuci pakaian berdasarkan berat (kiloan). Ini adalah pilihan yang lebih ekonomis untuk mencuci banyak pakaian dalam satu waktu.</p>
-                        <p class="text-primary fw-bold simple-border">Harga: Rp. 6.000/kg</p>
-                    </li>
+                <li class="mb-4 p-4 service-box fade-in-item position-relative">
+                <div class="best-offer-badge position-absolute top-0 start-0 bg-warning text-dark px-3 py-1 rounded-end" style="font-size: 14px; font-weight: bold;">
+                    Best Offer!
+                </div>
+                <h5>
+                    <img src="{{ asset('images/komplit.png') }}" alt="Komplit" class="me-2" style="width: 30px; height: 30px;">
+                    <strong>Komplit</strong>
+                </h5>
+                <p>Layanan ini memungkinkan pelanggan untuk mencuci pakaian berdasarkan berat (kiloan). Ini adalah pilihan yang lebih ekonomis untuk mencuci banyak pakaian dalam satu waktu.</p>
+                <p class="text-primary fw-bold simple-border">Harga: Rp. 6.000/kg</p>
+            </li>
                     <li class="mb-4 p-4 service-box fade-in-item">
                         <h5><img src="{{ asset('images/setrika.png') }}" alt="Setrika" class="me-2" style="width: 30px; height: 30px;"><strong>Setrika</strong></h5>
                         <p>Layanan ini menawarkan pencucian untuk item tertentu seperti selimut, jaket, atau pakaian dengan bahan khusus yang membutuhkan perlakuan tertentu.</p>
@@ -67,7 +73,7 @@
                         <img src="{{ asset('images/yusuf.jpg') }}" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
                         <h5 class="fw-bold">Yusuf Surya Mulyawan</h5>
                         <p class="text-muted">Front End & Back End Developer</p>
-                        <p>Saya bertanggung jawab dalam mengembangkan dan memelihara seluruh sistem aplikasi laundry, baik dari sisi tampilan yang user-friendly untuk pelanggan dan admin, serta memastikan fungsi backend yang berjalan dengan lancar untuk mendukung operasional yang efisien.</p>
+                        <p>Saya bertanggung jawab dalam mengembangkan dan memelihara seluruh sistem aplikasi laundry, baik dari sisi tampilan yang user-friendly untuk pelanggan dan admin, serta memastikan fungsi backend yang berjalan dengan lancar.</p>
 
                     </div>
                 </div>
