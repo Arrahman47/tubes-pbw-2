@@ -15,11 +15,12 @@ class Product extends Model
         'total_harga',
         'no_kamar',
         'catatan',
+        'bukti_pembayaran',
         'updated_at',
         'created_at',
         'tanggal_pemesanan', // Tambahkan kolom ini jika belum ada
         'status_pembayaran',
-         'user_id',
+        'user_id',
     ];
 
     protected $dates = [

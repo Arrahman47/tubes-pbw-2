@@ -1,7 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
-
 <script>
     function previewImage(event) {
         const file = event.target.files[0]; // Ambil file pertama
@@ -44,7 +42,7 @@
 
                 
 
-                <form action="{{ route('products.store') }}" method="POST">
+                <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="col-md-6">
                             <div class="form-group">
@@ -138,12 +136,14 @@
                             </div>
                         </div>
                         
-                    <div class="col-md-6">
-                    <div class="form-group">
-    <label for="bukti_pembayaran"><b>Foto Bukti Pembayaran</label>
-    <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran" accept="image/*" onchange="previewImage(event)">
-    <img id="preview" src="" alt="Preview Bukti Pembayaran" style="display: none; margin-top: 10px; max-width: 100%; height: auto; border: 1px solid #ddd; padding: 5px;">
-</div>
+                        <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="bukti_pembayaran"><b>Foto Bukti Pembayaran</b></label>
+            <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran" accept="image/jpeg,image/png,application/pdf" onchange="previewImage(event)">
+            <img id="preview" src="" alt="Preview Bukti Pembayaran" style="display: none; margin-top: 10px; max-width: 100%; height: auto; border: 1px solid #ddd; padding: 5px;">
+        </div>
 
 <a href="{{ route('payments.create') }}" class="btn btn-success mb-3" id="pay-button">Bayar</a>
 

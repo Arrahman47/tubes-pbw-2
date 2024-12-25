@@ -71,10 +71,23 @@ public function accept($id)
         'no_kamar' => 'required|string|max:10',
         'total_harga' => '',
         'catatan' => 'nullable|string',
-        
-    ]);
-    
+        'bukti_pembayaran' => 'nullable|image|mimes:jpeg,jpg,png,pdf|max:2048',
 
+    ]);
+    $buktiPembayaran = $request->file('bukti_pembayaran')->store('bukti_pembayaran', 'public');
+    if ($request->hasFile('bukti_pembayaran')) {
+        // Ambil file
+        $file = $request->file('bukti_pembayaran');
+        
+        // Generate nama file unik
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+        
+        // Simpan file ke storage/public/bukti_pembayaran
+        $file->storeAs('public/bukti_pembayaran', $filename);
+        
+        // Set path file ke kolom bukti_pembayaran
+        $validated['bukti_pembayaran'] = 'storage/bukti_pembayaran/' . $filename;
+    }
     $hargaPerKg = [
         'Komplit' => 6000,
         'Setrika' => 4000,
@@ -98,7 +111,9 @@ public function accept($id)
         'no_kamar' => $request->no_kamar,
         'total_harga' => $total_harga,
         'catatan' => $request->catatan,
+        'bukti_pembayaran' => $buktiPembayaran, // Menyimpan path file
         'status_pembayaran' => 'Pending', // Default status pembayaran
+
        
     ]);
 

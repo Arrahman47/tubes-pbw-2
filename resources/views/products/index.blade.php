@@ -122,9 +122,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <!-- Check if the product has a payment proof image -->
+                <!-- Cek apakah ada bukti pembayaran -->
                 @if($product->bukti_pembayaran)
-                    <img src="{{ asset('storage/' . $product->bukti_pembayaran) }}" alt="Bukti Pembayaran" class="img-fluid" style="max-width: 100%; height: auto;">
+                    <!-- Jika ada, tampilkan gambar -->
+                    <img src="{{ asset('storage/'.$product->bukti_pembayaran) }}" alt="Bukti Pembayaran" class="img-fluid" style="max-width: 100%; height: auto;">
                 @else
                     <p>No Payment Proof Available</p>
                 @endif
@@ -135,6 +136,7 @@
         </div>
     </div>
 </div>
+
 
 
         </tr>
