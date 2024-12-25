@@ -161,25 +161,34 @@
                     <li class="list-group-item">
                         <a href="{{ route('dashboard') }}" class="btn btn-custom btn-primary w-100"><i class=" fas fa-home me-2"></i>Dashboard</a>
                     </li>
+                   
                     <li class="list-group-item">
+                    @role('Admin')
                         <a href="{{ route('users.index') }}" class="btn btn-custom btn-primary w-100">
                             <i class="fa-solid fa-users me-2"></i> Kelola User
                         </a>
+                        @endrole
                     </li>
                     <li class="list-group-item">
+                    
                         <a href="{{ route('products.index') }}" class="btn btn-custom btn-primary w-100">
                             <i class="fa-solid fa-box me-2"></i> Manajemen Pemesanan
                         </a>
+                        
                     </li>
                     <li class="list-group-item">
+                    @role('Admin')
                         <a href="{{ route('roles.index') }}" class="btn btn-custom btn-primary w-100">
                             <i class="fa-solid fa-user-shield me-2"></i> Kelola Role
                         </a>
+                        @endrole
                     </li>
                     <li class="list-group-item">
+                    @role('Admin')
                         <a href="{{ route('payments.index') }}" class="btn btn-custom btn-primary w-100">
                             <i class="fa-solid fa-box me-2"></i> Kelola Pembayaran
                         </a>
+                        @endrole
                     </li>
                 </ul>
             </div>

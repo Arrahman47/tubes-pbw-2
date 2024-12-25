@@ -82,8 +82,10 @@
             <td>
     <div class="d-flex justify-content-center">
         <!-- Tombol Edit -->
+        @role('Admin')
         <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm me-1">
             <i class="fa-solid fa-pen-to-square"></i> Edit
+            </li>
         </a>
 
         <!-- Tombol Hapus -->
@@ -104,6 +106,7 @@
                 <i class="fa-solid fa-check"></i> Accepted
             </button>
         </form>
+        @endrole
         @endif
 
         <!-- Tombol Lihat Bukti Pembayaran -->
