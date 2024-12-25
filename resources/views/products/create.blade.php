@@ -71,14 +71,14 @@
 
                         <!-- Pilihan Kategori -->
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="pilihan_kategori"><strong>Pilihan Kategori</strong></label>
-                                <select id="pilihan_kategori" name="pilihan_kategori" class="form-control">
-    <option value="" disabled selected>Pilih kategori</option>
-    <option value="Komplit" data-harga="6000">Komplit (Rp 6000/kg)</option>
-    <option value="Cuci Kering" data-harga="4000">Cuci Kering (Rp 4000/kg)</option>
-    <option value="Setrika" data-harga="4000">Setrika (Rp 4000/kg)</option>
-</select>
+    <div class="form-group">
+        <label for="pilihan_kategori"><strong>Pilihan Kategori</strong></label>
+        <select id="pilihan_kategori" name="pilihan_kategori" class="form-control" onchange="hitungHarga()">
+            <option value="" disabled selected>Pilih kategori</option>
+            <option value="Komplit" data-harga="6000">Komplit (Rp 6000/kg)</option>
+            <option value="Cuci Kering" data-harga="4000">Cuci Kering (Rp 4000/kg)</option>
+            <option value="Setrika" data-harga="4000">Setrika (Rp 4000/kg)</option>
+        </select>
 
                                 @error('pilihan_kategori')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -99,23 +99,28 @@
 
                         <!-- Jumlah (kg) -->
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="jumlah_kg"><strong>Jumlah (kg)</strong></label>
-                                <input 
-                                    type="number" 
-                                    id="jumlah_kg" 
-                                    name="jumlah_kg" 
-                                    class="form-control @error('jumlah_kg') is-invalid @enderror" 
-                                    placeholder="Jumlah (kg)" 
-                                    value="{{ old('jumlah_kg') }}" 
-                                    min="1" 
-                                    oninput="hitungHarga()" 
-                                    required
-                                >
-                                <div class="mb-3">
-        <label for="harga_total" class="form-label">Total Harga</label>
-        <div id="harga_total" class="form-control bg-light text-dark" readonly>Rp</div>
-    </div>
+    <div class="form-group">
+        <label for="jumlah_kg"><strong>Jumlah (kg)</strong></label>
+        <input 
+            type="number" 
+            id="jumlah_kg" 
+            name="jumlah_kg" 
+            class="form-control @error('jumlah_kg') is-invalid @enderror" 
+            placeholder="Jumlah (kg)" 
+            value="{{ old('jumlah_kg') }}" 
+            min="1" 
+            oninput="hitungHarga()" 
+            required
+        >
+        <div class="mb-3">
+    <label for="harga_total" class="form-label">Total Harga</label>
+    <input 
+        type="text" 
+        id="harga_total" 
+        class="form-control bg-light text-dark" 
+        readonly 
+        value="Rp 0"
+    >
 </div>
                                 @error('jumlah_kg')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -135,7 +140,7 @@
                         
                     <div class="col-md-6">
                     <div class="form-group">
-    <label for="bukti_pembayaran">Foto Bukti Pembayaran</label>
+    <label for="bukti_pembayaran"><b>Foto Bukti Pembayaran</label>
     <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran" accept="image/*" onchange="previewImage(event)">
     <img id="preview" src="" alt="Preview Bukti Pembayaran" style="display: none; margin-top: 10px; max-width: 100%; height: auto; border: 1px solid #ddd; padding: 5px;">
 </div>
@@ -214,9 +219,26 @@
 
 @section('scripts')
 
-
-
     <script>
+function hitungHarga() {
+    // Ambil elemen
+    const kategori = document.getElementById('pilihan_kategori');
+    const jumlahKg = document.getElementById('jumlah_kg');
+    const hargaTotal = document.getElementById('harga_total');
+
+    // Ambil harga dari kategori yang dipilih
+    const selectedOption = kategori.options[kategori.selectedIndex];
+    const hargaPerKg = selectedOption ? parseInt(selectedOption.getAttribute('data-harga')) : 0;
+
+    // Ambil jumlah kilogram
+    const jumlah = parseInt(jumlahKg.value) || 0;
+
+    // Hitung total harga
+    const total = hargaPerKg * jumlah;
+
+    // Tampilkan total harga di form
+    hargaTotal.value = `Rp ${total.toLocaleString('id-ID')}`;
+}   
        function previewBuktiPembayaran(event) {
     const file = event.target.files[0];
     const reader = new FileReader();

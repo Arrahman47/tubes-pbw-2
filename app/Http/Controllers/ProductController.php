@@ -57,9 +57,6 @@ public function accept($id)
         return view('products.create');
     }
 
-    
-
-
     /**
      * Store a newly created resource in storage.
      */
