@@ -4,11 +4,12 @@
 <div class="container">
     <h2>Edit Profile</h2>
 
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
+    @if(session('status') == 'profile-updated')
+    <div class="alert alert-success">
+        Profile updated successfully.
+    </div>
+@endif
+
 
     <form method="POST" action="{{ route('profile.update') }}">
         @csrf
