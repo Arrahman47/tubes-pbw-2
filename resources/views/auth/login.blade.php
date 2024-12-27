@@ -60,9 +60,12 @@
                                 {{ __('Login') }}
                             </button>
                         </div>
-                        <div>
-                            <a href="auth/redirect" class="text-red">Login with google</a>
-                        </div>
+                        <div class="d-flex justify-content-center mt-5">
+    <a href="{{ url('auth/redirect') }}" class="btn-google d-flex align-items-center">
+        <img src="{{ asset('images/google.png') }}" alt="Google Logo" style="width: 24px; height: 24px; margin-right: 10px;">
+        Login with Google
+    </a>
+</div>
 
                         <div class="mt-3 text-center">
                             @if (Route::has('password.request'))
@@ -80,6 +83,29 @@
 @endsection
 
 <style>
+     .btn-google {
+        background-color: white; /* White background */
+        color: black; /* Black text */
+        border: 2px solid black; /* Black border (stroke) */
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        width: fit-content;
+    }
+
+    .btn-google img {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+
+    .btn-google:hover {
+        background-color: #f8f9fa; /* Slightly gray background on hover */
+        border-color: #343a40; /* Darker border color on hover */
+    }
     /* Keyframes for Fade-In Animation */
     @keyframes fadeIn {
         0% { opacity: 0; transform: translateY(20px); }
