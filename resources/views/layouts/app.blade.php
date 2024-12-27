@@ -41,15 +41,15 @@
             flex: 1;
         }
         .footer-navbar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
+            height: 50px; /* Tinggi footer */
             background-color: #c2def8;
             color: black;
             text-align: center;
-            padding: 10px 0;
-            z-index: 9999;
+            line-height: 50px; /* Vertikal align */
+            position: fixed; /* Tetap di bawah layar */
+            bottom: 0; /* Menempel di bagian bawah */
+            width: 100%;
+            z-index: 10; /* Pastikan di atas elemen lain */
         }
         body {
             padding-bottom: 50px;
@@ -210,11 +210,10 @@
     </div>
 
     <!-- Footer Navbar di bagian bawah -->
-    <nav class="navbar footer-navbar">
-        <div class="container text-bg">
-            <span class="mx-auto">&copy; 2024 Laundry Go. All rights reserved.</span>
-        </div>
-    </nav>
+    
+    <footer class="footer-navbar">
+        &copy; 2024 Laundry Go. All rights reserved.
+    </footer>
     
     <script>
     function confirmLogout() {
