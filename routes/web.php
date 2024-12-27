@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -49,4 +50,9 @@ Route::group(['middleware' => ['auth']], function() {
   
 
 });
+Route::get('/auth/redirect', [SocialiteController::class, 'redirect']);
+Route::get('/auth/google/callback', [SocialiteController::class, 'callback']);  
+
+
+
 require __DIR__.'/auth.php';

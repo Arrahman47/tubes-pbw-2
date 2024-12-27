@@ -60,6 +60,9 @@
                                 {{ __('Login') }}
                             </button>
                         </div>
+                        <div>
+                            <a href="auth/redirect" class="text-red">Login with google</a>
+                        </div>
 
                         <div class="mt-3 text-center">
                             @if (Route::has('password.request'))

@@ -12,24 +12,14 @@ return new class extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            // Tambahkan kolom baru jika belum ada
-            if (!Schema::hasColumn('products', 'promo_id')) {
-                $table->unsignedBigInteger('promo_id')->nullable(); // Kolom foreign key
-                $table->foreign('promo_id') // Definisi foreign key
-                    ->references('id')
-                    ->on('promos')
-                    ->onDelete('set null');
-            }
-
             if (!Schema::hasColumn('products', 'user_id')) {
-                $table->unsignedBigInteger('user_id')->nullable(); // Foreign key ke users
+                $table->unsignedBigInteger('user_id')->nullable();
                 $table->foreign('user_id')
                     ->references('id')
                     ->on('users')
                     ->onDelete('cascade');
             }
 
-            // Pastikan kolom lainnya sudah benar
             if (!Schema::hasColumn('products', 'nama')) {
                 $table->string('nama')->nullable();
             }
@@ -55,10 +45,7 @@ return new class extends Migration
                 $table->text('catatan')->nullable();
             }
             if (!Schema::hasColumn('products', 'kode_promo')) {
-                $table->text('kode_promo')->nullable();
-            }
-            if (!Schema::hasColumn('products', 'user_id')) {
-                $table->text('user_id')->nullable();
+                $table->string('kode_promo')->nullable();
             }
         });
     }
@@ -69,18 +56,12 @@ return new class extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            // Drop foreign key sebelum menghapus kolom
-            if (Schema::hasColumn('products', 'promo_id')) {
-                $table->dropForeign(['promo_id']);
-                $table->dropColumn('promo_id');
-            }
             if (Schema::hasColumn('products', 'user_id')) {
                 $table->dropForeign(['user_id']);
                 $table->dropColumn('user_id');
             }
 
-            // Drop kolom lainnya
-            $table->dropColumn([
+            $columns = [
                 'nama',
                 'tanggal_pemesanan',
                 'pilihan_kategori',
@@ -89,7 +70,14 @@ return new class extends Migration
                 'total_harga',
                 'no_kamar',
                 'catatan',
-            ]);
+                'kode_promo',
+            ];
+
+            foreach ($columns as $column) {
+                if (Schema::hasColumn('products', $column)) {
+                    $table->dropColumn($column);
+                }
+            }
         });
     }
 };
