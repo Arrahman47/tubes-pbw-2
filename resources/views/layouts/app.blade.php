@@ -118,16 +118,13 @@
     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {{ Auth::user()->name }}
     </a>
-    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="{{ route('profile.edit') }}">
-            {{ __('Edit Profil') }}
-        </a>
+    <div class="dropdown-menu dropdown-menu-end">
         <!-- Logout option triggers confirmation -->
         <a class="dropdown-item" href="#" onclick="confirmLogout()">
             {{ __('Logout') }}
         </a>
     </div>
-
+</div>
     <!-- Logout confirmation -->
     <div id="logout-confirmation" class="d-none">
         <p>Apakah Anda yakin ingin logout?</p>
