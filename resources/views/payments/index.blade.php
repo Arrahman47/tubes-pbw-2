@@ -6,12 +6,12 @@
 </head>
 <body>
 <div class="container mt-5">
-    <h2 class="mb-4">Manajemen Pembayaran</h2>
+    <h2 class="text-primary fw-bold"><i class="fa-solid fa-credit-card me-2"></i>Manajemen Pembayaran</h2>
    
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
+            <thead class="table-primary text-center">
+                <tr class="text-center">
                     <th>User Name</th>
                     <th>Payment Method</th>
                     <th>Amount</th>
@@ -29,30 +29,29 @@
                     <td>{{ ucfirst($payment->status) }}</td>
                     <td>{{ $payment->created_at->format('Y-m-d H:i:s') }}</td>
                     <td>
-    <div class="d-flex justify-content-center">
-        
+                        <div class="d-flex justify-content-center">
 
-        <!-- Tombol Hapus -->
-        <form action="{{ route('payments.destroy', $payment->id) }}" method="POST" style="display:inline;">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger btn-sm me-1">
-                <i class="fa-solid fa-trash"></i> Hapus
-            </button>
-        </form>
+                            <!-- Tombol Hapus -->
+                            <form action="{{ route('payments.destroy', $payment->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm me-1">
+                                    <i class="fa-solid fa-trash-can"></i> Hapus
+                                </button>
+                            </form>
 
-        <!-- Tombol Accepted -->
-        @if($payment->status_pembayaran !== 'Accepted')
-        <form action="{{ route('payments.accept', $payment->id) }}" method="POST" style="display:inline;">
-            @csrf
-            @method('PUT')
-            <button type="submit" class="btn btn-success btn-sm">
-                <i class="fa-solid fa-check"></i> Accepted
-            </button>
-        </form>
-        @endif
-    </div>
-</td>
+                            <!-- Tombol Accepted -->
+                            @if($payment->status_pembayaran !== 'Accepted')
+                            <form action="{{ route('payments.accept', $payment->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('PUT')
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    <i class="fa-solid fa-thumbs-up"></i> Accepted
+                                </button>
+                            </form>
+                            @endif
+                        </div>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mt-4">
-    <div class="row mb-3 align-items-center">
+    <div class="row mb-4 align-items-center">
         <div class="col-md-8">
             <h2 class="text-primary fw-bold"><i class="fa-solid fa-user-shield me-2"></i>Manajemen Role</h2>
             <p class="text-muted">Kelola daftar role pengguna untuk sistem dengan mudah.</p>
