@@ -36,6 +36,7 @@
             margin: 0;
             display: flex;
             flex-direction: column;
+            
         }
         .content-wrapper {
             flex: 1;
@@ -53,6 +54,7 @@
         }
         body {
             padding-bottom: 50px;
+            
         }
         .btn-custom {
             background-color: #c2def8;
@@ -147,51 +149,56 @@
             </div>
         </nav>
 
-        <!-- Sidebar Off-Canvas -->
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="sidebarMenuLabel">Menu</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <a href="{{ route('dashboard') }}" class="btn btn-custom btn-primary w-100"><i class=" fas fa-home me-2"></i>Dashboard</a>
-                    </li>
-                   
-                    <li class="list-group-item">
-                    @role('Admin')
-                        <a href="{{ route('users.index') }}" class="btn btn-custom btn-primary w-100">
-                            <i class="fa-solid fa-users me-2"></i> Kelola User
-                        </a>
-                        @endrole
-                    </li>
-                    <li class="list-group-item">
-                    
-                        <a href="{{ route('products.index') }}" class="btn btn-custom btn-primary w-100">
-                            <i class="fa-solid fa-box me-2"></i> Manajemen Pemesanan
-                        </a>
-                        
-                    </li>
-                    <li class="list-group-item">
-                    @role('Admin')
-                        <a href="{{ route('roles.index') }}" class="btn btn-custom btn-primary w-100">
-                            <i class="fa-solid fa-user-shield me-2"></i> Kelola Role
-                        </a>
-                        @endrole
-                    </li>
-                    <li class="list-group-item">
-                    @role('Admin')
-                        <a href="{{ route('payments.index') }}" class="btn btn-custom btn-primary w-100">
-                            <i class="fa-solid fa-box me-2"></i> Kelola Pembayaran
-                        </a>
-                        @endrole
-                    </li>
-                </ul>
-            </div>
-        </div>
+       <!-- Sidebar Off-Canvas -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="sidebarMenuLabel">Menu</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="{{ route('dashboard') }}" 
+                   class="btn btn-custom btn-primary w-100 {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                    <i class="fas fa-home me-2"></i>Dashboard
+                </a>
+            </li>
+            <li class="list-group-item">
+                @role('Admin')
+                <a href="{{ route('users.index') }}" 
+                   class="btn btn-custom btn-primary w-100 {{ request()->routeIs('users.index') ? 'active' : '' }}">
+                    <i class="fa-solid fa-users me-2"></i> Kelola User
+                </a>
+                @endrole
+            </li>
+            <li class="list-group-item">
+                <a href="{{ route('products.index') }}" 
+                   class="btn btn-custom btn-primary w-100 {{ request()->routeIs('products.index') ? 'active' : '' }}">
+                    <i class="fa-solid fa-box me-2"></i> Manajemen Pemesanan
+                </a>
+            </li>
+            <li class="list-group-item">
+                @role('Admin')
+                <a href="{{ route('roles.index') }}" 
+                   class="btn btn-custom btn-primary w-100 {{ request()->routeIs('roles.index') ? 'active' : '' }}">
+                    <i class="fa-solid fa-user-shield me-2"></i> Kelola Role
+                </a>
+                @endrole
+            </li>
+            <li class="list-group-item">
+                @role('Admin')
+                <a href="{{ route('payments.index') }}" 
+                   class="btn btn-custom btn-primary w-100 {{ request()->routeIs('payments.index') ? 'active' : '' }}">
+                    <i class="fa-solid fa-credit-card me-2"></i> Kelola Pembayaran
+                </a>
+                @endrole
+            </li>
+        </ul>
+    </div>
+</div>
 
-        <main class="py-4">
+
+        <main class="py-4" style="flex: 3;">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-12">
@@ -207,10 +214,10 @@
     </div>
 
     <!-- Footer Navbar di bagian bawah -->
-    
     <footer class="footer-navbar">
-        &copy; 2024 Laundry Go. All rights reserved.
-    </footer>
+    &copy; 2024 Laundry Go. All rights reserved. ❤️
+</footer>
+
     
     <script>
     function confirmLogout() {

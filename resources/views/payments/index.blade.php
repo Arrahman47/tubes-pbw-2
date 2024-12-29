@@ -1,28 +1,50 @@
 @extends('layouts.app')
 
 @section('content')
-    <title>Pembayaran</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-<div class="container mt-5">
-    <h2 class="text-primary fw-bold"><i class="fa-solid fa-credit-card me-2"></i>Manajemen Pembayaran</h2>
-   
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.75rem;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+
+        .btn i {
+            margin-right: 5px;
+        }
+    </style>
+
+<div class="container mt-4">
+    <h2 class="text-primary fw-bold">
+        <i class="fa-solid fa-credit-card me-2"></i>Manajemen Pembayaran
+    </h2>
+    <p class="text-muted">Kelola pembayaran pengguna dengan tabel berikut ini.</p>
+    @if($payments->isEmpty())  <!-- Corrected variable name here -->
+        <div class="alert alert-warning text-center">
+            <i class="fa-solid fa-exclamation-circle me-2"></i>Data not found
+        </div>
+    @else
     <div class="table-responsive">
-        <table class="table table-bordered table-striped">
+        <table class="table table-hover align-middle">
             <thead class="table-primary text-center">
-                <tr class="text-center">
-                    <th>User Name</th>
-                    <th>Payment Method</th>
-                    <th>Amount</th>
-                    <th>Status</th>
+                <tr>
+                    <th>Nama</th>
+                    <th>Metode Pembayaran</th>
+                    <th>Jumlah</th>
+                    <th>Status Pembayaran</th>
                     <th>Created At</th>
-                    <th>Actions</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($payments as $payment)
-                <tr>
+                <tr class="text-center">
                     <td>{{ $payment->user_name }}</td>
                     <td>{{ ucfirst($payment->payment_method) }}</td>
                     <td>Rp{{ number_format($payment->amount, 2) }}</td>
@@ -30,19 +52,18 @@
                     <td>{{ $payment->created_at->format('Y-m-d H:i:s') }}</td>
                     <td>
                         <div class="d-flex justify-content-center">
-
                             <!-- Tombol Hapus -->
-                            <form action="{{ route('payments.destroy', $payment->id) }}" method="POST" style="display:inline;">
+                            <form action="{{ route('payments.destroy', $payment->id) }}" method="POST" class="me-1">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm me-1">
+                                <button type="submit" class="btn btn-danger btn-sm">
                                     <i class="fa-solid fa-trash-can"></i> Hapus
                                 </button>
                             </form>
 
                             <!-- Tombol Accepted -->
-                            @if($payment->status_pembayaran !== 'Accepted')
-                            <form action="{{ route('payments.accept', $payment->id) }}" method="POST" style="display:inline;">
+                            @if($payment->status !== 'Accepted')  <!-- Fixed check for payment status -->
+                            <form action="{{ route('payments.accept', $payment->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <button type="submit" class="btn btn-success btn-sm">
@@ -57,9 +78,6 @@
             </tbody>
         </table>
     </div>
+    @endif
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/js/all.min.js"></script>
-</body>
-</html>
 @endsection
