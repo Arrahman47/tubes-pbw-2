@@ -45,7 +45,7 @@
                 <div class="card-body">
                     <i class="fas fa-star fa-3x mb-3"></i>
                     <h3 class="card-title">5/5</h3>
-                    <p class="card-text">Rating Layanan</p>
+                    <p class="card-text">Rating Layanan Google Maps</p>
                 </div>
             </div>
         </div>

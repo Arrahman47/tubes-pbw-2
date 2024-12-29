@@ -40,7 +40,17 @@
                     </div>
                 @endif
 
-                
+                 <!-- Notice -->
+        <div class="p-2 mb-3" style="background-color: rgba(255, 0, 0, 0.1); border: 1px solid rgba(255, 0, 0, 0.3); border-radius: 5px;">
+            <p class="text-danger mb-1">
+                <i class="fa-solid fa-info-circle me-1"></i>
+                1. Diharapkan diisi sesuai data pesanan dengan benar.
+            </p>
+            <p class="text-danger mb-0">
+                <i class="fa-solid fa-info-circle me-1"></i>
+                2. Bagian kolom catatan beri tanda strip "-" apabila tidak mengisi.
+            </p>
+        </div>
 
                 <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -144,7 +154,6 @@
             <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran" accept="image/jpeg,image/png,application/pdf" onchange="previewImage(event)">
             <img id="preview" src="" alt="Preview Bukti Pembayaran" style="display: none; margin-top: 10px; max-width: 100%; height: auto; border: 1px solid #ddd; padding: 5px;">
         </div>
-
 <a href="{{ route('payments.create') }}" class="btn btn-success mb-3" id="pay-button">Bayar</a>
 
                         <!-- Status Pembayaran -->
@@ -165,7 +174,7 @@
                         <!-- Catatan -->
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="catatan"><strong>Catatan</strong></label>
+                                <label for="catatan"><strong>Catatan *jika kosong harap beri tanda "-"</strong></label>
                                 <textarea class="form-control @error('catatan') is-invalid @enderror" name="catatan" placeholder="Catatan">{{ old('catatan') }}</textarea>
                                 @error('catatan')
                                     <div class="invalid-feedback">{{ $message }}</div>

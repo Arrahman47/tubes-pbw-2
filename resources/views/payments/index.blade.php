@@ -48,7 +48,17 @@
                     <td>{{ $payment->user_name }}</td>
                     <td>{{ ucfirst($payment->payment_method) }}</td>
                     <td>Rp{{ number_format($payment->amount, 2) }}</td>
-                    <td>{{ ucfirst($payment->status) }}</td>
+                    <td><span class="badge 
+                @if($payment->status === 'pending')
+                    bg-warning text-dark
+                @elseif($payment->status === 'Accepted')
+                    bg-success text-white
+                @else
+                    bg-secondary text-white
+                @endif
+            ">
+                {{ ucfirst($payment->status) }}
+            </span></td>
                     <td>{{ $payment->created_at->format('Y-m-d H:i:s') }}</td>
                     <td>
                         <div class="d-flex justify-content-center">

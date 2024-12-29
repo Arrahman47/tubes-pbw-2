@@ -172,6 +172,17 @@
 
 <div class="container mt-5">
     <h2>Pembayaran</h2>
+     <!-- Notice -->
+     <div class="p-2 mb-3" style="background-color: rgba(255, 0, 0, 0.1); border: 1px solid rgba(255, 0, 0, 0.3); border-radius: 5px;">
+            <p class="text-danger mb-1">
+                <i class="fa-solid fa-info-circle me-1"></i>
+                1. Diharapkan diisi sesuai data pesanan dengan benar.
+            </p>
+            <p class="text-danger mb-0">
+                <i class="fa-solid fa-info-circle me-1"></i>
+                2. Pembayaran harus valid disertai bukti foto pembayaran.
+            </p>
+        </div>
     <form action="{{ route('payments.store') }}" method="POST">
         @csrf
         <div class="mb-3">
