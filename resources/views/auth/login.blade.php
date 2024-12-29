@@ -45,13 +45,12 @@
                         </div>
 
                         <!-- Remember Me Checkbox -->
-                        <div class="mb-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                <label class="form-check-label" for="remember">
-                                    {{ __('Ingatkan Saya') }}
-                                </label>
-                            </div>
+                        <div class="mt-3 text-center">
+                            @if (Route::has('password.request'))
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                            @endif
                         </div>
 
                         <!-- Submit Button and Forgot Password Link -->
@@ -60,6 +59,12 @@
                                 {{ __('Login') }}
                             </button>
                         </div>
+
+                        <div class="d-flex justify-content-center mt-3">
+    <span>{{ __("Don't have an account?") }}</span>
+    <a href="{{ route('register') }}" class="ms-2">{{ __('Register') }}</a>
+</div>
+
                         <div class="d-flex justify-content-center mt-5">
     <a href="{{ url('auth/redirect') }}" class="btn-google d-flex align-items-center">
         <img src="{{ asset('images/google.png') }}" alt="Google Logo" style="width: 24px; height: 24px; margin-right: 10px;">
@@ -67,13 +72,7 @@
     </a>
 </div>
 
-                        <div class="mt-3 text-center">
-                            @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                            @endif
-                        </div>
+                       
                     </form>
                 </div>
             </div>

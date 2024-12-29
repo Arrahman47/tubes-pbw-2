@@ -56,6 +56,12 @@
                                 {{ __('Register') }}
                             </button>
                         </div>
+
+                        <div class="d-flex justify-content-center mt-3">
+    <span>{{ __("Already have an account?") }}</span>
+    <a href="{{ route('login') }}" class="ms-2">{{ __('Login') }}</a>
+</div>
+                        
                     </form>
                 </div>
             </div>
