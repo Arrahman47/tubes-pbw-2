@@ -26,18 +26,21 @@ class ProductController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-{
-    $products = Product::paginate(10);
-
-    // Hitung jumlah Orders Pending
-    $orderCountPending = Product::where('status_pembayaran', 'Pending')->count();
-
-    // Hitung jumlah Orders Accepted
-    $orderCountAccepted = Product::where('status_pembayaran', 'Accepted')->count();
-
-    return view('products.index', compact('products', 'orderCountPending', 'orderCountAccepted'));
-}
-
+    {
+        $products = Product::paginate(10);
+    
+        // Hitung jumlah Orders Pending
+        $orderCountPending = Product::where('status_pembayaran', 'Pending')->count();
+    
+        // Hitung jumlah Orders Accepted
+        $orderCountAccepted = Product::where('status_pembayaran', 'Accepted')->count();
+    
+        // Hitung jumlah Total Orders
+        $orderCountTotal = Product::count();
+    
+        return view('products.index', compact('products', 'orderCountPending', 'orderCountAccepted', 'orderCountTotal'));
+    }
+    
     
 
 public function accept($id)

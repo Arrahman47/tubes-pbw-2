@@ -24,8 +24,6 @@
         </div>
     @endif
 
-    
-
     <div class="mb-4 text-center py-3 bg-warning rounded shadow-sm border border-primary d-inline-block">
     <h4 class="fw-bold text-dark">
         <i class="fa-solid fa-list me-2"></i>{{ $orderCountPending }} Orders Pending
@@ -80,7 +78,20 @@
             <td>{{ $product->no_kamar }}</td>
             <td>{{ $product->total_harga}}</td>
             <td>{{ $product->catatan }}</td>
-            <td>{{ $product->status_pembayaran }}</td>
+            <td>
+    <span class="badge 
+        @if($product->status_pembayaran === 'Pending')
+            bg-warning text-dark
+        @elseif($product->status_pembayaran === 'Accepted')
+            bg-success text-white
+        @else
+            bg-secondary text-white
+        @endif
+    ">
+        {{ ucfirst($product->status_pembayaran) }}
+    </span>
+</td>
+
             <td>
     <div class="d-flex justify-content-center">
         <!-- Tombol Edit -->
