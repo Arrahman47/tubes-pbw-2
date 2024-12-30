@@ -120,7 +120,7 @@
 </form>
 
 <!-- Tombol Accepted -->
-@if($product->status_pembayaran !== 'Accepted')
+@if($product->status_pembayaran !== 'Accepted' && $product->status_pembayaran !== 'Rejected')
 <form action="{{ route('products.accept', $product->id) }}" method="POST" style="display:inline;">
     @csrf
     @method('PUT')
@@ -129,6 +129,7 @@
     </button>
 </form>
 @endif
+
 
 <!-- Tombol Rejected -->
 @if($product->status_pembayaran !== 'Rejected')
