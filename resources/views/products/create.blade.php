@@ -2,23 +2,42 @@
 @section('content')
 <script>
     function previewImage(event) {
-        const file = event.target.files[0]; // Ambil file pertama
-        const preview = document.getElementById('preview'); // Ambil elemen img
+        const file = event.target.files[0];
+        const preview = document.getElementById('preview');
 
         if (file) {
-            const reader = new FileReader(); // Gunakan FileReader API
+            const reader = new FileReader();
 
             reader.onload = function (e) {
-                preview.src = e.target.result; // Set src ke hasil baca file
-                preview.style.display = 'block'; // Tampilkan elemen img
+                preview.src = e.target.result;
+                preview.style.display = 'block';
             };
 
-            reader.readAsDataURL(file); // Baca file sebagai Data URL
+            reader.readAsDataURL(file);
         } else {
-            preview.src = ''; // Kosongkan src jika tidak ada file
-            preview.style.display = 'none'; // Sembunyikan elemen img
+            preview.src = '';
+            preview.style.display = 'none';
         }
     }
+
+    function hitungHarga() {
+        const kategori = document.getElementById('pilihan_kategori');
+        const jumlahKg = document.getElementById('jumlah_kg');
+        const hargaTotal = document.getElementById('harga_total');
+
+        const selectedOption = kategori.options[kategori.selectedIndex];
+        const hargaPerKg = selectedOption ? parseInt(selectedOption.getAttribute('data-harga')) : 0;
+
+        const jumlah = parseInt(jumlahKg.value) || 0;
+        const total = hargaPerKg * jumlah;
+
+        hargaTotal.value = `Rp ${total.toLocaleString('id-ID')}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('pilihan_kategori').addEventListener('change', hitungHarga);
+        document.getElementById('jumlah_kg').addEventListener('input', hitungHarga);
+    });
 </script>
 
 <div class="row justify-content-center">
@@ -40,21 +59,21 @@
                     </div>
                 @endif
 
-                 <!-- Notice -->
-        <div class="p-2 mb-3" style="background-color: rgba(255, 0, 0, 0.1); border: 1px solid rgba(255, 0, 0, 0.3); border-radius: 5px;">
-            <p class="text-danger mb-1">
-                <i class="fa-solid fa-info-circle me-1"></i>
-                1. Diharapkan diisi sesuai data pesanan dengan benar.
-            </p>
-            <p class="text-danger mb-0">
-                <i class="fa-solid fa-info-circle me-1"></i>
-                2. Bagian kolom catatan beri tanda strip "-" apabila tidak mengisi.
-            </p>
-        </div>
+                <div class="p-2 mb-3" style="background-color: rgba(255, 0, 0, 0.1); border: 1px solid rgba(255, 0, 0, 0.3); border-radius: 5px;">
+                    <p class="text-danger mb-1">
+                        <i class="fa-solid fa-info-circle me-1"></i>
+                        1. Diharapkan diisi sesuai data pesanan dengan benar.
+                    </p>
+                    <p class="text-danger mb-0">
+                        <i class="fa-solid fa-info-circle me-1"></i>
+                        2. Bagian kolom catatan beri tanda strip "-" apabila tidak mengisi.
+                    </p>
+                </div>
 
                 <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="col-md-6">
+                    <div class="row g-3">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="nama"><strong>Nama</strong></label>
                                 <input type="text" id="nama" name="nama" class="form-control @error('nama') is-invalid @enderror" placeholder="Nama" value="{{ old('nama') }}">
@@ -64,37 +83,31 @@
                             </div>
                         </div>
 
-
-                    <div class="row g-3">
-                        <!-- Tanggal Pemesanan -->
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="tanggal_pemesanan"><strong>Tanggal Pemesanan</strong></label>
-                                <input type="date" name="tanggal_pemesanan" class="form-control @error('tanggal_pemesanan') is-invalid @enderror" placeholder="Tanggal Pemesanan" value="{{ old('tanggal_pemesanan') }}">
+                                <input type="date" name="tanggal_pemesanan" class="form-control @error('tanggal_pemesanan') is-invalid @enderror" value="{{ old('tanggal_pemesanan') }}">
                                 @error('tanggal_pemesanan')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
 
-                        <!-- Pilihan Kategori -->
                         <div class="col-md-6">
-    <div class="form-group">
-        <label for="pilihan_kategori"><strong>Pilihan Kategori</strong></label>
-        <select id="pilihan_kategori" name="pilihan_kategori" class="form-control" onchange="hitungHarga()">
-            <option value="" disabled selected>Pilih kategori</option>
-            <option value="Komplit" data-harga="6000">Komplit (Rp 6000/kg)</option>
-            <option value="Cuci Kering" data-harga="4000">Cuci Kering (Rp 4000/kg)</option>
-            <option value="Setrika" data-harga="4000">Setrika (Rp 4000/kg)</option>
-        </select>
-
+                            <div class="form-group">
+                                <label for="pilihan_kategori"><strong>Pilihan Kategori</strong></label>
+                                <select id="pilihan_kategori" name="pilihan_kategori" class="form-control">
+                                    <option value="" disabled selected>Pilih kategori</option>
+                                    <option value="Komplit" data-harga="6000">Komplit (Rp 6000/kg)</option>
+                                    <option value="Cuci Kering" data-harga="4000">Cuci Kering (Rp 4000/kg)</option>
+                                    <option value="Setrika" data-harga="4000">Setrika (Rp 4000/kg)</option>
+                                </select>
                                 @error('pilihan_kategori')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
 
-                        <!-- Gedung Asrama -->
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="gedung_asrama"><strong>Gedung Asrama</strong></label>
@@ -105,37 +118,20 @@
                             </div>
                         </div>
 
-                        <!-- Jumlah (kg) -->
                         <div class="col-md-6">
-    <div class="form-group">
-        <label for="jumlah_kg"><strong>Jumlah (kg)</strong></label>
-        <input 
-            type="number" 
-            id="jumlah_kg" 
-            name="jumlah_kg" 
-            class="form-control @error('jumlah_kg') is-invalid @enderror" 
-            placeholder="Jumlah (kg)" 
-            value="{{ old('jumlah_kg') }}" 
-            min="1" 
-            oninput="hitungHarga()" 
-            required
-        >
-        <div class="mb-3">
-    <label for="harga_total" class="form-label">Total Harga</label>
-    <input 
-        type="text" 
-        id="harga_total" 
-        class="form-control bg-light text-dark" 
-        readonly 
-        value="Rp 0"
-    >
-</div>
+                            <div class="form-group">
+                                <label for="jumlah_kg"><strong>Jumlah (kg)</strong></label>
+                                <input type="number" id="jumlah_kg" name="jumlah_kg" class="form-control @error('jumlah_kg') is-invalid @enderror" placeholder="Jumlah (kg)" value="{{ old('jumlah_kg') }}" min="1" required>
+                                <div class="mt-2">
+                                    <label for="harga_total" class="form-label">Total Harga</label>
+                                    <input type="text" id="harga_total" class="form-control bg-light text-dark" readonly value="Rp 0">
+                                </div>
                                 @error('jumlah_kg')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-                        <!-- No Kamar -->
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="no_kamar"><strong>No Kamar</strong></label>
@@ -145,33 +141,15 @@
                                 @enderror
                             </div>
                         </div>
-                        
-                        <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="bukti_pembayaran"><b>Foto Bukti Pembayaran</b></label>
-            <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran" accept="image/jpeg,image/png,application/pdf" onchange="previewImage(event)">
-            <img id="preview" src="" alt="Preview Bukti Pembayaran" style="display: none; margin-top: 10px; max-width: 100%; height: auto; border: 1px solid #ddd; padding: 5px;">
-        </div>
-<a href="{{ route('payments.create') }}" class="btn btn-success mb-3" id="pay-button">Bayar</a>
 
-                        <!-- Status Pembayaran -->
-                        <!-- <div class="col-md-6">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="status_pembayaran"><strong>Status Pembayaran</strong></label>
-                                <select name="status_pembayaran" id="status_pembayaran" class="form-select @error('status_pembayaran') is-invalid @enderror">
-                                    <option value="" disabled selected>Pilih status</option>
-                                    <option value="Belum Dibayar" {{ old('status_pembayaran') == 'Belum Dibayar' ? 'selected' : '' }}>Belum Dibayar</option>
-                                    <option value="Sudah Dibayar" {{ old('status_pembayaran') == 'Sudah Dibayar' ? 'selected' : '' }}>Sudah Dibayar</option>
-                                </select>
-                                @error('status_pembayaran')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <label for="bukti_pembayaran"><b>Foto Bukti Pembayaran</b></label>
+                                <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran" accept="image/jpeg,image/png,application/pdf" onchange="previewImage(event)">
+                                <img id="preview" src="" alt="Preview Bukti Pembayaran" style="display: none; margin-top: 10px; max-width: 100%; height: auto; border: 1px solid #ddd; padding: 5px;">
                             </div>
-                        </div> -->
+                        </div>
 
-                        <!-- Catatan -->
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="catatan"><strong>Catatan *jika kosong harap beri tanda "-"</strong></label>
@@ -182,155 +160,12 @@
                             </div>
                         </div>
                     </div>
+
                     <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
                     <button type="reset" class="btn btn-secondary btn-sm"><i class="fa-solid fa-eraser"></i> Reset</button>
-
-
-                 <!-- <div class="text-center mt-4">
-                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#reviewModal">
-        <i class="fa-solid fa-eye"></i> Review Pemesanan
-    </button>
-                       
-
-<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="reviewModalLabel">Review Pemesanan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p><strong>Nama:</strong> <span id="review_nama"></span></p>
-                <p><strong>Tanggal Pemesanan:</strong> <span id="review_tanggal_pemesanan"></span></p>
-                <p><strong>Kategori:</strong> <span id="review_kategori"></span></p>
-                <p><strong>Gedung Asrama:</strong> <span id="review_gedung_asrama"></span></p>
-                <p><strong>Jumlah (kg):</strong> <span id="review_jumlah_kg"></span></p>
-                <p><strong>Total Harga:</strong> <span id="review_total_harga"></span></p>
-                <p><strong>No Kamar:</strong> <span id="review_no_kamar"></span></p>
-                <p><strong>Catatan:</strong> <span id="review_catatan"></span></p>
-                <p><strong>Foto Bukti Pembayaran:</strong></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="document.querySelector('form').submit();">Kirim Pemesanan</button>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-@endsection
-
-@section('scripts')
-
-    <script>
-function hitungHarga() {
-    // Ambil elemen
-    const kategori = document.getElementById('pilihan_kategori');
-    const jumlahKg = document.getElementById('jumlah_kg');
-    const hargaTotal = document.getElementById('harga_total');
-
-    // Ambil harga dari kategori yang dipilih
-    const selectedOption = kategori.options[kategori.selectedIndex];
-    const hargaPerKg = selectedOption ? parseInt(selectedOption.getAttribute('data-harga')) : 0;
-
-    // Ambil jumlah kilogram
-    const jumlah = parseInt(jumlahKg.value) || 0;
-
-    // Hitung total harga
-    const total = hargaPerKg * jumlah;
-
-    // Tampilkan total harga di form
-    hargaTotal.value = `Rp ${total.toLocaleString('id-ID')}`;
-}   
-       function previewBuktiPembayaran(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    const preview = document.getElementById('bukti_preview');
-
-    reader.onload = function(e) {
-        preview.src = e.target.result;
-        preview.style.display = 'block';
-        updateReview();
-    };
-
-    if (file) {
-        reader.readAsDataURL(file);
-    }
-}
-
-function updateReview() {
-    document.getElementById('review_nama').textContent = document.getElementById('nama').value;
-    document.getElementById('review_tanggal_pemesanan').textContent = document.getElementById('tanggal_pemesanan').value;
-    document.getElementById('review_kategori').textContent = document.getElementById('pilihan_kategori').value;
-    document.getElementById('review_gedung_asrama').textContent = document.getElementById('gedung_asrama').value;
-    document.getElementById('review_jumlah_kg').textContent = document.getElementById('jumlah_kg').value;
-    document.getElementById('review_total_harga').textContent = document.getElementById('harga_total').textContent;
-    document.getElementById('review_no_kamar').textContent = document.getElementById('no_kamar').value;
-    document.getElementById('review_catatan').textContent = document.getElementById('catatan').value;
-
-    // Update preview of the uploaded payment receipt
-    const previewImage = document.getElementById('bukti_preview');
-    document.getElementById('review_bukti').src = previewImage.src;
-}
-
-// Event listener untuk memonitor setiap perubahan di form
-document.addEventListener('DOMContentLoaded', () => {
-    const formElements = document.querySelectorAll('input, select, textarea');
-    formElements.forEach(element => {
-        element.addEventListener('input', updateReview);
-    });
-});
-function updateReview() {
-    document.getElementById('review_nama').textContent = document.getElementById('nama').value;
-    document.getElementById('review_tanggal_pemesanan').textContent = document.getElementById('tanggal_pemesanan').value;
-    document.getElementById('review_kategori').textContent = document.getElementById('pilihan_kategori').value;
-    document.getElementById('review_gedung_asrama').textContent = document.getElementById('gedung_asrama').value;
-    document.getElementById('review_jumlah_kg').textContent = document.getElementById('jumlah_kg').value;
-    document.getElementById('review_total_harga').textContent = document.getElementById('harga_total').textContent;
-    document.getElementById('review_no_kamar').textContent = document.getElementById('no_kamar').value;
-    document.getElementById('review_catatan').textContent = document.getElementById('catatan').value;
-
-    // Update preview of the uploaded payment receipt
-    const previewImage = document.getElementById('bukti_preview');
-    document.getElementById('review_bukti').src = previewImage.src;
-
-    // Show the modal
-    const modal = new bootstrap.Modal(document.getElementById('reviewModal'));
-    modal.show();
-}
-
-       function hitungHarga() {
-    const kategoriSelect = document.getElementById('pilihan_kategori');
-    const jumlahKgInput = document.getElementById('jumlah_kg');
-    const hargaTotalDiv = document.getElementById('harga_total');
-
-    // Ambil data harga dari kategori yang dipilih
-    const selectedOption = kategoriSelect.options[kategoriSelect.selectedIndex];
-    const hargaPerKg = selectedOption ? parseInt(selectedOption.getAttribute('data-harga')) : 0;
-
-    // Ambil jumlah (kg)
-    const jumlahKg = parseInt(jumlahKgInput.value) || 0;
-
-    // Hitung total harga
-    const totalHarga = hargaPerKg * jumlahKg;
-
-    // Tampilkan hasil ke elemen harga total
-    hargaTotalDiv.textContent = totalHarga.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
-}
-    document.addEventListener('DOMContentLoaded', () => {
-        const kategoriSelect = document.getElementById('pilihan_kategori');
-        const jumlahKgInput = document.getElementById('jumlah_kg');
-
-        kategoriSelect.addEventListener('change', hitungHarga);
-        jumlahKgInput.addEventListener('input', hitungHarga);
-    });
-
-
-    </script>
 @endsection
