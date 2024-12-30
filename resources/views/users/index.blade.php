@@ -14,6 +14,31 @@
         </div>
     </div>
 
+    <div class="row mb-3">
+        <!-- Kotak Statistik Admin -->
+        <div class="col-md-6">
+            <div class="card bg-danger text-white shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fa-solid fa-user-shield me-2"></i> Total Admin
+                    </h5>
+                    <p class="card-text display-4">{{ $adminCount }}</p>
+                </div>
+            </div>
+        </div>
+        <!-- Kotak Statistik Customer -->
+        <div class="col-md-6">
+            <div class="card bg-primary text-white shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fa-solid fa-users me-2"></i> Total Customer
+                    </h5>
+                    <p class="card-text display-4">{{ $customerCount }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <i class="fa-solid fa-check-circle me-2"></i>{{ session('success') }}
@@ -44,7 +69,7 @@
                                     <span class="badge 
                                         @if($v == 'Admin') 
                                             bg-danger 
-                                        @elseif($v == 'C    ustomer') 
+                                        @elseif($v == 'Customer') 
                                             bg-primary 
                                         @else 
                                             bg-secondary 

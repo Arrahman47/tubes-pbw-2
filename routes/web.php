@@ -48,7 +48,7 @@ Route::group(['middleware' => ['auth']], function() {
    /* Route::post('/orders/{id}/pay', [ProductController::class, 'updatePaymentStatus'])->name('orders.pay'); */
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
     Route::put('products/{id}/reject', [ProductController::class, 'reject'])->name('products.reject');
-
+    Route::get('products/{id}/generate-word-invoice', [ProductController::class, 'generateWordInvoice'])->name('products.generateWordInvoice');
 
 });
 Route::get('/auth/redirect', [SocialiteController::class, 'redirect']);

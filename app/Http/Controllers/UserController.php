@@ -41,8 +41,10 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $data = User::latest()->paginate(5);
+        $adminCount = User::role('Admin')->count();
+        $customerCount = User::role('Customer')->count();
 
-        return view('users.index', compact('data'))
+        return view('users.index', compact('data', 'adminCount', 'customerCount'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 

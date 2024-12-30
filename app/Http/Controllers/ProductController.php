@@ -6,6 +6,8 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\IOFactory;
 
 class ProductController extends Controller
 { 
@@ -21,7 +23,42 @@ class ProductController extends Controller
         $this->middleware('permission:laundry-accept', ['only' => ['accept']]);
         
     }
+    public function generateWordInvoice($id)
+    {
+        $product = Product::findOrFail($id);
+    
+        // Membuat instance dari PHPWord
+        $phpWord = new PhpWord();
+    
+        // Menambahkan halaman baru
+        $section = $phpWord->addSection();
+    
+$section->addText(
+    'Laundry Go',
+    ['name' => 'Arial', 'size' => 24, 'bold' => true],
+    ['alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER]
+);
 
+// Menambahkan informasi pemesanan ke dokumen
+$section->addTitle('Invoice Pemesanan Laundry Go', 1);
+$section->addTitle('Terimakasih berikut pemesanan laundry anda: ', 2);
+$section->addText('Nama: ' . $product->nama);
+$section->addText('Tanggal Pemesanan: ' . $product->tanggal_pemesanan);
+$section->addText('Gedung Asrama: ' . $product->gedung_asrama);
+$section->addText('Jumlah (kg): ' . $product->jumlah_kg);
+$section->addText('Total Harga: ' . $product->total_harga);
+$section->addText('Catatan: ' . $product->catatan);
+$section->addText('Status Pembayaran: ' . $product->status_pembayaran);
+$section->addText('Alasan Reject: ' . ($product->alasan_reject ?? 'N/A'));
+
+    
+        // Menyimpan dokumen ke file
+        $filePath = storage_path('app/public/invoices/' . 'invoice_' . $product->id . '.docx');
+        $phpWord->save($filePath, 'Word2007');
+    
+        // Mengunduh file Word
+        return response()->download($filePath);
+    }
     /**
      * Display a listing of the resource.
      */

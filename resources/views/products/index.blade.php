@@ -132,7 +132,7 @@
 
 
 <!-- Tombol Rejected -->
-@if($product->status_pembayaran !== 'Rejected')
+@if($product->status_pembayaran !== 'Rejected' && $product->status_pembayaran !== 'Accepted')
 <form action="{{ route('products.reject', $product->id) }}" method="POST" style="display:inline;">
     @csrf
     @method('PUT')
@@ -148,6 +148,9 @@
         <button class="btn btn-info btn-sm ms-1" data-bs-toggle="modal" data-bs-target="#paymentProofModal-{{ $product->id }}">
             <i class="fa-solid fa-image"></i> Lihat Bukti Pembayaran
         </button>
+        <a href="{{ route('products.generateWordInvoice', $product->id) }}" class="btn btn-warning btn-sm ms-1">
+                                <i class="fa-solid fa-print"></i> Cetak Pembayaran
+                            </a>
     </div>
 </td>
 
