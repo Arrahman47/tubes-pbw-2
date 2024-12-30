@@ -23,7 +23,11 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-
+    <div class="mb-4 text-center py-3 bg-primary rounded shadow-sm border border-primary d-inline-block">
+    <h4 class="fw-bold text-white">
+        <i class="fa-solid fa-box me-2"></i>{{ $orderCountTotal }} Total Orders
+    </h4>
+</div>
     <div class="mb-4 text-center py-3 bg-warning rounded shadow-sm border border-primary d-inline-block">
     <h4 class="fw-bold text-dark">
         <i class="fa-solid fa-list me-2"></i>{{ $orderCountPending }} Orders Pending
