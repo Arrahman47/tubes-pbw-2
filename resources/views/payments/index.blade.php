@@ -25,7 +25,28 @@
         <i class="fa-solid fa-credit-card me-2"></i>Manajemen Pembayaran
     </h2>
     <p class="text-muted">Kelola pembayaran pengguna dengan tabel berikut ini.</p>
-    @if($payments->isEmpty())  <!-- Corrected variable name here -->
+
+    <!-- Financial Statistics Section -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Transaksi Pembayaran Disetujui</h5>
+                    <p class="card-text">Rp{{ number_format($totalPayments, ) }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-secondary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Rata-rata Pembayaran</h5>
+                    <p class="card-text">Rp{{ number_format($averagePayment, ) }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if($payments->isEmpty()) 
         <div class="alert alert-warning text-center">
             <i class="fa-solid fa-exclamation-circle me-2"></i>Data not found
         </div>
@@ -72,7 +93,7 @@
                             </form>
 
                             <!-- Tombol Accepted -->
-                            @if($payment->status !== 'Accepted')  <!-- Fixed check for payment status -->
+                            @if($payment->status !== 'Accepted') 
                             <form action="{{ route('payments.accept', $payment->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')

@@ -62,9 +62,18 @@ $section->addText('Alasan Reject: ' . ($product->alasan_reject ?? 'N/A'));
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate(10);
+        $search = $request->input('search');
+
+    $products = Product::query()
+        ->when($search, function ($query, $search) {
+            $query->where('nama', 'like', "%{$search}%")
+                  ->orWhere('tanggal_pemesanan', 'like', "%{$search}%")
+                  ->orWhere('gedung_asrama', 'like', "%{$search}%")
+                  ->orWhere('no_kamar', 'like', "%{$search}%");
+                })
+       ->paginate(10);
     
         // Hitung jumlah Orders Pending
         $orderCountPending = Product::where('status_pembayaran', 'Pending')->count();

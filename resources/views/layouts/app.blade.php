@@ -104,7 +104,7 @@
                     <span class="ms-2 fw-bold">Laundry Go</span>
                 </a>
                 <!-- Tautan WhatsApp -->
-                <a href="https://wa.me/6282190116233" target="_blank" class="ms-3 text-success fw-bold text-decoration-none fs-5" style="font-size: 1.25rem;">
+                <a href="https://wa.me/6282190116233?text=Halo%2C%20kak%20ada%20perlu%20yang%20ingin%20saya%20tanyakan" target="_blank" class="ms-3 text-success fw-bold text-decoration-none fs-5" style="font-size: 1.25rem;">
     <i class="fa-brands fa-whatsapp me-1"></i>Kontak Kami
 </a>
 

@@ -96,10 +96,12 @@ public function store(Request $request): JsonResponse
     // Dapatkan semua pembayaran, bisa ditambah dengan filter
     $payments = Payment::all();
 
+    $totalPayments = $payments->sum('amount');
+    $averagePayment = $payments->avg('amount');
     // Jika ingin memfilter berdasarkan pengguna yang login
     // $payments = Payment::where('user_id', auth()->id())->get();
 
-    return view('payments.index', compact('payments'));
+    return view('payments.index', compact('payments', 'totalPayments', 'averagePayment'));
 }
 
     // Get single payment

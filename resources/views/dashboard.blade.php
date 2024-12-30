@@ -1,14 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<h2 class="text-primary fw-bold" style="color: #343a40;"><i class="fas fa-home me-2"></i>Dashboard</h2>
-<div class="text-center py-5" style="background-image: url('https://example.com/your-image.jpg'); background-size: cover; background-position: center; color: black;">
-    <h1 class="animate__animated animate__fadeInDown">Selamat Datang, {{ Auth::user()->name }} di Laundry Go!</h1>
-    <p class="animate__animated animate__fadeInUp animate__delay-1s">Yeay! Kamu berhasil login ke layanan Laundry kami.</p>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="text-primary fw-bold mb-0" style="color: #343a40;">
+        <i class="fas fa-home me-2"></i>Dashboard
+    </h2>
+    <span id="currentDateTime" class="fw-bold text-dark p-2 rounded" style="background-color: #e3f2fd; font-size: 1.1rem; border: 1px solid #90caf9; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+    </span>
+</div>
+
+<div class="text-center py-5 rounded shadow" style="background-image: url('https://example.com/your-image.jpg'); background-size: cover; background-position: center; color: black;">
+    <h1 class="animate__animated animate__fadeInDown display-4">Selamat Datang, {{ Auth::user()->name }} di Laundry Go!</h1>
+    <p class="animate__animated animate__fadeInUp animate__delay-1s lead">Yeay! Kamu berhasil login ke layanan Laundry kami.</p>
     <p class="animate__animated animate__fadeInUp animate__delay-2s">Kami siap membantu kamu mencuci pakaian dengan layanan terbaik. Nikmati pengalaman mencuci yang mudah dan cepat!</p>
-    
+
     <div class="mt-4">
-        <a href="{{ route('products.index') }}" class="btn btn-outline-primary btn-lg animate__animated animate__pulse animate__infinite">
+        <a href="{{ route('products.index') }}" class="btn btn-outline-primary btn-lg animate__animated animate__pulse animate__infinite rounded-pill">
             <i class="fa-solid fa-cart-plus me-2"></i> Mulai Pemesanan
         </a>
         <p class="mt-2 animate__animated animate__fadeInUp animate__delay-3s">Atau, kelola pemesananmu dengan mudah di <strong>Manajemen Pemesanan</strong>.</p>
@@ -21,7 +28,7 @@
     <div class="row text-center mt-4">
         <!-- Pesanan Terselesaikan -->
         <div class="col-md-4 animate__animated animate__zoomIn animate__delay-1s">
-            <div class="card text-white bg-primary card-hover">
+            <div class="card text-white bg-primary card-hover rounded">
                 <div class="card-body">
                     <i class="fas fa-check-circle fa-3x mb-3"></i>
                     <h3 class="card-title">100+</h3>
@@ -31,7 +38,7 @@
         </div>
         <!-- Pelanggan Setia -->
         <div class="col-md-4 animate__animated animate__zoomIn animate__delay-1.5s">
-            <div class="card text-white bg-success card-hover">
+            <div class="card text-white bg-success card-hover rounded">
                 <div class="card-body">
                     <i class="fas fa-users fa-3x mb-3"></i>
                     <h3 class="card-title">50+</h3>
@@ -41,7 +48,7 @@
         </div>
         <!-- Rating Layanan -->
         <div class="col-md-4 animate__animated animate__zoomIn animate__delay-2s">
-            <div class="card text-white bg-warning card-hover">
+            <div class="card text-white bg-warning card-hover rounded">
                 <div class="card-body">
                     <i class="fas fa-star fa-3x mb-3"></i>
                     <h3 class="card-title">5/5</h3>
@@ -57,7 +64,7 @@
     <h3 class="text-center text-primary fw-bold animate__animated animate__fadeInDown">Layanan Unggulan</h3>
     <div class="row text-center mt-4">
         <div class="col-md-4 animate__animated animate__fadeInUp animate__delay-1s">
-            <div class="card border-primary card-hover">
+            <div class="card border-primary card-hover rounded">
                 <div class="card-body">
                     <i class="fas fa-tshirt fa-3x text-primary"></i>
                     <h5 class="card-title mt-3">Cuci & Lipat</h5>
@@ -66,7 +73,7 @@
             </div>
         </div>
         <div class="col-md-4 animate__animated animate__fadeInUp animate__delay-1.5s">
-            <div class="card border-success card-hover">
+            <div class="card border-success card-hover rounded">
                 <div class="card-body">
                     <i class="fas fa-wind fa-3x text-success"></i>
                     <h5 class="card-title mt-3">Cuci Kering</h5>
@@ -75,7 +82,7 @@
             </div>
         </div>
         <div class="col-md-4 animate__animated animate__fadeInUp animate__delay-2s">
-            <div class="card border-warning card-hover">
+            <div class="card border-warning card-hover rounded">
                 <div class="card-body">
                     <i class="fas fa-shipping-fast fa-3x text-warning"></i>
                     <h5 class="card-title mt-3">Antar Jemput</h5>
@@ -86,13 +93,12 @@
     </div>
 </div>
 
-
 <!-- Testimoni pelanggan dengan animasi -->
 <div class="container mt-5">
     <h3 class="text-center text-primary fw-bold animate__animated animate__fadeInDown">Apa Kata Pelanggan?</h3>
     <div class="row mt-4">
         <div class="col-md-4 animate__animated animate__fadeIn animate__delay-1s">
-            <div class="card border-info">
+            <div class="card border-info rounded">
                 <div class="card-body">
                     <blockquote class="blockquote">
                         <p>"Layanannya sangat cepat dan hasilnya memuaskan!"</p>
@@ -102,7 +108,7 @@
             </div>
         </div>
         <div class="col-md-4 animate__animated animate__fadeIn animate__delay-1.5s">
-            <div class="card border-secondary">
+            <div class="card border-secondary rounded">
                 <div class="card-body">
                     <blockquote class="blockquote">
                         <p>"Laundry Go benar-benar membantu saya menghemat waktu!"</p>
@@ -112,7 +118,7 @@
             </div>
         </div>
         <div class="col-md-4 animate__animated animate__fadeIn animate__delay-2s">
-            <div class="card border-danger">
+            <div class="card border-danger rounded">
                 <div class="card-body">
                     <blockquote class="blockquote">
                         <p>"Pakaiannya bersih dan harum. Recommended!"</p>
@@ -127,6 +133,15 @@
 
 <!-- Tambahkan link untuk animasi CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<script>
+    function updateDateTime() {
+        const now = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        document.getElementById('currentDateTime').innerText = now.toLocaleString('id-ID', options);
+    }
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+</script>
 <style>
 /* Efek hover pada kotak */
 .card-hover {
@@ -137,5 +152,11 @@
     transform: scale(1.05); /* Perbesar sedikit */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Tambahkan bayangan */
     cursor: pointer; /* Ubah kursor menjadi pointer */
+}
+
+/* Warna dan teks tambahan */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
 }
 </style>

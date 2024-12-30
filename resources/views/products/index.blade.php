@@ -45,6 +45,12 @@
         <i class="fa-solid fa-times me-2"></i>{{ $orderCountRejected }} Orders Rejected
     </h4>
 </div>
+<form action="{{ route('products.index') }}" method="GET" class="mb-4 d-flex">
+    <input type="text" name="search" class="form-control me-2" placeholder="Cari data nama pemesanan..." value="{{ request('search') }}">
+    <button type="submit" class="btn btn-primary">
+        <i class="fa-solid fa-search"></i> Cari
+    </button>
+</form>
 
     
     <form action="{{ route('products.index') }}" method="GET" class="mb-4">
