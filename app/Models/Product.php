@@ -20,6 +20,7 @@ class Product extends Model
         'created_at',
         'tanggal_pemesanan', // Tambahkan kolom ini jika belum ada
         'status_pembayaran',
+        'alasan_reject',
         'user_id',
     ];
 

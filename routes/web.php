@@ -47,7 +47,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::delete('/payments/{id}', [PaymentController::class, 'destroy'])->name('payments.destroy');
    /* Route::post('/orders/{id}/pay', [ProductController::class, 'updatePaymentStatus'])->name('orders.pay'); */
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-  
+    Route::put('products/{id}/reject', [ProductController::class, 'reject'])->name('products.reject');
+
 
 });
 Route::get('/auth/redirect', [SocialiteController::class, 'redirect']);

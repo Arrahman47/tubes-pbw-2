@@ -27,7 +27,7 @@
     <h4 class="fw-bold text-white">
         <i class="fa-solid fa-box me-2"></i>{{ $orderCountTotal }} Total Orders
     </h4>
-</div>
+</div>  
     <div class="mb-4 text-center py-3 bg-warning rounded shadow-sm border border-primary d-inline-block">
     <h4 class="fw-bold text-dark">
         <i class="fa-solid fa-list me-2"></i>{{ $orderCountPending }} Orders Pending
@@ -40,9 +40,12 @@
         <i class="fa-solid fa-check me-2"></i>{{ $orderCountAccepted }} Orders Accepted
     </h4>
 </div>
+<div class="mb-4 text-center py-3 bg-danger rounded shadow-sm border border-primary d-inline-block">
+    <h4 class="fw-bold text-white">
+        <i class="fa-solid fa-times me-2"></i>{{ $orderCountRejected }} Orders Rejected
+    </h4>
+</div>
 
-
-    
     
     <form action="{{ route('products.index') }}" method="GET" class="mb-4">
         
@@ -67,6 +70,7 @@
                     <th>Total Harga</th>
                     <th>Catatan</th>
                     <th>Status Pembayaran</th>
+                    <th>Alasan Reject</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -88,6 +92,8 @@
             bg-warning text-dark
         @elseif($product->status_pembayaran === 'Accepted')
             bg-success text-white
+        @elseif($product->status_pembayaran === 'Rejected')
+            bg-danger text-white
         @else
             bg-secondary text-white
         @endif
@@ -95,36 +101,47 @@
         {{ ucfirst($product->status_pembayaran) }}
     </span>
 </td>
-
+            <td>{{ $product->alasan_reject ?? '-' }}</td>
             <td>
     <div class="d-flex justify-content-center">
         <!-- Tombol Edit -->
-        @role('Admin')
-        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm me-1">
-            <i class="fa-solid fa-pen-to-square"></i> Edit
-            </li>
-        </a>
+@role('Admin')
+<a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm me-1">
+    <i class="fa-solid fa-pen-to-square"></i> Edit
+</a>
 
-        <!-- Tombol Hapus -->
-        <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger btn-sm me-1">
-                <i class="fa-solid fa-trash"></i> Hapus
-            </button>
-        </form>
+<!-- Tombol Hapus -->
+<form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-danger btn-sm me-1">
+        <i class="fa-solid fa-trash"></i> Hapus
+    </button>
+</form>
 
-        <!-- Tombol Accepted -->
-        @if($product->status_pembayaran !== 'Accepted')
-        <form action="{{ route('products.accept', $product->id) }}" method="POST" style="display:inline;">
-            @csrf
-            @method('PUT')
-            <button type="submit" class="btn btn-success btn-sm">
-                <i class="fa-solid fa-check"></i> Accepted
-            </button>
-        </form>
-        @endrole
-        @endif
+<!-- Tombol Accepted -->
+@if($product->status_pembayaran !== 'Accepted')
+<form action="{{ route('products.accept', $product->id) }}" method="POST" style="display:inline;">
+    @csrf
+    @method('PUT')
+    <button type="submit" class="btn btn-success btn-sm">
+        <i class="fa-solid fa-check"></i> Accepted
+    </button>
+</form>
+@endif
+
+<!-- Tombol Rejected -->
+@if($product->status_pembayaran !== 'Rejected')
+<form action="{{ route('products.reject', $product->id) }}" method="POST" style="display:inline;">
+    @csrf
+    @method('PUT')
+    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#rejectReasonModal-{{ $product->id }}">
+        <i class="fa-solid fa-times"></i> Reject
+    </button>
+</form>
+@endrole
+@endif
+
 
         <!-- Tombol Lihat Bukti Pembayaran -->
         <button class="btn btn-info btn-sm ms-1" data-bs-toggle="modal" data-bs-target="#paymentProofModal-{{ $product->id }}">
@@ -153,6 +170,31 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Alasan Reject -->
+<div class="modal fade" id="rejectReasonModal-{{ $product->id }}" tabindex="-1" aria-labelledby="rejectReasonModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rejectReasonModalLabel">Alasan Reject - {{ $product->nama }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('products.reject', $product->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="alasan_reject" class="form-label">Alasan Penolakan</label>
+                        <textarea name="alasan_reject" id="alasan_reject" class="form-control" rows="3" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

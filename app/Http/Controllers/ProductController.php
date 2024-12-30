@@ -37,11 +37,32 @@ class ProductController extends Controller
     
         // Hitung jumlah Total Orders
         $orderCountTotal = Product::count();
+
+        $orderCountRejected = Product::where('status_pembayaran', 'Rejected')->count();
+
     
-        return view('products.index', compact('products', 'orderCountPending', 'orderCountAccepted', 'orderCountTotal'));
+        return view('products.index', compact('products', 'orderCountPending', 'orderCountAccepted', 'orderCountTotal', 'orderCountRejected'));
     }
     
-    
+    public function reject(Request $request, $id)
+{
+    $product = Product::findOrFail($id);
+
+    // Validasi data
+    $request->validate([
+        'alasan_reject' => 'required|string|max:255',
+    ]);
+
+    // Update status dan alasan reject
+    $product->update([
+        'status_pembayaran' => 'Rejected',
+        'alasan_reject' => $request->alasan_reject,
+    ]);
+
+    return redirect()->route('products.index')->with('success', 'Pesanan berhasil ditolak.');
+}
+
+
 
 public function accept($id)
 {
@@ -75,6 +96,7 @@ public function accept($id)
         'total_harga' => '',
         'catatan' => 'nullable|string',
         'bukti_pembayaran' => 'nullable|image|mimes:jpeg,jpg,png,pdf|max:2048',
+        'alasan_reject' => 'nullable|string',
 
     ]);
     $buktiPembayaran = $request->file('bukti_pembayaran')->store('bukti_pembayaran', 'public');
@@ -116,6 +138,7 @@ public function accept($id)
         'catatan' => $request->catatan,
         'bukti_pembayaran' => $buktiPembayaran, // Menyimpan path file
         'status_pembayaran' => 'Pending', // Default status pembayaran
+        'alasan_reject' => $request->alasan_reject ?? null,
 
        
     ]);
