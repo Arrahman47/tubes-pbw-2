@@ -98,10 +98,12 @@ public function store(Request $request): JsonResponse
 
     $totalPayments = $payments->sum('amount');
     $averagePayment = $payments->avg('amount');
+    $totalPendingPayments = Payment::where('status', 'pending')->sum('amount');
+
     // Jika ingin memfilter berdasarkan pengguna yang login
     // $payments = Payment::where('user_id', auth()->id())->get();
 
-    return view('payments.index', compact('payments', 'totalPayments', 'averagePayment'));
+    return view('payments.index', compact('payments', 'totalPayments', 'averagePayment','totalPendingPayments'));
 }
 
     // Get single payment

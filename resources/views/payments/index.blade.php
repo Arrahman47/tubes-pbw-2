@@ -28,23 +28,32 @@
 
     <!-- Financial Statistics Section -->
     <div class="row">
-        <div class="col-md-4">
-            <div class="card text-white bg-primary mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Total Transaksi Pembayaran Disetujui</h5>
-                    <p class="card-text">Rp{{ number_format($totalPayments, ) }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card text-white bg-secondary mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Rata-rata Pembayaran</h5>
-                    <p class="card-text">Rp{{ number_format($averagePayment, ) }}</p>
-                </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Total Transaksi Pembayaran Disetujui</h5>
+                <p class="card-text">Rp{{ number_format($totalPayments, 0, ',', '.') }}</p>
             </div>
         </div>
     </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-secondary mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Rata-rata Pembayaran</h5>
+                <p class="card-text">Rp{{ number_format($averagePayment, 0, ',', '.') }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Total Pembayaran Belum Disetujui</h5>
+                <p class="card-text">Rp{{ number_format($totalPendingPayments, 0, ',', '.') }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     @if($payments->isEmpty()) 
         <div class="alert alert-warning text-center">
