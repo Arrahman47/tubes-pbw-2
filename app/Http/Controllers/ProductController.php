@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use PhpOffice\PhpWord\PhpWord;
+
 use PhpOffice\PhpWord\IOFactory;
 
 class ProductController extends Controller
@@ -22,6 +24,18 @@ class ProductController extends Controller
         $this->middleware('permission:laundry-delete', ['only' => ['destroy']]);
         $this->middleware('permission:laundry-accept', ['only' => ['accept']]);
         
+    }
+
+    public function printAll()
+    {
+        // Ambil semua data pesanan
+        $products = Product::all();
+
+        // Kirim data ke view cetak PDF
+        $pdf = Pdf::loadView('products.print', compact('products'));
+
+        // Download atau tampilkan file PDF
+        return $pdf->stream('semua_pesanan.pdf');
     }
     public function generateWordInvoice($id)
     {
@@ -89,6 +103,8 @@ $section->addText('Alasan Reject: ' . ($product->alasan_reject ?? 'N/A'));
     
         return view('products.index', compact('products', 'orderCountPending', 'orderCountAccepted', 'orderCountTotal', 'orderCountRejected'));
     }
+
+    
     
     public function reject(Request $request, $id)
 {
@@ -118,6 +134,11 @@ public function accept($id)
 
     return redirect()->route('products.index')->with('success', 'Pembayaran berhasil disetujui.');
 }
+public function show($id)
+    {
+        $product = Product::findOrFail($id); // Cari produk berdasarkan ID
+        return view('products.show', compact('product')); // Tampilkan view detail produk
+    }
 
     /**
      * Show the form for creating a new resource.

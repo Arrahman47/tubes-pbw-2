@@ -13,6 +13,13 @@
                 <i class="fa fa-plus me-2"></i>Tambah Pemesanan
             </a>
             @endcan
+            <div class="col-md-4 text-md-end">
+            <a href="{{ route('products.printAll') }}" class="btn btn-warning btn-lg shadow-sm">
+                <i class="fa-solid fa-print"></i> Cetak Semua Pembayaran
+            </a>
+            </div>
+            
+
         </div>
     </div>
   
