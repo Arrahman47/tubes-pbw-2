@@ -4,24 +4,24 @@
 <div class="container mt-4">
     <div class="row mb-3 align-items-center">
         <div class="col-md-8">
-            <h2 class="text-primary fw-bold"><i class="fa-solid fa-box me-2"></i>Pemesanan</h2>
+            <h2 class="text-primary fw-bold">
+                <i class="fa-solid fa-box me-2"></i>Pemesanan
+            </h2>
             <p class="text-muted">Kelola semua pemesanan yang telah dibuat dengan mudah.</p>
         </div>
         <div class="col-md-4 text-md-end">
             @can('laundry-create')
-            <a href="{{ route('products.create') }}" class="btn btn-success btn-lg shadow-sm">
+            <a href="{{ route('products.create') }}" class="btn btn-success btn-lg shadow-sm me-2">
                 <i class="fa fa-plus me-2"></i>Tambah Pemesanan
             </a>
             @endcan
-            <div class="col-md-4 text-md-end">
             <a href="{{ route('products.printAll') }}" class="btn btn-warning btn-lg shadow-sm">
                 <i class="fa-solid fa-print"></i> Cetak Semua Pembayaran
             </a>
-            </div>
-            
-
         </div>
     </div>
+</div>
+
   
 
     @if(session('success'))
